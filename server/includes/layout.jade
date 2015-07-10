@@ -1,11 +1,13 @@
 doctype
 html
     head
+        title Peterson Lab
         base(href="/")
         link(href="/favicon.ico", rel="shortcut icon", type="image/x-icon")
         link(rel="stylesheet", href="/css/bootstrap.css")
         link(rel="stylesheet", href="/vendor/toastr/toastr.css")
         link(rel="stylesheet", href="/css/site.css")
-    body(ng-app='app')
+    body(ng-app='app' ng-keypress="onSpace($event)")
+        //h1 Layout
         block main-content
         include scripts
