@@ -5,8 +5,7 @@
 
 angular.module('app', [
     'ngResource',
-    'ngRoute',
-    "ngSanitize"
+    'ngRoute'
 ]);
 
 //how many arguments can be passed to the config callback?
