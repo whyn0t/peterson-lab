@@ -14,9 +14,11 @@
     "angular-route": "~1.4.1",
     "videogular": "~1.2.4",
     "videogular-themes-default": "~1.2.4",
-    "angular-sanitize": "~1.4.2"
+    "angular-sanitize": "~1.4.2",
+    "webcam-directive": "~3.0.0"
   },
   "resolutions": {
-    "angular-sanitize": "~1.4.2"
+    "angular-sanitize": "~1.4.2",
+    "angular": "1.4.2"
   }
 }

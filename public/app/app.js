@@ -24,6 +24,9 @@ angular.module('app').config(function($routeProvider, $locationProvider) {
         .when('/debrief', {
             templateUrl: '/partials/debrief'
         })
+        .when('/thankyou', {
+            templateUrl: '/partials/thankyou'
+        })
         .otherwise({redirectTo: '/welcome'})
 });
 
@@ -33,5 +36,7 @@ angular.element(window).on('keydown', function(e) {
         location.href = "stimulus";
     } else if (window.location.pathname == "/stimulus") {
         location.href = "debrief";
+    } else if (window.location.pathname == "/thankyou") {
+        location.href = "welcome";
     }
 });
