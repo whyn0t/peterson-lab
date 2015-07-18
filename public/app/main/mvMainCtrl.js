@@ -108,7 +108,7 @@ angular.module('app').controller('mvMainCtrl', function($scope, $window, $docume
         if ($scope.phase == "welcome") {
             //start video capture
             //_video.play();
-            _toggleRecording({'classList':[]});
+            //_toggleRecording({'classList':[]});
             $scope.makeSnapshot();
             stopImg = $interval(function() {
                 $scope.makeSnapshot();
@@ -118,8 +118,8 @@ angular.module('app').controller('mvMainCtrl', function($scope, $window, $docume
         } else if ($scope.phase == "stimulus") {
             $scope.$broadcast('stopPlayer');
             $interval.cancel(stopImg);
-            _toggleRecording({'classList':['recording']})
-            _saveAudio();
+            //_toggleRecording({'classList':['recording']})
+            //_saveAudio();
             $scope.phase = "debrief";
         } else if ($scope.phase == "thankyou") {
             $scope.phase = "welcome";
