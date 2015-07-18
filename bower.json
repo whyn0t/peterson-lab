@@ -15,7 +15,8 @@
     "videogular": "~1.2.4",
     "videogular-themes-default": "~1.2.4",
     "angular-sanitize": "~1.4.2",
-    "webcam-directive": "~3.0.0"
+    "webcam-directive": "~3.0.0",
+    "videogular-controls": "~1.2.4"
   },
   "resolutions": {
     "angular-sanitize": "~1.4.2",

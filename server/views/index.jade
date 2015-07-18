@@ -2,7 +2,32 @@ extends ../includes/layout
 
 block main-content
     section.content
-        div(ng-view)
-
-    //footer.container.text-center
-        p &copy; KaylerCo.
+        //div(ng-view)
+    div(ng-controller="mvMainCtrl" class="centred")
+        webcam(on-streaming="onSuccess()", on-access-denied="onError(err)", on-stream="onStream(stream)" channel="channel" hidden)
+        div(ng-switch on="phase")
+            div(ng-switch-when="welcome")
+                div(class="welcomeText")
+                    p Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
+                div(class="avTest")
+                    ul
+                        li Click here to test your microphone volume
+                        li Webcam Test
+                            video(id="webcam-live" autoplay)
+                div(class="instructions")
+                    p Press any key to get started...
+            div(ng-switch-when="stimulus" ng-controller="mvVideoCtrl as controller")
+                videogular(vg-player-ready="controller.onPlayerReady($API)" ng-click="controller.API.play()" vg-auto-play="true")
+                    vg-media(vg-src="controller.config.sources")
+                    vg-overlay-play
+                canvas(id='snapshot')
+                //p {{dataUrl}}
+            div(ng-switch-when="debrief")
+                div(class="prompt")
+                    p You stopped the video at {{stopTime}}
+                    p What was the pattern that you observed?
+                    textarea
+                    button(ng-click="switchToThankYou()") Submit
+            div(ng-switch-when="thankyou")
+                h1 Thank you for your participation!
+                h6 (Press any key to restart demo)

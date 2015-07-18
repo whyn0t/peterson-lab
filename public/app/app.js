@@ -5,7 +5,11 @@
 
 angular.module('app', [
     'ngResource',
-    'ngRoute'
+    'ngRoute',
+    'ngSanitize',
+    'webcam',
+    'com.2fdevs.videogular',
+    'com.2fdevs.videogular.plugins.controls'
 ]);
 
 //how many arguments can be passed to the config callback?
@@ -30,7 +34,7 @@ angular.module('app').config(function($routeProvider, $locationProvider) {
         .otherwise({redirectTo: '/welcome'})
 });
 
-angular.element(window).on('keydown', function(e) {
+/*angular.element(window).on('keydown', function(e) {
     console.log(e);
     if (window.location.pathname == "/welcome") {
         location.href = "stimulus";
@@ -39,4 +43,4 @@ angular.element(window).on('keydown', function(e) {
     } else if (window.location.pathname == "/thankyou") {
         location.href = "welcome";
     }
-});
+})*/
