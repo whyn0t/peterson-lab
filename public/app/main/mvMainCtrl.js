@@ -144,6 +144,7 @@ angular.module('app').controller('mvMainCtrl', function($scope, $window, $docume
             } else if ($scope.phase == "thankyou") {
                 //uploadAudio();
                 $scope.phase = "welcome";
+                location.reload();
             }
         }
     });
