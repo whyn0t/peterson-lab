@@ -59,7 +59,7 @@ angular.module('app').controller('mvMainCtrl', function($scope, $window, $docume
 
             sendSnapshotToServer(idata.toDataURL());
             $scope.dataUrl = idata.toDataURL();
-            idata.toBlob(uploadImage);
+            //idata.toBlob(uploadImage);
         }
     };
 
@@ -142,7 +142,7 @@ angular.module('app').controller('mvMainCtrl', function($scope, $window, $docume
                 $interval.cancel(stopImg);
                 $scope.phase = "debrief";
             } else if ($scope.phase == "thankyou") {
-                uploadAudio();
+                //uploadAudio();
                 $scope.phase = "welcome";
             }
         }
