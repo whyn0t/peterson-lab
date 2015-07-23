@@ -19,3 +19,17 @@ footer
   left: 50%;
   transform: translate(-50%, -50%);
 }
+#analyser {
+  height: 100px;
+  width: 20px;
+  border: 2px solid #000;
+}
+#webcam-live {
+  height: 150px;
+}
+.videoTest {
+  float: left;
+}
+.audioTest {
+  float: left;
+}

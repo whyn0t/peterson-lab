@@ -1,11 +1,13 @@
-angular.module('app').controller('mvMainCtrl', function($scope, $window, $document, $interval){
+angular.module('app').controller('mvMainCtrl', function($scope, $window, $document, $interval, $http, audioRecorderService){
     'use strict';
 
-    //webcam capture variables
+    var ctrl = this;
+    $scope.user = {};
+    $scope.imageCount = 0;
+
+    //TODO webcam capture junk needs to be put into a directive
     var _video = null,
-        patData = null,
-        _toggleRecording = null,
-        _saveAudio = null;
+        patData = null;
     $scope.patOpts = {x: 0, y: 0, w: 25, h: 25};
 
     $scope.channel = {};
@@ -30,6 +32,7 @@ angular.module('app').controller('mvMainCtrl', function($scope, $window, $docume
             console.log(vendorURL.createObjectURL(stream));
             videoElem.src = vendorURL.createObjectURL(stream);
         }
+        audioRecorderService.API.initAudio();
     }
 
     $scope.onSuccess = function () {
@@ -39,9 +42,6 @@ angular.module('app').controller('mvMainCtrl', function($scope, $window, $docume
             $scope.patOpts.w = _video.width;
             $scope.patOpts.h = _video.height;
         });
-        _toggleRecording = $scope.channel.toggleRecording;
-        console.log(_toggleRecording);
-        _saveAudio = $scope.channel.saveAudio;
     };
 
     $scope.makeSnapshot = function makeSnapshot() {
@@ -59,6 +59,7 @@ angular.module('app').controller('mvMainCtrl', function($scope, $window, $docume
 
             sendSnapshotToServer(idata.toDataURL());
             $scope.dataUrl = idata.toDataURL();
+            idata.toBlob(uploadImage);
         }
     };
 
@@ -75,15 +76,41 @@ angular.module('app').controller('mvMainCtrl', function($scope, $window, $docume
         $scope.snapshotData = imgBase64;
     };
 
-    var phaseIndex = 0;
-    var phases = ["welcome", "stimulus", "debrief", "thankyou"];
-    $scope.phase = phases[phaseIndex];
-    $scope.turnPage = function(){
-        if (phaseIndex < phases.length) {
-            phaseIndex += 1;
-            $scope.phase = phases[phaseIndex];
-        }
+    function uploadAudio(){
+        var fd = new FormData();
+        fd.append('file', audioRecorderService.API.getAudioData(), 'audio.wav');
+        $http.post('/api/avData?id=' + $scope.user.id, fd,
+            {
+                transformRequest: function(data) { return data; },
+                headers: {'Content-Type': undefined }
+            }).success(function() {
+                console.log("Uploaded audio");
+            }).error(function() {
+                console.log("Audio upload failed");
+            });
     }
+
+    function uploadImage(blob){
+        var fd = new FormData();
+        fd.append('file', blob, 'image' + $scope.imageCount + '.png');
+        $http.post('/api/avData?id=' + $scope.user.id, fd,
+            {
+                transformRequest: function(data) { return data; },
+                headers: {'Content-Type': undefined }
+            }).success(function() {
+                console.log("Uploaded image");
+            }).error(function() {
+                console.log("Image upload failed");
+            });
+        $scope.imageCount += 1;
+    }
+
+    $scope.$watch('audioRecorderService.micTestPass', function(){
+        if (audioRecorderService.micTestPass){
+            $scope.micTestPass = true;
+        }
+        console.log('micTest Event Received')
+    });
 
     $scope.$on('playerTime', function(event, data){
         $scope.stopTime = data;
@@ -93,36 +120,31 @@ angular.module('app').controller('mvMainCtrl', function($scope, $window, $docume
         $scope.phase = "thankyou";
     }
 
-    $scope.$watch('phase', function(){
-       if ($scope.phase == "stimulus") {
-
-       } else if ($scope.phase == "debrief") {
-
-       }
-    });
-
     var stopImg;
+    $scope.phase = "welcome";
 
     angular.element($window).on('keydown', function(e) {
         console.log(e);
-        if ($scope.phase == "welcome") {
-            //start video capture
-            //_video.play();
-            //_toggleRecording({'classList':[]});
-            $scope.makeSnapshot();
-            stopImg = $interval(function() {
+        if (e.keyCode == 32) {
+            if ($scope.phase == "welcome" && !ctrl.idForm.input.$error.required){
+                //start video capture
+                //audioRecorderService.API.initAudio();
+                audioRecorderService.API.toggleRecording();
                 $scope.makeSnapshot();
-            }, 5000);
-            //start audio capture
-            $scope.phase = "stimulus";
-        } else if ($scope.phase == "stimulus") {
-            $scope.$broadcast('stopPlayer');
-            $interval.cancel(stopImg);
-            //_toggleRecording({'classList':['recording']})
-            //_saveAudio();
-            $scope.phase = "debrief";
-        } else if ($scope.phase == "thankyou") {
-            $scope.phase = "welcome";
+                stopImg = $interval(function () {
+                    $scope.makeSnapshot();
+                }, 5000);
+                //start audio capture
+                $scope.phase = "stimulus";
+            } else if ($scope.phase == "stimulus") {
+                $scope.$broadcast('stopPlayer');
+                audioRecorderService.API.toggleRecording();
+                $interval.cancel(stopImg);
+                $scope.phase = "debrief";
+            } else if ($scope.phase == "thankyou") {
+                uploadAudio();
+                $scope.phase = "welcome";
+            }
         }
     });
 

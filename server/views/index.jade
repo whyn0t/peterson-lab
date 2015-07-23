@@ -3,19 +3,33 @@ extends ../includes/layout
 block main-content
     section.content
         //div(ng-view)
-    div(ng-controller="mvMainCtrl" class="centred")
-        webcam(on-streaming="onSuccess()", on-access-denied="onError(err)", on-stream="onStream(stream)" channel="channel" hidden)
+    div(ng-controller="mvMainCtrl as main" class="centred")
+        webcam(on-streaming="onSuccess()" on-access-denied="onError(err)" on-stream="onStream(stream)" channel="channel" hidden)
         div(ng-switch on="phase")
-            div(ng-switch-when="welcome")
+            div(ng-switch-when="welcome" class="container")
                 div(class="welcomeText")
                     p Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
-                div(class="avTest")
-                    ul
-                        li Click here to test your microphone volume
-                        li Webcam Test
-                            video(id="webcam-live" autoplay)
+                div(class="avTest row")
+                    div(class="videoTest col-sm-4")
+                        p Center the camera on your face
+                        video(id="webcam-live" autoplay muted)
+                    div(class="audioTest col-sm-4 row")
+                        canvas(id='analyser')
+                        p(class="col-sm-6" ng-hide='micTestPass') Increase your microphone volume and tap the microphone until the meter turns green
+                        p(class="col-sm-6" ng-show='micTestPass') Your microphone is at an acceptable volume
+                    div(class="speakerTest col-sm-4")
+                        p Headphone Volume Calibration
+                        p Enter the word from this audio clip in the space below
+                        audio(controls)
+                            source(src="/video/welcome.mp3" type="audio/mpeg")
+                        label Input test word:
+                            input(type="text" name='speakerTestInput' ng-model='speakerTestInput' required)
+                div(class="userId")
+                    form(name='main.idForm')
+                        label Input participant number:
+                            input(type='text' name='input' ng-model='user.id' required)
                 div(class="instructions")
-                    p Press any key to get started...
+                    p Press space bar to begin...
             div(ng-switch-when="stimulus" ng-controller="mvVideoCtrl as controller")
                 videogular(vg-player-ready="controller.onPlayerReady($API)" ng-click="controller.API.play()" vg-auto-play="true")
                     vg-media(vg-src="controller.config.sources")

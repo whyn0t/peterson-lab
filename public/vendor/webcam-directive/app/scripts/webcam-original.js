@@ -9,21 +9,22 @@
 'use strict';
 
 (function() {
+  /*
   // GetUserMedia is not yet supported by all browsers
   // Until then, we need to handle the vendor prefixes
   navigator.getMedia = ( navigator.getUserMedia ||
                        navigator.webkitGetUserMedia ||
                        navigator.mozGetUserMedia ||
                        navigator.msGetUserMedia);
-
+*/
   // Checks if getUserMedia is available on the client browser
   window.hasUserMedia = function hasUserMedia() {
     return navigator.getMedia ? true : false;
   };
 })();
 
-angular.module('webcam', [])
-  .directive('webcam', function () {
+angular.module('webcam', ['userMedia'])
+  .directive('webcam', ['userMediaService', function(userMediaService) {
     return {
       template: '<div class="webcam" ng-transclude></div>',
       restrict: 'E',
@@ -100,6 +101,7 @@ angular.module('webcam', [])
           videoElem = document.createElement('video');
           videoElem.setAttribute('class', 'webcam-live');
           videoElem.setAttribute('autoplay', '');
+        videoElem.setAttribute('muted', '');
           element.append(videoElem);
 
           if ($scope.placeholder) {
@@ -120,8 +122,16 @@ angular.module('webcam', [])
             return;
           }
 
-          var mediaConstraint = { video: true, audio: true };
-          navigator.getMedia(mediaConstraint, onSuccess, onFailure);
+          //var mediaConstraint = { video: true, audio: true };
+          //navigator.getMedia(mediaConstraint, onSuccess, onFailure);
+          function onFirstSuccess(stream){
+            console.log('firstSuccess');
+          }
+          function onFirstFailure(err){
+            console.log('firstFailure');
+          }
+          //userMediaService(onFirstSuccess, onFirstFailure);
+          userMediaService(onSuccess, onFailure);
 
           /* Start streaming the webcam data when the video element can play
            * It will do it only once
@@ -160,4 +170,4 @@ angular.module('webcam', [])
 
       }
     };
-  });
+  }]);

@@ -3,10 +3,15 @@
 
 
 var express = require('express'),
+    fs = require('fs'),
 	stylus = require('stylus'),
 	logger = require('morgan'),
 	bodyParser = require('body-parser'),
-    mongoose = require('mongoose');
+    mongoose = require('mongoose'),
+    multer = require('multer'),
+    mkdirp = require('mkdirp');
+
+var done=false;
 
 //set your environment variable? what does this effect?
 var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
@@ -25,6 +30,7 @@ app.set('view engine', 'jade');
 //what is "use" for?
 app.use(logger('dev'));
 app.use(bodyParser());
+app.use(bodyParser.urlencoded({ extended: true}));
 //what are we setting here?
 app.use(stylus.middleware(
 	{
@@ -32,6 +38,34 @@ app.use(stylus.middleware(
 		compile: compile
 	}
 ));
+
+app.use(multer({ dest: './tmp/' }).single('file'));
+
+app.post('/api/avData', function(req, res) {
+    console.log(req.file);
+
+    var file = __dirname + '/' + 'avData' + '/' + req.query.id + '/' + req.file.originalname;
+    mkdirp(__dirname + '/' + 'avData' + '/' + req.query.id, function(err){
+        console.log(err);
+    });
+    fs.readFile( req.file.path, function(err, data) {
+        fs.writeFile(file, data, function(err){
+            if (err){
+                console.log(err);
+            } else {
+                response = {
+                    message:'File uploaded successfully',
+                    filename: req.file.name
+                };
+            }
+            console.log(response);
+            res.status(200).end (JSON.stringify(( response )));
+            fs.unlink(req.file.path, function(err){
+                console.log(err);
+            });
+        });
+    });
+});
 
 //static route handling
 app.use(express.static(__dirname + "/public"));
@@ -53,7 +87,7 @@ db.once('open', function callback(){
 //render parses from jade?
 app.get('/partials/:partialPath', function(req, res){
     res.render('partials/' + req.params.partialPath);
-})
+});
 
 app.get('*', function(req, res){
 	res.render('index', {
