@@ -2,7 +2,86 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="75922d38-c3aa-45dc-bb3e-4832b78ffca2" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/liveFeedPlaceholder.gif" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/1111/image0.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/12/audio.wav" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/123/audio.wav" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/123/image0.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/123/image1.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/123/image10.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/123/image11.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/123/image12.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/123/image13.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/123/image14.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/123/image15.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/123/image16.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/123/image17.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/123/image18.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/123/image19.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/123/image2.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/123/image20.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/123/image21.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/123/image22.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/123/image23.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/123/image24.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/123/image25.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/123/image26.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/123/image27.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/123/image28.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/123/image29.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/123/image3.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/123/image30.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/123/image31.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/123/image32.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/123/image33.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/123/image34.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/123/image35.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/123/image36.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/123/image37.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/123/image38.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/123/image39.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/123/image4.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/123/image40.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/123/image41.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/123/image42.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/123/image43.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/123/image44.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/123/image45.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/123/image46.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/123/image47.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/123/image48.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/123/image49.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/123/image5.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/123/image50.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/123/image51.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/123/image52.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/123/image53.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/123/image6.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/123/image7.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/123/image8.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/123/image9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/12345/audio.wav" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/4321/audio.wav" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/543/audio.wav" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/543/image0.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/543/image1.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/543/image2.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/698/audio.wav" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/698/image0.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/698/image1.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/avData/698/image2.png" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/avData/0000/audio.wav" afterPath="$PROJECT_DIR$/avData/0000/audio.wav" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/avData/1234/audio.wav" afterPath="$PROJECT_DIR$/avData/1234/audio.wav" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/avData/0000/image0.png" afterPath="$PROJECT_DIR$/avData/0000/image0.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/avData/0000/image1.png" afterPath="$PROJECT_DIR$/avData/0000/image1.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/avData/0000/image2.png" afterPath="$PROJECT_DIR$/avData/0000/image2.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/app/audioRecorderApp.js" afterPath="$PROJECT_DIR$/public/app/audioRecorderApp.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/views/index.jade" afterPath="$PROJECT_DIR$/server/views/index.jade" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/app/main/mvMainCtrl.js" afterPath="$PROJECT_DIR$/public/app/main/mvMainCtrl.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server.js" afterPath="$PROJECT_DIR$/server.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/site.css" afterPath="$PROJECT_DIR$/public/css/site.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/site.styl" afterPath="$PROJECT_DIR$/public/css/site.styl" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="petersonLab.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -26,41 +105,51 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="index.jade" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.jade" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server/views/index.jade">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.32" vertical-offset="0" max-vertical-offset="936">
-              <caret line="6" column="100" selection-start-line="6" selection-start-column="100" selection-end-line="6" selection-end-column="100" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1296">
+              <caret line="0" column="6" selection-start-line="0" selection-start-column="6" selection-end-line="8" selection-end-column="38" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="scripts.jade" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/includes/scripts.jade">
+      <file leaf-file-name="site.styl" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/css/site.styl">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.08" vertical-offset="0" max-vertical-offset="360">
-              <caret line="14" column="60" selection-start-line="14" selection-start-column="60" selection-end-line="14" selection-end-column="60" />
+            <state vertical-scroll-proportion="-12.24" vertical-offset="0" max-vertical-offset="1008">
+              <caret line="17" column="15" selection-start-line="17" selection-start-column="15" selection-end-line="17" selection-end-column="15" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mvMainCtrl.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="videoControl.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/videoControl.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="450">
+              <caret line="0" column="43" selection-start-line="0" selection-start-column="43" selection-end-line="0" selection-end-column="43" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="server.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="615" max-vertical-offset="1926">
+              <caret line="57" column="62" selection-start-line="57" selection-start-column="62" selection-end-line="57" selection-end-column="62" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mvMainCtrl.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/app/main/mvMainCtrl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8519737" vertical-offset="2110" max-vertical-offset="2844">
-              <caret line="146" column="34" selection-start-line="146" selection-start-column="34" selection-end-line="146" selection-end-column="34" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="mvVideoCtrl.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/app/video/mvVideoCtrl.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.285714" vertical-offset="0" max-vertical-offset="612">
-              <caret line="16" column="11" selection-start-line="16" selection-start-column="11" selection-end-line="16" selection-end-column="11" />
+            <state vertical-scroll-proportion="-19.285715" vertical-offset="2106" max-vertical-offset="3312">
+              <caret line="147" column="27" selection-start-line="147" selection-start-column="27" selection-end-line="147" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -69,8 +158,8 @@
       <file leaf-file-name="audioRecorderApp.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/app/audioRecorderApp.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-64.28571" vertical-offset="1206" max-vertical-offset="3564">
-              <caret line="167" column="0" selection-start-line="167" selection-start-column="0" selection-end-line="167" selection-end-column="0" />
+            <state vertical-scroll-proportion="-13.5" vertical-offset="108" max-vertical-offset="3546">
+              <caret line="27" column="50" selection-start-line="27" selection-start-column="27" selection-end-line="27" selection-end-column="50" />
               <folding />
             </state>
           </provider>
@@ -79,7 +168,7 @@
       <file leaf-file-name="recorderApp.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/app/recorderApp.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.2142856" vertical-offset="54" max-vertical-offset="1998">
+            <state vertical-scroll-proportion="0.0" vertical-offset="54" max-vertical-offset="1998">
               <caret line="8" column="48" selection-start-line="8" selection-start-column="48" selection-end-line="8" selection-end-column="48" />
               <folding />
             </state>
@@ -89,18 +178,8 @@
       <file leaf-file-name="userMediaApp.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/app/userMediaApp.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="720">
+            <state vertical-scroll-proportion="0.0" vertical-offset="162" max-vertical-offset="720">
               <caret line="9" column="8" selection-start-line="9" selection-start-column="8" selection-end-line="9" selection-end-column="8" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="webcam-original.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/vendor/webcam-directive/app/scripts/webcam-original.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.428572" vertical-offset="1544" max-vertical-offset="3222">
-              <caret line="102" column="49" selection-start-line="102" selection-start-column="49" selection-end-line="102" selection-end-column="49" />
               <folding />
             </state>
           </provider>
@@ -132,18 +211,18 @@
         <option value="$PROJECT_DIR$/public/app/userMedia/getUserMediaService.js" />
         <option value="$PROJECT_DIR$/public/app/app.js" />
         <option value="$PROJECT_DIR$/public/app/main/mvFormCtrl.js" />
-        <option value="$PROJECT_DIR$/public/css/site.styl" />
         <option value="$PROJECT_DIR$/server/includes/scripts.jade" />
-        <option value="$PROJECT_DIR$/server.js" />
         <option value="$PROJECT_DIR$/public/js/audioTest.js" />
         <option value="$PROJECT_DIR$/public/js/recorderjs/recorder.js" />
         <option value="$PROJECT_DIR$/public/vendor/webcam-directive/app/scripts/webcam.js" />
         <option value="$PROJECT_DIR$/public/app/recorderApp.js" />
         <option value="$PROJECT_DIR$/public/app/userMediaApp.js" />
-        <option value="$PROJECT_DIR$/server/views/index.jade" />
         <option value="$PROJECT_DIR$/public/vendor/webcam-directive/app/scripts/webcam-original.js" />
+        <option value="$PROJECT_DIR$/server.js" />
         <option value="$PROJECT_DIR$/public/app/audioRecorderApp.js" />
         <option value="$PROJECT_DIR$/public/app/main/mvMainCtrl.js" />
+        <option value="$PROJECT_DIR$/public/css/site.styl" />
+        <option value="$PROJECT_DIR$/server/views/index.jade" />
       </list>
     </option>
   </component>
@@ -179,7 +258,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -284,95 +362,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="video" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="petersonLab" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="petersonLab" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="vendor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webcam-directive" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="petersonLab" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="petersonLab" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="vendor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webcam-directive" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scripts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="petersonLab" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="petersonLab" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="vendor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="petersonLab" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="petersonLab" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
+              <option name="myItemId" value="images" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -394,48 +384,9 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="petersonLab" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="petersonLab" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="petersonLab" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="petersonLab" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -448,6 +399,9 @@
       <recent name="$PROJECT_DIR$/public/js" />
       <recent name="$PROJECT_DIR$/server/views/partials" />
       <recent name="$PROJECT_DIR$/public/app/main" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public/images" />
     </key>
   </component>
   <component name="RunManager">
@@ -506,11 +460,10 @@
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24932976" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.35442358" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32894737" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -522,6 +475,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32894737" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -546,13 +500,50 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/public/app/video/mvVideoCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="288" max-vertical-offset="612">
+          <caret line="16" column="11" selection-start-line="16" selection-start-column="11" selection-end-line="16" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/app/audioRecorderApp.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1206" max-vertical-offset="3564">
+          <caret line="167" column="0" selection-start-line="167" selection-start-column="0" selection-end-line="167" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/app/recorderApp.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="54" max-vertical-offset="1998">
+          <caret line="8" column="48" selection-start-line="8" selection-start-column="48" selection-end-line="8" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/app/userMediaApp.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="162" max-vertical-offset="720">
+          <caret line="9" column="8" selection-start-line="9" selection-start-column="8" selection-end-line="9" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/vendor/webcam-directive/app/scripts/webcam-original.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1544" max-vertical-offset="3222">
+          <caret line="102" column="49" selection-start-line="102" selection-start-column="49" selection-end-line="102" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/public/app/app.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="108" max-vertical-offset="882">
           <caret line="8" column="17" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#40#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -560,7 +551,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="198" max-vertical-offset="324">
           <caret line="11" column="26" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -608,9 +598,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="828">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#40#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -663,9 +650,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="648" max-vertical-offset="810">
           <caret line="38" column="54" selection-start-line="38" selection-start-column="15" selection-end-line="38" selection-end-column="54" />
-          <folding>
-            <element signature="e#0#40#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -740,7 +724,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="122508">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -755,13 +738,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="144">
           <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/videoControl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="933">
-          <caret line="0" column="43" selection-start-line="0" selection-start-column="43" selection-end-line="0" selection-end-column="43" />
         </state>
       </provider>
     </entry>
@@ -804,7 +780,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="198" max-vertical-offset="324">
           <caret line="11" column="26" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -812,48 +787,21 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="918">
           <caret line="10" column="15" selection-start-line="10" selection-start-column="15" selection-end-line="10" selection-end-column="15" />
-          <folding>
-            <element signature="e#0#40#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.75" vertical-offset="615" max-vertical-offset="1890">
-          <caret line="41" column="51" selection-start-line="41" selection-start-column="51" selection-end-line="41" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/css/site.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="252" max-vertical-offset="738">
-          <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/css/site.styl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.08" vertical-offset="0" max-vertical-offset="720">
-          <caret line="14" column="6" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/server/includes/scripts.jade">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.08" vertical-offset="0" max-vertical-offset="360">
+        <state vertical-scroll-proportion="0.0" vertical-offset="252" max-vertical-offset="360">
           <caret line="14" column="60" selection-start-line="14" selection-start-column="60" selection-end-line="14" selection-end-column="60" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/app/recorderApp.js">
+    <entry file="file://$PROJECT_DIR$/public/vendor/webcam-directive/app/scripts/webcam-original.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.2142856" vertical-offset="54" max-vertical-offset="1998">
-          <caret line="8" column="48" selection-start-line="8" selection-start-column="48" selection-end-line="8" selection-end-column="48" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1544" max-vertical-offset="3222">
+          <caret line="102" column="49" selection-start-line="102" selection-start-column="49" selection-end-line="102" selection-end-column="49" />
           <folding />
         </state>
       </provider>
@@ -866,33 +814,49 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/views/index.jade">
+    <entry file="file://$PROJECT_DIR$/public/app/recorderApp.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.32" vertical-offset="0" max-vertical-offset="936">
-          <caret line="6" column="100" selection-start-line="6" selection-start-column="100" selection-end-line="6" selection-end-column="100" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="54" max-vertical-offset="1998">
+          <caret line="8" column="48" selection-start-line="8" selection-start-column="48" selection-end-line="8" selection-end-column="48" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/vendor/webcam-directive/app/scripts/webcam-original.js">
+    <entry file="file://$PROJECT_DIR$/server.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.428572" vertical-offset="1544" max-vertical-offset="3222">
-          <caret line="102" column="49" selection-start-line="102" selection-start-column="49" selection-end-line="102" selection-end-column="49" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="615" max-vertical-offset="1926">
+          <caret line="57" column="62" selection-start-line="57" selection-start-column="62" selection-end-line="57" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/videoControl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="961">
+          <caret line="0" column="43" selection-start-line="0" selection-start-column="43" selection-end-line="0" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/site.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="738">
+          <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/app/audioRecorderApp.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-64.28571" vertical-offset="1206" max-vertical-offset="3564">
-          <caret line="167" column="0" selection-start-line="167" selection-start-column="0" selection-end-line="167" selection-end-column="0" />
+        <state vertical-scroll-proportion="-13.5" vertical-offset="108" max-vertical-offset="3546">
+          <caret line="27" column="50" selection-start-line="27" selection-start-column="27" selection-end-line="27" selection-end-column="50" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/app/video/mvVideoCtrl.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.285714" vertical-offset="0" max-vertical-offset="612">
+        <state vertical-scroll-proportion="0.29968783" vertical-offset="0" max-vertical-offset="961">
           <caret line="16" column="11" selection-start-line="16" selection-start-column="11" selection-end-line="16" selection-end-column="11" />
           <folding />
         </state>
@@ -900,8 +864,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/app/main/mvMainCtrl.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8519737" vertical-offset="2110" max-vertical-offset="2844">
-          <caret line="146" column="34" selection-start-line="146" selection-start-column="34" selection-end-line="146" selection-end-column="34" />
+        <state vertical-scroll-proportion="-19.285715" vertical-offset="2106" max-vertical-offset="3312">
+          <caret line="147" column="27" selection-start-line="147" selection-start-column="27" selection-end-line="147" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/site.styl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-12.24" vertical-offset="0" max-vertical-offset="1008">
+          <caret line="17" column="15" selection-start-line="17" selection-start-column="15" selection-end-line="17" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/views/index.jade">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1296">
+          <caret line="0" column="6" selection-start-line="0" selection-start-column="6" selection-end-line="8" selection-end-column="38" />
           <folding />
         </state>
       </provider>

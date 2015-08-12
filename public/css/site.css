@@ -13,6 +13,22 @@ footer
   p
     border-top 1px solid #d7e0e2
     */
+.partId {
+  margin-top: 50px;
+}
+.parent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.center-y {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.calibration-height {
+  height: 250px;
+}
 .centred {
   position: fixed;
   top: 50%;

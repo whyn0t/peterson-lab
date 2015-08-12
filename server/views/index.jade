@@ -2,46 +2,66 @@ extends ../includes/layout
 
 block main-content
     section.content
-        //div(ng-view)
-    div(ng-controller="mvMainCtrl as main" class="centred")
-        webcam(on-streaming="onSuccess()" on-access-denied="onError(err)" on-stream="onStream(stream)" channel="channel" hidden)
-        div(ng-switch on="phase")
-            div(ng-switch-when="welcome" class="container")
-                div(class="welcomeText")
-                    p Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
-                div(class="avTest row")
-                    div(class="videoTest col-sm-4")
-                        p Center the camera on your face
-                        video(id="webcam-live" autoplay muted)
-                    div(class="audioTest col-sm-4 row")
-                        canvas(id='analyser')
-                        p(class="col-sm-6" ng-hide='micTestPass') Increase your microphone volume and tap the microphone until the meter turns green
-                        p(class="col-sm-6" ng-show='micTestPass') Your microphone is at an acceptable volume
-                    div(class="speakerTest col-sm-4")
-                        p Headphone Volume Calibration
-                        p Enter the word from this audio clip in the space below
-                        audio(controls)
-                            source(src="/video/welcome.mp3" type="audio/mpeg")
-                        label Input test word:
-                            input(type="text" name='speakerTestInput' ng-model='speakerTestInput' required)
-                div(class="userId")
-                    form(name='main.idForm')
-                        label Input participant number:
-                            input(type='text' name='input' ng-model='user.id' required)
-                div(class="instructions")
-                    p Press space bar to begin...
-            div(ng-switch-when="stimulus" ng-controller="mvVideoCtrl as controller")
-                videogular(vg-player-ready="controller.onPlayerReady($API)" ng-click="controller.API.play()" vg-auto-play="true")
-                    vg-media(vg-src="controller.config.sources")
-                    vg-overlay-play
-                canvas(id='snapshot')
-                //p {{dataUrl}}
-            div(ng-switch-when="debrief")
-                div(class="prompt")
-                    p You stopped the video at {{stopTime}}
-                    p What was the pattern that you observed?
-                    textarea
-                    button(ng-click="switchToThankYou()") Submit
-            div(ng-switch-when="thankyou")
-                h1 Thank you for your participation!
-                h6 (Press any key to restart demo)
+    div(class="container-fluid partId")
+        div(ng-controller="mvMainCtrl as main" class="col-xs-10 col-xs-offset-1")
+            webcam(on-streaming="onSuccess()" on-access-denied="onError(err)" on-stream="onStream(stream)" channel="channel" hidden)
+            div(ng-switch on="phase")
+                div(ng-switch-when="permissions")
+                    p Please allow access to your camera and microphone to continue. Refresh the page if there is no permissions prompt.
+                div(ng-switch-when="welcome")
+                    div(class="row-fluid")
+                        p Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
+                    div(class="row-fluid")
+                        div(class="col-xs-4 calibration-height parent" ng-style='borders.webcam')
+                            div(class="row-fluid")
+                                div(class="text-center")
+                                    p(ng-hide="validation.webcam") Center the camera on your face
+                                    h4(ng-show="validation.webcam") Webcam calibration complete
+                                    video(id="webcam-live" autoplay muted)
+                                        img(src="/images/liveFeedPlaceHolder.gif" title="Please refresh the page and allow microphone and webcam access to continue")
+                            div(class="row-fluid")
+                                div(class="text-center")
+                                    button(ng-click="borders.webcam = {border: '5px solid green'}; validation.webcam = true" ng-hide="validation.webcam") Done
+                        div(class="col-xs-4 row-fluid calibration-height parent" ng-style='borders.microphone')
+                            div(class="text-center")
+                                div(class="col-xs-3")
+                                    canvas(id='analyser')
+                                div(class="col-xs-9 text-center")
+                                    p(ng-hide="validation.microphone") Increase your microphone volume and tap the microphone until the meter fills up
+                                    h4(ng-show="validation.microphone") Microphone calibration complete
+                        div(class="col-xs-4 calibration-height parent" ng-style='borders.speakers')
+                            div(class="text-center")
+                                div(ng-hide="validation.speakerTestInput == 'welcome'")
+                                    p Enter the word from
+                                    button(ng-click='playTestSound()') this audio clip
+                                    br
+                                    p in the space below
+                                    audio(id='audioTest')
+                                        source(src="/video/welcome.mp3" type="audio/mpeg")
+                                    label Input test word:
+                                        input(type="text" name='speakerTestInput' ng-model='validation.speakerTestInput' required)
+                                h4(ng-show="validation.speakerTestInput == 'welcome'") Headphone calibration complete
+                    div(class="row-fluid")
+                        div(class="partId text-center")
+                            form(name='main.idForm')
+                                label Input participant number:
+                                    input(type='text' name='input' ng-model='user.id' required)
+                    div(class="row-fluid")
+                        h2(class="text-center" ng-show="validation.webcam && validation.microphone && validation.speakerTestInput") Press space bar to begin...
+                div(ng-switch-when="stimulus" ng-controller="mvVideoCtrl as controller")
+                    div(class="text-center")
+                        videogular(vg-player-ready="controller.onPlayerReady($API)" ng-click="controller.API.play()" vg-auto-play="true")
+                            vg-media(vg-src="controller.config.sources")
+                            vg-overlay-play
+                        canvas(id='snapshot')
+                    //p {{dataUrl}}
+                div( class="parent" ng-switch-when="debrief")
+                    div(class="text-center")
+                        p You stopped the video at {{stopTime}}
+                        p What was the pattern that you observed?
+                        textarea
+                        button(ng-click="switchToThankYou()") Submit
+                div(class="parent" ng-switch-when="thankyou")
+                    div(class="text-center")
+                        h1 Thank you for your participation!
+                        h6 (Press any key to restart demo)

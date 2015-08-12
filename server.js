@@ -45,23 +45,25 @@ app.post('/api/avData', function(req, res) {
     console.log(req.file);
 
     var file = __dirname + '/' + 'avData' + '/' + req.query.id + '/' + req.file.originalname;
-    mkdirp(__dirname + '/' + 'avData' + '/' + req.query.id, function(err){
-        console.log(err);
-    });
-    fs.readFile( req.file.path, function(err, data) {
-        fs.writeFile(file, data, function(err){
-            if (err){
-                console.log(err);
-            } else {
-                response = {
-                    message:'File uploaded successfully',
-                    filename: req.file.name
-                };
-            }
-            console.log(response);
-            res.status(200).end (JSON.stringify(( response )));
-            fs.unlink(req.file.path, function(err){
-                console.log(err);
+    //mkdirp(__dirname + '/' + 'avData' + '/' + req.query.id, function(err){
+//        console.log(err);
+//    });
+    fs.mkdir(__dirname + '/' + 'avData' + '/' + req.query.id, function() {
+        fs.readFile(req.file.path, function (err, data) {
+            fs.writeFile(file, data, function (err) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    response = {
+                        message: 'File uploaded successfully',
+                        filename: req.file.name
+                    };
+                }
+                console.log(response);
+                res.status(200).end(JSON.stringify(( response )));
+                fs.unlink(req.file.path, function (err) {
+                    console.log(err);
+                });
             });
         });
     });

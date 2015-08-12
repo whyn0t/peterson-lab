@@ -1,5 +1,5 @@
 angular.module('audioRecorder', ['userMedia'])
-	.factory('audioRecorderService', ['userMediaService', 'recorderService', '$window', function(userMediaService, recorderService, $window){
+	.factory('audioRecorderService', ['userMediaService', 'recorderService', '$window', '$rootScope', function(userMediaService, recorderService, $window, $rootScope){
 
 		$window.AudioContext = $window.AudioContext || $window.webkitAudioContext;
 
@@ -106,8 +106,7 @@ angular.module('audioRecorder', ['userMedia'])
                 analyserContext.fillRect(0, canvasHeight, canvasWidth, -freqAvg * 2);
 
                 if (freqAvg > 50) {
-                    micTestPass = true;
-                    //console.log(freqAvg);
+                    $rootScope.$broadcast('micTestPass');
                 }
 
                 /*

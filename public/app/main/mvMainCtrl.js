@@ -4,6 +4,10 @@ angular.module('app').controller('mvMainCtrl', function($scope, $window, $docume
     var ctrl = this;
     $scope.user = {};
     $scope.imageCount = 0;
+    $scope.validation = {};
+    $scope.borders = {webcam: { border: '5px solid red' },
+                        microphone: { border: '5px solid red' },
+                        speakers: { border: '5px solid red' }};
 
     //TODO webcam capture junk needs to be put into a directive
     var _video = null,
@@ -59,7 +63,7 @@ angular.module('app').controller('mvMainCtrl', function($scope, $window, $docume
 
             sendSnapshotToServer(idata.toDataURL());
             $scope.dataUrl = idata.toDataURL();
-            //idata.toBlob(uploadImage);
+            idata.toBlob(uploadImage);
         }
     };
 
@@ -112,21 +116,43 @@ angular.module('app').controller('mvMainCtrl', function($scope, $window, $docume
         console.log('micTest Event Received')
     });
 
+    $scope.$watch('validation.speakerTestInput', function(){
+        if ($scope.validation.speakerTestInput) {
+            $scope.validation.speakerTestInput = $scope.validation.speakerTestInput.toLowerCase().trim();
+            if ($scope.validation.speakerTestInput == 'welcome'){
+                $scope.borders.speakers = { border: '5px solid green' };
+            }
+        }
+    })
+
     $scope.$on('playerTime', function(event, data){
         $scope.stopTime = data;
+    });
+
+    $scope.$on('micTestPass', function(event, data){
+        $scope.validation.microphone = true;
+        $scope.borders.microphone = {border: '5px solid green'};
+        $scope.$apply();
     });
 
     $scope.switchToThankYou = function(){
         $scope.phase = "thankyou";
     }
 
+    $scope.playTestSound = function(){
+        document.getElementById('audioTest').play();
+    }
+
     var stopImg;
+    //$scope.phase = "permissions";
     $scope.phase = "welcome";
 
     angular.element($window).on('keydown', function(e) {
-        console.log(e);
-        if (e.keyCode == 32) {
-            if ($scope.phase == "welcome" && !ctrl.idForm.input.$error.required){
+        if (e.keyCode == 32 || e.keyCode == 49) {
+            //var userIdValid = !ctrl.idForm.input.$error.required;
+            //var speakerTestInput = $scope.validation.speakerTestInput.toLowerCase().trim();
+            //console.log(speakerTestInput);
+            if ($scope.phase == "welcome" && !ctrl.idForm.input.$error.required && $scope.validation.speakerTestInput.toLowerCase().trim() == 'welcome'){
                 //start video capture
                 //audioRecorderService.API.initAudio();
                 audioRecorderService.API.toggleRecording();
@@ -142,7 +168,7 @@ angular.module('app').controller('mvMainCtrl', function($scope, $window, $docume
                 $interval.cancel(stopImg);
                 $scope.phase = "debrief";
             } else if ($scope.phase == "thankyou") {
-                //uploadAudio();
+                uploadAudio();
                 $scope.phase = "welcome";
                 location.reload();
             }
