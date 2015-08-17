@@ -3,7 +3,7 @@ extends ../includes/layout
 block main-content
     section.content
     div(class="container-fluid partId")
-        div(ng-controller="mvMainCtrl as main" class="col-xs-10 col-xs-offset-1")
+        div(ng-controller="mvMainCtrl as main" class="col-xs-10 col-xs-offset-1" ng-cloak)
             webcam(on-streaming="onSuccess()" on-access-denied="onError(err)" on-stream="onStream(stream)" channel="channel" hidden)
             div(ng-switch on="phase")
                 div(ng-switch-when="permissions")
@@ -11,6 +11,11 @@ block main-content
                 div(ng-switch-when="welcome")
                     div(class="row-fluid")
                         p Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
+                    div(class="row-fluid")
+                        div(class="partId text-center")
+                            form(name='main.idForm')
+                                label Input participant number:
+                                    input(type='text' name='input' ng-model='sessionData.partId' required)
                     div(class="row-fluid")
                         div(class="col-xs-4 calibration-height parent" ng-style='borders.webcam')
                             div(class="row-fluid")
@@ -42,12 +47,7 @@ block main-content
                                         input(type="text" name='speakerTestInput' ng-model='validation.speakerTestInput' required)
                                 h4(ng-show="validation.speakerTestInput == 'welcome'") Headphone calibration complete
                     div(class="row-fluid")
-                        div(class="partId text-center")
-                            form(name='main.idForm')
-                                label Input participant number:
-                                    input(type='text' name='input' ng-model='user.id' required)
-                    div(class="row-fluid")
-                        h2(class="text-center" ng-show="validation.webcam && validation.microphone && validation.speakerTestInput") Press space bar to begin...
+                        h2(class="text-center" ng-show="!ctrl.idForm.input.$error.required && validation.webcam && validation.microphone && validation.speakerTestInput == 'welcome'") Press space bar to begin...
                 div(ng-switch-when="stimulus" ng-controller="mvVideoCtrl as controller")
                     div(class="text-center")
                         videogular(vg-player-ready="controller.onPlayerReady($API)" ng-click="controller.API.play()" vg-auto-play="true")
@@ -57,9 +57,10 @@ block main-content
                     //p {{dataUrl}}
                 div( class="parent" ng-switch-when="debrief")
                     div(class="text-center")
-                        p You stopped the video at {{stopTime}}
+                        p You stopped the video at {{sessionData.stopTime}}
                         p What was the pattern that you observed?
-                        textarea
+                        form
+                            textarea(type='text' name='textarea' ng-model='sessionData.response' required)
                         button(ng-click="switchToThankYou()") Submit
                 div(class="parent" ng-switch-when="thankyou")
                     div(class="text-center")
