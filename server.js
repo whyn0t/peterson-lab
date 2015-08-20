@@ -100,6 +100,16 @@ var sessionSchema = mongoose.Schema({
 
 var Session = mongoose.model('Session', sessionSchema);
 
+var studySchema = mongoose.Schema({
+    studyId: String,
+    partIdStart: Number,
+    partIdEnd: Number,
+    active: Boolean,
+    dateTime: {type: Date, default: Date.now()}
+});
+
+var Study = mongoose.model('Study', studySchema);
+
 app.post('/api/sessionData', function(req, res){
     console.log('got session data post');
     console.log(req.body);
@@ -160,6 +170,16 @@ app.get('/api/admin', [jwtauth], function(req, res){
     });
 
 });
+
+app.get('api/admin', [jwtauth], function(req, res){
+
+})
+
+app.get('/admin', function(req, res){
+    res.render('admin', {
+
+    });
+})
 
 app.get('*', function(req, res){
 	res.render('index', {
