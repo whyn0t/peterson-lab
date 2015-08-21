@@ -1,10 +1,33 @@
 extends ../includes/layout
 block main-content
     section.content
-    h1 Welcome to the admin page
-    table
-        thead
-            tr
-                td studyId
-                td partId Range
-                td
+    div(ng-controller='mvAdminCtrl as admin')
+        h1 Welcome to the admin page
+        div(ng-show='!authentication.access_token')
+            h3(ng-show='authentication.attempts > 0') Incorrect username or password
+            form(name='admin.authForm')
+                label Username:
+                    input(type='text' name='input' ng-model='authentication.username' required)
+                label Password:
+                    input(type='text' name='input' ng-model='authentication.password' required)
+                button(ng-click='submitCredentials()') submit
+        div(ng-show='authentication.access_token')
+            table(class='table table-bordered')
+                thead
+                    tr
+                        th Active
+                        th Study ID
+                        th PartId Min
+                        th PartId Max
+                tbody
+                    tr
+                        td
+                            input(type='checkbox' name='active' ng-model='newStudy.active')
+                        td
+                            input(type='text' name='studyId' ng-model='newStudy.studyId')
+                        td
+                            input(type='number' name='partIdMin' ng-model='newStudy.partIdMin')
+                        td
+                            input(type='number' name='partIdMax' ng-model='newStudy.partIdMax')
+                        td
+                            button(ng-click='postNewStudy()') Add

@@ -1,5 +1,6 @@
 var jwt = require('jwt-simple'),
-    url = require('url');
+    url = require('url'),
+    app = require('./server');
 
 module.exports = function(req, res, next) {
     var token = (req.body && req.body.access_token)
@@ -10,7 +11,6 @@ module.exports = function(req, res, next) {
     if (token) {
         try {
             var decoded = jwt.decode(token, app.get('jwtTokenSecret'));
-
             // handle token here
             if (decoded.exp <= Date.now()) {
                 res.end('Access token has expired', 400);

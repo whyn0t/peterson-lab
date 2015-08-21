@@ -10,7 +10,6 @@ var express = require('express'),
     mongoose = require('mongoose'),
     multer = require('multer'),
     jwt = require('jwt-simple'),
-    jwtauth = require('./jwtauth.js'),
     moment = require('moment'),
     json2csv = require('json2csv');
 
@@ -21,7 +20,8 @@ var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 console.log(env);
 
 //create new express app
-var app = express();
+var app = module.exports = express();
+var jwtauth = require('./jwtauth.js');
 
 //stylus configuration... what does stylus do?
 function compile(str, path){
@@ -102,8 +102,8 @@ var Session = mongoose.model('Session', sessionSchema);
 
 var studySchema = mongoose.Schema({
     studyId: String,
-    partIdStart: Number,
-    partIdEnd: Number,
+    partIdMin: Number,
+    partIdMax: Number,
     active: Boolean,
     dateTime: {type: Date, default: Date.now()}
 });
@@ -121,7 +121,13 @@ app.post('/api/sessionData', function(req, res){
         });
     if (session.studyId != 'demo') {
         session.save(function (err) {
-            console.log(err);
+            if(err){
+                console.log(err);
+                //TODO need better failure status
+                res.sendStatus(418);
+            } else {
+                res.sendStatus(200);
+            }
         });
     }
 });
@@ -171,15 +177,29 @@ app.get('/api/admin', [jwtauth], function(req, res){
 
 });
 
+app.post('/api/newStudy', [jwtauth], function(req, res){
+    var study = new Study(req.body);
+    console.log(req.body);
+    study.save(function (err) {
+        if (err) {
+            console.log(err);
+            //TODO need better failure status
+            res.sendStatus(400);
+        } else {
+            res.sendStatus(200);
+        }
+    });
+});
+
 app.get('api/admin', [jwtauth], function(req, res){
 
-})
+});
 
 app.get('/admin', function(req, res){
     res.render('admin', {
 
     });
-})
+});
 
 app.get('*', function(req, res){
 	res.render('index', {
