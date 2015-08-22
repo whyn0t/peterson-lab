@@ -45,7 +45,7 @@ app.use(stylus.middleware(
 
 app.use(multer({ dest: './tmp/' }).single('file'));
 
-app.post('/api/avData', function(req, res) {
+app.post('/api/avData', [jwtauth], function(req, res) {
     console.log(req.file);
 
     //only store non-demo data
@@ -92,8 +92,8 @@ db.once('open', function callback(){
 
 var sessionSchema = mongoose.Schema({
     studyId: String,
-    partId: String,
-    stopTime: String,
+    partId: Number,
+    stopTime: Number,
     response: String,
     dateTime: {type: Date, default: Date.now()}
 });
@@ -110,7 +110,7 @@ var studySchema = mongoose.Schema({
 
 var Study = mongoose.model('Study', studySchema);
 
-app.post('/api/sessionData', function(req, res){
+app.post('/api/sessionData', [jwtauth], function(req, res){
     console.log('got session data post');
     console.log(req.body);
     var session = new Session({
@@ -137,7 +137,7 @@ app.set('jwtTokenSecret', 'PETERSON_LAB');
 app.post('/api/auth', function(req, res){
     console.log(req.body);
     if (req.body.username == 'admin' && req.body.password == 'petersonlab1!') {
-        var expires = moment().add('days', 7).valueOf();
+        var expires = moment().add('hours', 16).valueOf();
         var token = jwt.encode({
             iss: req.body.username,
             exp: expires
@@ -153,6 +153,34 @@ app.post('/api/auth', function(req, res){
     }
 });
 
+app.post('/api/auth/session', function(req, res){
+    var studyId = req.body.studyId;
+    var partId = req.body.partId;
+   Study.findOne({studyId: studyId}).exec(function(err, result){
+      if (err){
+          console.log(err);
+          //todo better status
+          res.end(418);
+      } else {
+          if (result.partIdMin <= partId && partId <= result.partIdMax) {
+              console.log(result.partIdMin, partId, result.partIdMax);
+              var expires = moment().add('hours', 1).valueOf();
+              var token = jwt.encode({
+                  iss: studyId + partId,
+                  exp: expires
+              }, app.get('jwtTokenSecret'));
+              res.json({
+                  token: token,
+                  exp: expires,
+                  user: studyId + partId
+              });
+          } else {
+              res.sendStatus(401);
+          }
+      }
+   });
+});
+
 
 //routes
 //render parses from jade?
@@ -160,21 +188,48 @@ app.get('/partials/:partialPath', function(req, res){
     res.render('partials/' + req.params.partialPath);
 });
 
-app.get('/api/admin', [jwtauth], function(req, res){
-    Session.find({}).exec(function(err, result){
+app.get('/api/getCsv', [jwtauth], function(req, res){
+    Session.find({}, {"_id": 0, "__v": 0}).exec(function(err, result){
         if (err){
             console.log(err);
             res.end(401);
+        } else {
+            json2csv({data: result}, function(err, csv){
+                if(err){
+                    console.log(err);
+                    res.end('csv conversion error', 400);
+                }
+                res.send(csv);
+            });
         }
-        json2csv({data: result}, function(err, csv){
-            if(err){
-                console.log(err);
-                res.end('csv conversion error', 400);
-            }
-            res.send(csv);
-        });
     });
 
+});
+
+app.get('/api/getStudies', [jwtauth], function(req, res){
+   Study.find({}, {"__v": 0}).exec(function(err, result){
+       if (err){
+           console.log(err);
+           //TODO need better status
+           res.end(418);
+       } else {
+           //console.log(result);
+           res.json(result);
+       }
+   });
+});
+
+app.post('/api/removeStudy', [jwtauth], function(req, res){
+    console.log(req.body._id);
+    Study.findByIdAndRemove(req.body._id, function(err, result){
+        if (err) {
+            console.log(err);
+            //todo need better code
+            res.sendStatus(418);
+        } else {
+            res.sendStatus(200);
+        }
+    });
 });
 
 app.post('/api/newStudy', [jwtauth], function(req, res){

@@ -9,7 +9,7 @@ angular.module('app').controller('mvMainCtrl', function($scope, $window, $docume
                         microphone: { border: '5px solid red' },
                         speakers: { border: '5px solid red' }};
     $scope.sessionData = {studyId: $location.search().studyId || 'demo'};
-
+    var authentication = {};
 
     //TODO webcam capture junk needs to be put into a directive
     var _video = null,
@@ -92,7 +92,10 @@ angular.module('app').controller('mvMainCtrl', function($scope, $window, $docume
                     transformRequest: function (data) {
                         return data;
                     },
-                    headers: {'Content-Type': undefined}
+                    headers: {
+                        'Content-Type': undefined,
+                        'x-access-token': authentication.token
+                    }
                 }).success(function () {
                     console.log("Uploaded audio");
                 }).error(function () {
@@ -111,7 +114,10 @@ angular.module('app').controller('mvMainCtrl', function($scope, $window, $docume
                     transformRequest: function (data) {
                         return data;
                     },
-                    headers: {'Content-Type': undefined}
+                    headers: {
+                        'Content-Type': undefined,
+                        'x-access-token': authentication.token
+                    }
                 }).success(function () {
                     console.log("Uploaded image");
                 }).error(function () {
@@ -143,6 +149,12 @@ angular.module('app').controller('mvMainCtrl', function($scope, $window, $docume
        }
     });
 
+    $scope.$watch('phase', function(){
+        if ($scope.phase == 'stimulus') {
+            validateSession();
+        }
+    })
+
     $scope.$on('playerTime', function(event, data){
         $scope.sessionData.stopTime = data;
     });
@@ -163,8 +175,28 @@ angular.module('app').controller('mvMainCtrl', function($scope, $window, $docume
 
     var postSession = function(sessionData){
         if ($scope.sessionData.studyId != 'demo') {
-            $http.post('/api/sessionData', sessionData);
+            $http({
+                method: 'POST',
+                url: '/api/sessionData',
+                data: sessionData,
+                header: {
+                    'x-access-token': authentication.token
+                }
+            })
         }
+    }
+
+    var validateSession = function(){
+        //hacky
+        $scope.sessionData.partId = parseInt($scope.sessionData.partId);
+        $http({
+            method: 'POST',
+            url: '/api/auth/session',
+            data: $scope.sessionData
+        }).then(function(res){
+            console.log(res.data.token);
+            authentication = res.data;
+        })
     }
 
     var stopImg;

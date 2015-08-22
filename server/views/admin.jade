@@ -20,6 +20,14 @@ block main-content
                         th PartId Min
                         th PartId Max
                 tbody
+                    tr(ng-repeat="study in studies")
+                        td
+                            input(type='checkbox' name='active' ng-model='study.active')
+                        td {{ study.studyId }}
+                        td {{ study.partIdMin }}
+                        td {{ study.partIdMax }}
+                        td
+                            button(ng-click='deleteStudy(study._id)') Delete
                     tr
                         td
                             input(type='checkbox' name='active' ng-model='newStudy.active')
