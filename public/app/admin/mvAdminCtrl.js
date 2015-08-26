@@ -2,6 +2,7 @@ angular.module('app').controller('mvAdminCtrl', function($scope, $http) {
     $scope.authentication = {attempts: 0};
     $scope.newStudy = {};
     $scope.studies = {};
+    $scope.dlQuery = {};
 
     $scope.submitCredentials = function(){
         $http.post('/api/auth', {
@@ -66,5 +67,12 @@ angular.module('app').controller('mvAdminCtrl', function($scope, $http) {
         }).then(function(res){
             populateStudyTable();
         })
+    }
+
+    $scope.downloadAvData = function(studyId){
+        $http({
+            method: 'GET',
+            url: '/api/download/' + studyId
+        });
     }
 });

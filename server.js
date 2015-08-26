@@ -1,6 +1,9 @@
 //why have some sources in vendor and some in node_modules?
 //what do bower and toastr do?
 
+const CLIENT_ID = " 962654615166-c4ordtuul3hh80ti4j5mrrnf2jealu5s.apps.googleusercontent.com ";
+const CLIENT_SECRET = "Yrdab0zQRCuNfyddd2d3SQHD";
+const REFRESH_TOKEN = "1/Yra7quKZxh0XlpDCSzIdL1ipINuE6zGtkPqG6ye-Hs1IgOrJDtdun6zK6XiATCKT";
 
 var express = require('express'),
     fs = require('fs'),
@@ -11,7 +14,12 @@ var express = require('express'),
     multer = require('multer'),
     jwt = require('jwt-simple'),
     moment = require('moment'),
-    json2csv = require('json2csv');
+    json2csv = require('json2csv'),
+    archiver = require('archiver'),
+    GoogleTokenProvider = require("refresh-token").GoogleTokenProvider,
+    async = require('async'),
+    request = require('request'),
+    _accesstoken;
 
 var done=false;
 
@@ -206,6 +214,25 @@ app.get('/api/getCsv', [jwtauth], function(req, res){
 
 });
 
+app.get('/api/download/:studyId', function(req, res){
+    var archive = archiver.create('zip');
+
+    res.writeHead(200, {
+        'Content-Type': 'application/zip',
+        'Content-disposition': 'attachment; filename=' + req.params.studyId + '-avData.zip'
+    });
+
+    archive.on('error', function(err){
+        console.log(err);
+    });
+
+    archive.pipe(res);
+    archive.bulk([
+        { expand: true, cwd: 'avData/' + req.params.studyId, src: ['**/*'], dest: 'avData/' + req.params.studyId}
+    ]);
+    archive.finalize();
+})
+
 app.get('/api/getStudies', [jwtauth], function(req, res){
    Study.find({}, {"__v": 0}).exec(function(err, result){
        if (err){
@@ -261,6 +288,9 @@ app.get('*', function(req, res){
 
     });
 });
+
+//GDrive
+
 
 
 

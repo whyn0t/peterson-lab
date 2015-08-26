@@ -12,6 +12,7 @@ block main-content
                     input(type='text' name='input' ng-model='authentication.password' required)
                 button(ng-click='submitCredentials()') submit
         div(ng-show='authentication.access_token')
+            h2 Manage Studies
             table(class='table table-bordered')
                 thead
                     tr
@@ -39,3 +40,10 @@ block main-content
                             input(type='number' name='partIdMax' ng-model='newStudy.partIdMax')
                         td
                             button(ng-click='postNewStudy()') Add
+            h2 Download Data
+            label(for="studySelect") StudyId:
+            form
+            select(name="studySelect" ng-model="dlQuery.studyId")
+                option(value="") All
+                option(ng-repeat="study in studies" value="{{ study.studyId }}") {{ study.studyId }}
+            button(ng-click="downloadAvData(dlQuery.studyId)") Download
