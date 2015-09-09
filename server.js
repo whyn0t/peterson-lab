@@ -4,6 +4,8 @@
 const CLIENT_ID = " 962654615166-c4ordtuul3hh80ti4j5mrrnf2jealu5s.apps.googleusercontent.com ";
 const CLIENT_SECRET = "Yrdab0zQRCuNfyddd2d3SQHD";
 const REFRESH_TOKEN = "1/Yra7quKZxh0XlpDCSzIdL1ipINuE6zGtkPqG6ye-Hs1IgOrJDtdun6zK6XiATCKT";
+const ENDPOINT_OF_GDRIVE = 'https://www.googleapis.com/drive/v2';
+const FOLDER_ID = '0B7xxmI9nb2CLb0Z5MXNHUXQ2MUU';
 
 var express = require('express'),
     fs = require('fs'),
@@ -19,7 +21,10 @@ var express = require('express'),
     GoogleTokenProvider = require("refresh-token").GoogleTokenProvider,
     async = require('async'),
     request = require('request'),
-    _accesstoken;
+    uploadFile = require('./server/services/googleDrive').insertFile,
+    shareData = require('./server/services/googleDrive').share,
+    unshareData = require('./server/services/googleDrive').unshare,
+    _accessToken;
 
 var done=false;
 
@@ -70,12 +75,18 @@ app.post('/api/avData', [jwtauth], function(req, res) {
                                 message: 'File uploaded successfully',
                                 filename: req.file.name
                             };
+                            //upload to google drive
+                            //TODO delete local file on success
+                            uploadFile({
+                                path: ['avData', req.query.studyId, req.query.partId, req.file.originalname],
+                                location: file
+                            });
                         }
                         console.log(response);
                         res.status(200).end(JSON.stringify(( response )));
-                        fs.unlink(req.file.path, function (err) {
-                            console.log(err);
-                        });
+                        //fs.unlink(req.file.path, function (err) {
+                        //    console.log(err);
+                        //});
                     });
                 });
             });
@@ -117,6 +128,14 @@ var studySchema = mongoose.Schema({
 });
 
 var Study = mongoose.model('Study', studySchema);
+
+var shareSchema = mongoose.Schema({
+    name: String,
+    email: String,
+    permission: String
+});
+
+var Share = mongoose.model('Share', shareSchema);
 
 app.post('/api/sessionData', [jwtauth], function(req, res){
     console.log('got session data post');
@@ -273,6 +292,49 @@ app.post('/api/newStudy', [jwtauth], function(req, res){
     });
 });
 
+app.post('/api/share', [jwtauth], function(req, res){
+    var share = new Share(req.body);
+    console.log(req.body);
+    share.save(function(err) {
+        if (err) {
+            console.log(err);
+            res.sendStatus(418);
+        } else {
+            //give permissions to email
+            shareData('avData', req.body.email, req.body.permission);
+            res.sendStatus(200);
+        }
+    })
+})
+
+app.get('/api/getShared', [jwtauth], function(req, res){
+    Share.find({}, {"__v": 0}).exec(function(err, result){
+        if (err){
+            console.log(err);
+            //TODO need better status
+            res.end(418);
+        } else {
+            console.log("Got share: ", result);
+            res.json(result);
+        }
+    });
+});
+
+app.post('/api/unshare', [jwtauth], function(req, res){
+    Share.findByIdAndRemove(req.body._id, function(err){
+        if (err) {
+            console.log(err);
+            //todo need better code
+            res.sendStatus(418);
+        } else {
+            unshareData('avData', req.body.email, function(){
+                console.log('Unshared:', req.body.email);
+            });
+            res.sendStatus(200);
+        }
+    });
+});
+
 app.get('api/admin', [jwtauth], function(req, res){
 
 });
@@ -289,11 +351,64 @@ app.get('*', function(req, res){
     });
 });
 
+/*
 //GDrive
 
-
-
-
+async.waterfall([
+    //obtain a new access token
+    function(callback) {
+        console.log("Obtaining access token");
+        var tokenProvider = new GoogleTokenProvider({
+            'refresh_token': REFRESH_TOKEN,
+            'client_id': CLIENT_ID,
+            'client_secret': CLIENT_SECRET
+        });
+        tokenProvider.getToken(callback);
+    },
+    //retrieve the children in a specified folder
+    function(accessToken, callback) {
+        console.log("Retreiving children");
+        _accessToken = accessToken;
+        request.get({
+            'url': ENDPOINT_OF_GDRIVE + '/files/' + FOLDER_ID + '/children',
+            'qs': {
+                'access_token': accessToken
+            }
+        }, callback);
+    },
+    //parse the response
+    function(response, body, callback) {
+        var list = JSON.parse(body);
+        if (list.error) {
+            return callback(list.error);
+        }
+        callback(null, list.items);
+    },
+    //get the file information of the children
+    function(children, callback) {
+        async.map(children, function(child, cback) {
+            request.get({
+                'url': ENDPOINT_OF_GDRIVE + '/files/' + child.id,
+                'qs': {
+                    'access_token': _accessToken
+                }
+            }, function(err, response, body) {
+                body = JSON.parse(body);
+                cback(null, {
+                    'title': body.title,
+                    'md5Checksum': body.md5Checksum
+                });
+            })
+        }, callback);
+    }
+], function(err, results) {
+    if (!err) {
+        console.log(results);
+    } else {
+        console.log(err);
+    }
+});
+*/
 const port = process.env.PORT || 3030;
 app.listen(port);
 console.log("Listening on port " + port + "...");

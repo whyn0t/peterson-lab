@@ -40,10 +40,29 @@ block main-content
                             input(type='number' name='partIdMax' ng-model='newStudy.partIdMax')
                         td
                             button(ng-click='postNewStudy()') Add
-            h2 Download Data
-            label(for="studySelect") StudyId:
-            form
-            select(name="studySelect" ng-model="dlQuery.studyId")
-                option(value="") All
-                option(ng-repeat="study in studies" value="{{ study.studyId }}") {{ study.studyId }}
-            button(ng-click="downloadAvData(dlQuery.studyId)") Download
+            h2 Share Data
+            table(class='table table-bordered')
+                thead
+                    tr
+                        th Name
+                        th Gmail
+                        th Permission
+                        th
+                tbody
+                    tr(ng-repeat="share in shares")
+                        td {{ share.name }}
+                        td {{ share.email }}
+                        td {{ share.permission }}
+                        td
+                            button(ng-click="unshareAvData(share)") Remove
+                    tr
+                        td
+                            input(type='text' name='userName' ng-model='newShare.name')
+                        td
+                            input(type='text' name='email' ng-model='newShare.email')
+                        td
+                            select(ng-model='newShare.permission')
+                                option reader
+                                option writer
+                        td
+                            button(ng-click='shareAvData()') Add

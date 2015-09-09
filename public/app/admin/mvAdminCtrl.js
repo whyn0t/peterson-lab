@@ -3,6 +3,8 @@ angular.module('app').controller('mvAdminCtrl', function($scope, $http) {
     $scope.newStudy = {};
     $scope.studies = {};
     $scope.dlQuery = {};
+    $scope.newShare = {};
+    $scope.shares = {};
 
     $scope.submitCredentials = function(){
         $http.post('/api/auth', {
@@ -12,6 +14,7 @@ angular.module('app').controller('mvAdminCtrl', function($scope, $http) {
             $scope.authentication.access_token = res.data.token;
             $scope.authentication.expires = res.data.exp;
             populateStudyTable();
+            populateShareTable();
         }, function(res){
             if (res.status == 401){
                 $scope.authentication.attempts += 1;
@@ -67,6 +70,51 @@ angular.module('app').controller('mvAdminCtrl', function($scope, $http) {
         }).then(function(res){
             populateStudyTable();
         })
+    }
+
+    $scope.shareAvData = function(){
+        $http({
+            method: 'POST',
+            url: '/api/share',
+            headers: {
+                'x-access-token': $scope.authentication.access_token
+            },
+            data: $scope.newShare
+        }).then(function(res){
+            populateShareTable();
+            $scope.newShare = {};
+        }, function(res){
+            //the post failed
+        });
+    }
+
+    $scope.unshareAvData = function(share){
+        $http({
+            method: 'POST',
+            url: '/api/unshare',
+            headers: {
+                'x-access-token': $scope.authentication.access_token
+            },
+            data: share
+        }).then(function(res){
+            populateShareTable();
+        })
+    }
+
+    function populateShareTable(){
+        $http({
+            method: 'GET',
+            url: '/api/getShared',
+            headers: {
+                'x-access-token': $scope.authentication.access_token,
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(function(res){
+                $scope.shares = res.data;
+            }, function(res){
+                //the get failed
+            });
     }
 
     $scope.downloadAvData = function(studyId){
