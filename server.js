@@ -29,7 +29,7 @@ var express = require('express'),
 var done=false;
 
 //set your environment variable? what does this effect?
-var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+var env = process.env.NODE_ENV = process.env.NODE_ENV || 'developmen';
 console.log(env);
 
 //create new express app
@@ -101,7 +101,7 @@ app.use(express.static(__dirname + "/public"));
 if (env === 'development') {
     mongoose.connect('mongodb://localhost/petersonLab');
 } else {
-    mongoose.connect('mongodb://nigelsmk:tim54p4ML@ds049198.mongolab.com:49198/petersonlab');
+    mongoose.connect('mongodb://nigelsmk:simplepassword@ds049878.mongolab.com:49878/heroku_9z2qdrt5/petersonlab');
 }
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error...'));

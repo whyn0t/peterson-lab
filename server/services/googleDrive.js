@@ -27,6 +27,44 @@ module.exports = {
     unshare: unshare
 }
 
+//TODO finish this function
+function fileExists(fileInfo, parentId, successCallback, failCallback){
+    authClient.authorize(function(err, tokens){
+
+        var requestParams = {auth: authClient};
+        if (parentId){
+            requestParams.q = "'" + parentId + "' in parents";
+        }
+
+        drive.files.list(requestParams
+        , function(err, response) {
+            if (err) {
+                console.log('The API returned an error: ' + err);
+                return;
+            }
+            var files = response.items;
+            if (files.length == 0) {
+                console.log('No files found.');
+                failCallback(fileInfo);
+            } else {
+                for (var i = 0; i < files.length; i++) {
+                    var file = files[i];
+                    if (file.title == fileInfo.path[0]) {
+                        console.log('Found ', file.title, file.id);
+                        fileInfo.path = fileInfo.path.slice(1);
+                        fileInfo.parentId = file.id;
+                        successCallback(fileInfo);
+                        return;
+                    }
+                    //console.log('%s (%s)', file.title, file.id);
+                }
+                //TODO if folder not found, create folder and return id
+                failCallback(fileInfo);
+            }
+        });
+    });
+}
+
 function insertFile(fileInfo, callback){
     if (fileInfo.path.length == 1){
         //insert file
@@ -262,7 +300,6 @@ function unshare(fileName, email, callback) {
                 console.log(permissions[i]);
                 if (permissions[i].emailAddress == email){
                     console.log('Unshared', fileName, 'with', email);
-                    deletePermission(fileInfo.id, permissions[i].id, callback);
                 }
             }
         });
