@@ -63,6 +63,16 @@ app.post('/api/avData', [jwtauth], function(req, res) {
 
     //only store non-demo data
     if (req.query.studyId != 'demo') {
+        uploadFile({
+            path: ['avData', req.query.studyId, req.query.partId, req.file.originalname],
+            location: req.file.path
+        }, function(){
+            fs.unlink(req.file.path, function (err) {
+                console.log(err);
+            });
+        });
+
+        /*
         var file = __dirname + '/avData/' + req.query.studyId + '/' + req.query.partId + '/' + req.file.originalname;
         fs.mkdir(__dirname + '/avData/' + req.query.studyId, function () {
             fs.mkdir(__dirname + '/avData/' + req.query.studyId + '/' + req.query.partId, function () {
@@ -91,6 +101,7 @@ app.post('/api/avData', [jwtauth], function(req, res) {
                 });
             });
         });
+        */
     }
 });
 

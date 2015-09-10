@@ -92,7 +92,7 @@ function insertFile(fileInfo, callback){
                     mimeType: mimeType,
                     body: fs.createReadStream(fileInfo.location) // read streams are awesome!
                 }
-            });
+            }, callback);
         });
         console.log("Saved", fileInfo.location, "as", fileInfo.path[0]);
     } else {
