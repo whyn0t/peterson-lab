@@ -1,4 +1,4 @@
-angular.module('app').controller('mvMainCtrl', function($scope, $window, $document, $interval, $http, $location, audioRecorderService){
+angular.module('app').controller('ssMainCtrl', function($scope, $window, $document, $interval, $http, $location, audioRecorderService){
     'use strict';
 
     var ctrl = this;
@@ -8,7 +8,15 @@ angular.module('app').controller('mvMainCtrl', function($scope, $window, $docume
     $scope.borders = {webcam: { border: '5px solid red' },
                         microphone: { border: '5px solid red' },
                         speakers: { border: '5px solid red' }};
-    $scope.sessionData = {studyId: $location.search().studyId || 'demo'};
+
+    //HACK to get studyId from url when or format /run/:studyId
+    var urlPath = $location.absUrl().split('/');
+    if (urlPath[urlPath.length - 2] == 'run'){
+        $scope.sessionData = {studyId: urlPath[urlPath.length - 1]}
+    } else {
+        $scope.sessionData = {studyId: 'demo'};
+    }
+    //$scope.sessionData = {studyId: $location.search().studyId || 'demo'};
     var authentication = {};
 
     //TODO webcam capture junk needs to be put into a directive
@@ -166,6 +174,8 @@ angular.module('app').controller('mvMainCtrl', function($scope, $window, $docume
     });
 
     $scope.switchToThankYou = function(){
+        postSession($scope.sessionData);
+        uploadAudio();
         $scope.phase = "thankyou";
     }
 
@@ -179,7 +189,7 @@ angular.module('app').controller('mvMainCtrl', function($scope, $window, $docume
                 method: 'POST',
                 url: '/api/sessionData',
                 data: sessionData,
-                header: {
+                headers: {
                     'x-access-token': authentication.token
                 }
             })
@@ -188,15 +198,18 @@ angular.module('app').controller('mvMainCtrl', function($scope, $window, $docume
 
     var validateSession = function(){
         //hacky
-        $scope.sessionData.partId = parseInt($scope.sessionData.partId);
-        $http({
-            method: 'POST',
-            url: '/api/auth/session',
-            data: $scope.sessionData
-        }).then(function(res){
-            console.log(res.data.token);
-            authentication = res.data;
-        })
+        if ($scope.sessionData.studyId != 'demo') {
+            $scope.sessionData.partId = parseInt($scope.sessionData.partId);
+            $http({
+                method: 'POST',
+                url: '/api/auth/session',
+                data: $scope.sessionData
+            }).then(function (res) {
+                console.log(res.data.token);
+                authentication = res.data;
+                $rootScope.videoUrl = res.data.stimulusUrl;
+            })
+        }
     }
 
     var stopImg;
@@ -227,8 +240,6 @@ angular.module('app').controller('mvMainCtrl', function($scope, $window, $docume
                 $interval.cancel(stopImg);
                 $scope.phase = "debrief";
             } else if ($scope.phase == "thankyou") {
-                uploadAudio();
-                postSession($scope.sessionData);
                 $scope.phase = "welcome";
                 location.reload();
             }

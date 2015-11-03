@@ -15,26 +15,13 @@ angular.module('app', [
 ]);
 
 //how many arguments can be passed to the config callback?
+/*
 angular.module('app').config(function($routeProvider, $locationProvider) {
     $locationProvider.html5Mode(true);
     $routeProvider
-        .when('/main', {
-            templateUrl: '/partials/main',
-            controller: 'mvMainCtrl'})
-        .when('/welcome', {
-            templateUrl: '/partials/welcome'
-        })
-        .when('/stimulus', {
-            templateUrl: '/partials/stimulus'
-        })
-        .when('/debrief', {
-            templateUrl: '/partials/debrief'
-        })
-        .when('/thankyou', {
-            templateUrl: '/partials/thankyou'
-        })
-        .otherwise({redirectTo: '/welcome'})
+        .when('/run/:studyId', {template: " ", controller: "ssMainCtrl"});
 });
+*/
 
 /*angular.element(window).on('keydown', function(e) {
     console.log(e);

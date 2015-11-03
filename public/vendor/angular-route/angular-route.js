@@ -694,7 +694,7 @@ ngRouteModule.provider('$routeParams', $RouteParamsProvider);
  * @example
  * ```js
  *  // Given:
- *  // URL: http://server.com/index.html#/Chapter/1/Section/2?search=moby
+ *  // URL: http://app.com/index.html#/Chapter/1/Section/2?search=moby
  *  // Route: /Chapter/:chapterId/Section/:sectionId
  *  //
  *  // Then
@@ -717,7 +717,7 @@ ngRouteModule.directive('ngView', ngViewFillContentFactory);
  * @description
  * # Overview
  * `ngView` is a directive that complements the {@link ngRoute.$route $route} service by
- * including the rendered template of the current route into the main layout (`index.html`) file.
+ * including the rendered template of the current route into the session layout (`index.html`) file.
  * Every time the current route changes, the included view changes with it according to the
  * configuration of the `$route` service.
  *
@@ -745,7 +745,7 @@ ngRouteModule.directive('ngView', ngViewFillContentFactory);
              deps="angular-route.js;angular-animate.js"
              animations="true" fixBase="true">
       <file name="index.html">
-        <div ng-controller="MainCtrl as main">
+        <div ng-controller="MainCtrl as session">
           Choose:
           <a href="Book/Moby">Moby</a> |
           <a href="Book/Moby/ch/1">Moby: Ch1</a> |
@@ -758,10 +758,10 @@ ngRouteModule.directive('ngView', ngViewFillContentFactory);
           </div>
           <hr />
 
-          <pre>$location.path() = {{main.$location.path()}}</pre>
-          <pre>$route.current.templateUrl = {{main.$route.current.templateUrl}}</pre>
-          <pre>$route.current.params = {{main.$route.current.params}}</pre>
-          <pre>$routeParams = {{main.$routeParams}}</pre>
+          <pre>$location.path() = {{session.$location.path()}}</pre>
+          <pre>$route.current.templateUrl = {{session.$route.current.templateUrl}}</pre>
+          <pre>$route.current.params = {{session.$route.current.params}}</pre>
+          <pre>$routeParams = {{session.$routeParams}}</pre>
         </div>
       </file>
 

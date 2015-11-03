@@ -1,4 +1,4 @@
-extends ../includes/layout
+extends includes/layout
 block main-content
     section.content
     div(ng-controller='mvAdminCtrl as admin')
@@ -20,6 +20,7 @@ block main-content
                         th Study ID
                         th PartId Min
                         th PartId Max
+                        th Stimulus
                 tbody
                     tr(ng-repeat="study in studies")
                         td
@@ -27,8 +28,9 @@ block main-content
                         td {{ study.studyId }}
                         td {{ study.partIdMin }}
                         td {{ study.partIdMax }}
+                        td {{ study.stimulusTitle }}
                         td
-                            button(ng-click='deleteStudy(study._id)') Delete
+                            button(ng-click='deleteStudy(study)') Delete
                     tr
                         td
                             input(type='checkbox' name='active' ng-model='newStudy.active')
@@ -39,8 +41,11 @@ block main-content
                         td
                             input(type='number' name='partIdMax' ng-model='newStudy.partIdMax')
                         td
+                            select(ng-model='newStudy.stimulusTitle')
+                                option(ng-repeat="stimulus in stimuli") {{ stimulus.Key }}
+                        td
                             button(ng-click='postNewStudy()') Add
-            h2 Share Data
+            h2 Share AV Data
             table(class='table table-bordered')
                 thead
                     tr
@@ -64,5 +69,8 @@ block main-content
                             select(ng-model='newShare.permission')
                                 option reader
                                 option writer
+                                option owner
                         td
                             button(ng-click='shareAvData()') Add
+            h2 Backup Session Data to CSV file on the Google Drive
+                button(ng-click='csvBackup()') Do it!

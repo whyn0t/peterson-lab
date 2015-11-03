@@ -71,7 +71,7 @@ function shallowClearAndCopy(src, dst) {
  *
  * @description
  * A factory which creates a resource object that lets you interact with
- * [RESTful](http://en.wikipedia.org/wiki/Representational_State_Transfer) server-side data sources.
+ * [RESTful](http://en.wikipedia.org/wiki/Representational_State_Transfer) app-side data sources.
  *
  * The returned resource object has action methods which provide high-level behaviors without
  * the need to interact with the low level {@link ng.$http $http} service.
@@ -79,7 +79,7 @@ function shallowClearAndCopy(src, dst) {
  * Requires the {@link ngResource `ngResource`} module to be installed.
  *
  * By default, trailing slashes will be stripped from the calculated URLs,
- * which can pose problems with server backends that do not expect that
+ * which can pose problems with app backends that do not expect that
  * behavior.  This can be disabled by configuring the `$resourceProvider` like
  * this:
  *
@@ -186,10 +186,10 @@ function shallowClearAndCopy(src, dst) {
  *   ```
  *
  *   Calling these methods invoke an {@link ng.$http} with the specified http method,
- *   destination and parameters. When the data is returned from the server then the object is an
+ *   destination and parameters. When the data is returned from the app then the object is an
  *   instance of the resource class. The actions `save`, `remove` and `delete` are available on it
  *   as  methods with the `$` prefix. This allows you to easily perform CRUD operations (create,
- *   read, update, delete) on server-side data like this:
+ *   read, update, delete) on app-side data like this:
  *   ```js
  *   var User = $resource('/user/:userId', {userId:'@id'});
  *   var user = User.get({userId:123}, function() {
@@ -200,9 +200,9 @@ function shallowClearAndCopy(src, dst) {
  *
  *   It is important to realize that invoking a $resource object method immediately returns an
  *   empty reference (object or array depending on `isArray`). Once the data is returned from the
- *   server the existing reference is populated with the actual data. This is a useful trick since
+ *   app the existing reference is populated with the actual data. This is a useful trick since
  *   usually the resource is assigned to a model which is then rendered by the view. Having an empty
- *   object results in no rendering, once the data arrives from the server then the object is
+ *   object results in no rendering, once the data arrives from the app then the object is
  *   populated with the data and the view automatically re-renders itself showing the new data. This
  *   means that in most cases one never has to write a callback function for the action methods.
  *
@@ -222,11 +222,11 @@ function shallowClearAndCopy(src, dst) {
  *
  *   The Resource instances and collection have these additional properties:
  *
- *   - `$promise`: the {@link ng.$q promise} of the original server interaction that created this
+ *   - `$promise`: the {@link ng.$q promise} of the original app interaction that created this
  *     instance or collection.
  *
  *     On success, the promise is resolved with the same resource instance or collection object,
- *     updated with data from server. This makes it easy to use in
+ *     updated with data from app. This makes it easy to use in
  *     {@link ngRoute.$routeProvider resolve section of $routeProvider.when()} to defer view
  *     rendering until the resource(s) are loaded.
  *
@@ -236,7 +236,7 @@ function shallowClearAndCopy(src, dst) {
  *     If an interceptor object was provided, the promise will instead be resolved with the value
  *     returned by the interceptor.
  *
- *   - `$resolved`: `true` after first server interaction is completed (either with success or
+ *   - `$resolved`: `true` after first app interaction is completed (either with success or
  *      rejection), `false` before that. Knowing if the Resource has been resolved is useful in
  *      data-binding.
  *
@@ -251,10 +251,10 @@ function shallowClearAndCopy(src, dst) {
        charge: {method:'POST', params:{charge:true}}
       });
 
-     // We can retrieve a collection from the server
+     // We can retrieve a collection from the app
      var cards = CreditCard.query(function() {
        // GET: /user/123/card
-       // server returns: [ {id:456, number:'1234', name:'Smith'} ];
+       // app returns: [ {id:456, number:'1234', name:'Smith'} ];
 
        var card = cards[0];
        // each item is an instance of CreditCard
@@ -263,7 +263,7 @@ function shallowClearAndCopy(src, dst) {
        // non GET methods are mapped onto the instances
        card.$save();
        // POST: /user/123/card/456 {id:456, number:'1234', name:'J. Smith'}
-       // server returns: {id:456, number:'1234', name: 'J. Smith'};
+       // app returns: {id:456, number:'1234', name: 'J. Smith'};
 
        // our custom method is mapped as well.
        card.$charge({amount:9.99});
@@ -275,7 +275,7 @@ function shallowClearAndCopy(src, dst) {
      newCard.name = "Mike Smith";
      newCard.$save();
      // POST: /user/123/card {number:'0123', name:'Mike Smith'}
-     // server returns: {id:789, number:'0123', name: 'Mike Smith'};
+     // app returns: {id:789, number:'0123', name: 'Mike Smith'};
      expect(newCard.id).toEqual(789);
  * ```
  *
@@ -284,9 +284,9 @@ function shallowClearAndCopy(src, dst) {
  *
  * Calling these methods invoke `$http` on the `url` template with the given `method`, `params` and
  * `headers`.
- * When the data is returned from the server then the object is an instance of the resource type and
+ * When the data is returned from the app then the object is an instance of the resource type and
  * all of the non-GET methods are available with `$` prefix. This allows you to easily support CRUD
- * operations (create, read, update, delete) on server-side data.
+ * operations (create, read, update, delete) on app-side data.
 
    ```js
      var User = $resource('/user/:userId', {userId:'@id'});
@@ -297,7 +297,7 @@ function shallowClearAndCopy(src, dst) {
    ```
  *
  * It's worth noting that the success callback for `get`, `query` and other methods gets passed
- * in the response that came from the server as well as $http header getter function, so one
+ * in the response that came from the app as well as $http header getter function, so one
  * could rewrite the above example and get access to http headers as:
  *
    ```js

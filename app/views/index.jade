@@ -1,19 +1,20 @@
-extends ../includes/layout
+extends ./includes/layout
 
 block main-content
     section.content
     div(class="container-fluid partId")
-        div(ng-controller="mvMainCtrl as main" class="col-xs-10 col-xs-offset-1" ng-cloak)
+        div(ng-controller="ssMainCtrl as session" class="col-xs-10 col-xs-offset-1" ng-cloak)
             webcam(on-streaming="onSuccess()" on-access-denied="onError(err)" on-stream="onStream(stream)" channel="channel" hidden)
             div(ng-switch on="phase")
                 div(ng-switch-when="permissions")
                     p Please allow access to your camera and microphone to continue. Refresh the page if there is no permissions prompt.
                 div(ng-switch-when="welcome")
                     div(class="row-fluid")
-                        p Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
+                        p In order to make sure that you are not in a distracting environment, we would like to collect audio and video data during this task. This data will be stored on a secure server, separately from your provided information, and separately from any identifying information. This data will only be accessible by researchers affiliated with this project.
+                        p Please enable your browser to access your webcam and microphone and follow the instructions below before proceeding.
                     div(class="row-fluid")
                         div(class="partId text-center")
-                            form(name='main.idForm')
+                            form(name='session.idForm')
                                 label Input participant number:
                                     input(type='text' name='input' ng-model='sessionData.partId' required)
                     div(class="row-fluid")
@@ -48,13 +49,12 @@ block main-content
                                 h4(ng-show="validation.speakerTestInput == 'welcome'") Headphone calibration complete
                     div(class="row-fluid")
                         h2(class="text-center" ng-show="!ctrl.idForm.input.$error.required && validation.webcam && validation.microphone && validation.speakerTestInput == 'welcome'") Press space bar to begin...
-                div(ng-switch-when="stimulus" ng-controller="mvVideoCtrl as controller")
+                div(ng-switch-when="stimulus" ng-controller="vdMainCtrl as controller")
                     div(class="text-center")
                         videogular(vg-player-ready="controller.onPlayerReady($API)" ng-click="controller.API.play()" vg-auto-play="true")
                             vg-media(vg-src="controller.config.sources")
                             vg-overlay-play
-                        canvas(id='snapshot')
-                    //p {{dataUrl}}
+                        canvas(id='snapshot' hidden)
                 div( class="parent" ng-switch-when="debrief")
                     div(class="text-center")
                         p You stopped the video at {{sessionData.stopTime}}

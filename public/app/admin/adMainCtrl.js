@@ -5,6 +5,7 @@ angular.module('app').controller('mvAdminCtrl', function($scope, $http) {
     $scope.dlQuery = {};
     $scope.newShare = {};
     $scope.shares = {};
+    $scope.stimuli = {};
 
     $scope.submitCredentials = function(){
         $http.post('/api/auth', {
@@ -15,6 +16,7 @@ angular.module('app').controller('mvAdminCtrl', function($scope, $http) {
             $scope.authentication.expires = res.data.exp;
             populateStudyTable();
             populateShareTable();
+            getStimuli();
         }, function(res){
             if (res.status == 401){
                 $scope.authentication.attempts += 1;
@@ -58,15 +60,15 @@ angular.module('app').controller('mvAdminCtrl', function($scope, $http) {
         });
     }
 
-    $scope.deleteStudy = function(studyId){
-        console.log(studyId);
+    $scope.deleteStudy = function(study){
+        console.log(study);
         $http({
             method: 'POST',
             url: '/api/removeStudy',
             headers: {
                 'x-access-token': $scope.authentication.access_token
             },
-            data: {_id: studyId}
+            data: study
         }).then(function(res){
             populateStudyTable();
         })
@@ -117,10 +119,30 @@ angular.module('app').controller('mvAdminCtrl', function($scope, $http) {
             });
     }
 
-    $scope.downloadAvData = function(studyId){
+    $scope.csvBackup = function(){
         $http({
             method: 'GET',
-            url: '/api/download/' + studyId
+            url: '/api/getCsv',
+            headers: {
+                'x-access-token': $scope.authentication.access_token
+            }
+        });
+    }
+
+    function getStimuli(){
+        $http({
+            method: 'GET',
+            url: 'api/getStimuli',
+            headers: {
+                'x-access-token': $scope.authentication.access_token,
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(function(res){
+            $scope.stimuli = res.data;
+            console.log(res.data);
+        }, function(res){
+            //the get failed
         });
     }
 });

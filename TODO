@@ -1,0 +1,35 @@
+Code structure improvement
+    Initialize page behaviors using events. On spacebar press, emit an event that indicates the app's current state.
+
+Admin
+    Study does not store false active
+    On study delete, delete avData
+    activate active
+    obfuscate password
+    video upload and assignment to study
+    on delete with data deleted stimuli folder and crashed...
+
+Welcome
+    Participant number highlight for completion
+        grey out calibration?
+
+stimulus
+    centre video better?
+    delete images stored in gdrive from server temp folder
+
+feedback
+    larger text input
+    optional feedback text?
+
+general
+    modularization of client side
+    error management
+    browser testing
+
+upload video
+    reorganize gdrive folder structure
+
+
+EXTRAS
+thankyou
+    redirect option?
