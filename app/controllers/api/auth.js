@@ -45,7 +45,6 @@ module.exports.controller = function(app) {
                         token: token,
                         exp: expires,
                         user: studyId + partId,
-                        stimulusUrl: "https://s3-us-west-2.amazonaws.com/peterson-elab/+" + result.stimulusUrl
                     });
                 } else {
                     res.sendStatus(401);

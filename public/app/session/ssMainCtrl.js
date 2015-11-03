@@ -207,7 +207,7 @@ angular.module('app').controller('ssMainCtrl', function($scope, $window, $docume
             }).then(function (res) {
                 console.log(res.data.token);
                 authentication = res.data;
-                $rootScope.videoUrl = res.data.stimulusUrl;
+                //$rootScope.videoUrl = res.data.stimulusUrl;
             })
         }
     }

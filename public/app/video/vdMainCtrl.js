@@ -1,6 +1,6 @@
 //'use strict';
 angular.module('app').controller('vdMainCtrl',
-    ["$sce", "$scope", function ($sce, $scope, $rootScope) {
+    ["$sce", "$scope", function ($sce, $scope) {
         var controller = this;
         controller.API = null;
 
@@ -19,7 +19,7 @@ angular.module('app').controller('vdMainCtrl',
         controller.config = {
             sources: [
                 //{src: $sce.trustAsResourceUrl("/video/stim1.mp4"), type: "video/mp4"},
-                {src: $sce.trustAsResourceUrl($rootScope.stimulusUrl), type: "video/mp4"},
+                {src: $sce.trustAsResourceUrl("/video/stim1.mp4"), type: "video/mp4"},
                 {src: $sce.trustAsResourceUrl("/video/stim1.webm"), type: "video/webm"},
                 {src: $sce.trustAsResourceUrl("/video/stim1.mp4"), type: "video/ogg"}
             ]
