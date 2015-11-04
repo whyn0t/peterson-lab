@@ -1,0 +1,5 @@
+div(class="text-center" ng-controller="vdMainCtrl as controller")
+    videogular(vg-player-ready="controller.onPlayerReady($API)" ng-click="controller.API.play()" vg-auto-play="true")
+        vg-media(vg-src="controller.config.sources")
+        vg-overlay-play
+    canvas(id='snapshot' hidden)

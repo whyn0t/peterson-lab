@@ -1,0 +1,40 @@
+div(class="row-fluid")
+    p In order to make sure that you are not in a distracting environment, we would like to collect audio and video data during this task. This data will be stored on a secure server, separately from your provided information, and separately from any identifying information. This data will only be accessible by researchers affiliated with this project.
+    p Please enable your browser to access your webcam and microphone and follow the instructions below before proceeding.
+div(class="row-fluid")
+    div(class="partId text-center")
+        form(name='session.idForm')
+            label Input participant number:
+                input(type='text' name='input' ng-model='sessionData.partId' required)
+div(class="row-fluid")
+    div(class="col-xs-4 calibration-height parent" ng-style='borders.webcam')
+        div(class="row-fluid")
+            div(class="text-center")
+                p(ng-hide="validation.webcam") Center the camera on your face
+                h4(ng-show="validation.webcam") Webcam calibration complete
+                video(id="webcam-live" autoplay muted)
+                    img(src="/images/liveFeedPlaceHolder.gif" title="Please refresh the page and allow microphone and webcam access to continue")
+        div(class="row-fluid")
+            div(class="text-center")
+                button(ng-click="borders.webcam = {border: '5px solid green'}; validation.webcam = true" ng-hide="validation.webcam") Done
+    div(class="col-xs-4 row-fluid calibration-height parent" ng-style='borders.microphone')
+        div(class="text-center")
+            div(class="col-xs-3")
+                canvas(id='analyser')
+            div(class="col-xs-9 text-center")
+                p(ng-hide="validation.microphone") Increase your microphone volume and tap the microphone until the meter fills up
+                h4(ng-show="validation.microphone") Microphone calibration complete
+    div(class="col-xs-4 calibration-height parent" ng-style='borders.speakers')
+        div(class="text-center")
+            div(ng-hide="validation.speakerTestInput == 'welcome'")
+                p Enter the word from
+                button(ng-click='playTestSound()') this audio clip
+                br
+                p in the space below
+                audio(id='audioTest')
+                    source(src="/video/welcome.mp3" type="audio/mpeg")
+                label Input test word:
+                    input(type="text" name='speakerTestInput' ng-model='validation.speakerTestInput' required)
+            h4(ng-show="validation.speakerTestInput == 'welcome'") Headphone calibration complete
+div(class="row-fluid")
+    h2(class="text-center" ng-show="!ctrl.idForm.input.$error.required && validation.webcam && validation.microphone && validation.speakerTestInput == 'welcome'") Press space bar to begin...

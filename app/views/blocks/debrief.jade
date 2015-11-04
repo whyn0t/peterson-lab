@@ -1,0 +1,6 @@
+div(class="text-center")
+    p You stopped the video at {{sessionData.stopTime}}
+    p What was the pattern that you observed?
+    form
+        textarea(type='text' name='textarea' ng-model='sessionData.response' required)
+    button(ng-click="switchToThankYou()") Submit
