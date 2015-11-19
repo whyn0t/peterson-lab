@@ -9,7 +9,7 @@ block main-content
                 div(ng-switch-when="permissions")
                     p Please allow access to your camera and microphone to continue. Refresh the page if there is no permissions prompt.
                 div(ng-switch-when="welcome")
-                    include blocks/welcome.jade
+                    include blocks/welcome/main
                 div(ng-switch-when="stimulus")
                     include blocks/stimulus.jade
                 div( class="parent" ng-switch-when="debrief")

@@ -1,0 +1,10 @@
+div(class="col-xs-4 calibration-height parent" ng-style='borders.webcam')
+    div(class="row-fluid")
+        div(class="text-center")
+            p(ng-hide="validation.webcam") Center the camera on your face
+            h4(ng-show="validation.webcam") Webcam calibration complete
+            video(id="webcam-live" autoplay muted)
+                img(src="/images/liveFeedPlaceHolder.gif" title="Please refresh the page and allow microphone and webcam access to continue")
+    div(class="row-fluid")
+        div(class="text-center")
+            button(ng-click="borders.webcam = {border: '5px solid green'}; validation.webcam = true" ng-hide="validation.webcam") Done

@@ -1,24 +1,23 @@
 //'use strict';
-angular.module('app').controller('vdMainCtrl',
+angular.module('app').controller('stimulusCtrl',
     ["$sce", "$scope", function ($sce, $scope) {
-        var controller = this;
-        controller.API = null;
+        var vm = this;
+        vm.API = null;
 
-        controller.onPlayerReady = function(API) {
-            controller.API = API;
+        vm.onPlayerReady = function(API) {
+            vm.API = API;
             $scope.videoAPI = API;
             console.log("player ready");
             console.log($scope.phase);
         }
 
         $scope.$on('stopPlayer', function(){
-            $scope.$emit('playerTime', controller.API.currentTime);
-            controller.API.stop();
+            $scope.$emit('playerTime', vm.API.currentTime);
+            vm.API.stop();
         });
 
-        controller.config = {
+        vm.config = {
             sources: [
-                //{src: $sce.trustAsResourceUrl("/video/stim1.mp4"), type: "video/mp4"},
                 {src: $sce.trustAsResourceUrl("/video/stim1.mp4"), type: "video/mp4"},
                 {src: $sce.trustAsResourceUrl("/video/stim1.webm"), type: "video/webm"},
                 {src: $sce.trustAsResourceUrl("/video/stim1.mp4"), type: "video/ogg"}

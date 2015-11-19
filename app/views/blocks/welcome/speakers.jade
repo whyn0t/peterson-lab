@@ -1,0 +1,12 @@
+div(class="col-xs-4 calibration-height parent" ng-style='borders.speakers')
+    div(class="text-center")
+        div(ng-hide="validation.speakerTestInput == 'welcome'")
+            p Enter the word from
+            button(ng-click='playTestSound()') this audio clip
+            br
+            p in the space below
+            audio(id='audioTest')
+                source(src="/video/welcome.mp3" type="audio/mpeg")
+            label Input test word:
+                input(type="text" name='speakerTestInput' ng-model='validation.speakerTestInput' required)
+        h4(ng-show="validation.speakerTestInput == 'welcome'") Headphone calibration complete

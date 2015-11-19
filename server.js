@@ -23,6 +23,7 @@ console.log(env);
 //express configuration
 app.set('views', __dirname + '/app/views');
 app.set('view engine', 'jade');
+app.locals.basedir = __dirname;
 app.set('jwtTokenSecret', 'PETERSON_LAB');
 app.use(logger('dev'));
 app.use(bodyParser());

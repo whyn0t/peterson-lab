@@ -1,5 +1,8 @@
-angular.module('userMedia', [])
-    .factory('userMediaService', function(){
+angular.module('userMedia', ['$scope'])
+    .constant('UM_Event', {
+        GOTSTREAM: 'gotStream'
+    })
+    .factory('userMediaService', function($rootScope){
         var liveStream = null;
         var streamErr = null;
 
@@ -12,12 +15,13 @@ angular.module('userMedia', [])
         return function(onSuccess, onFailure){
 
             function onSuccessLocal(stream){
-                console.log('got stream')
+                console.log('getUserMedia | Got stream')
+                $rootScope.$emit(UM_Event.GOTSTREAM, stream)
                 liveStream = stream;
                 onSuccess(stream);
             }
             function onFailureLocal(err){
-              console.log('stream failed')
+              console.log('getUserMedia | Stream failed')
                 streamErr = err;
                 onFailure(err);
             }
