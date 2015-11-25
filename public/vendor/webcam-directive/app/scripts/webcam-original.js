@@ -8,166 +8,167 @@
  */
 'use strict';
 
-(function() {
-  /*
-  // GetUserMedia is not yet supported by all browsers
-  // Until then, we need to handle the vendor prefixes
-  navigator.getMedia = ( navigator.getUserMedia ||
-                       navigator.webkitGetUserMedia ||
-                       navigator.mozGetUserMedia ||
-                       navigator.msGetUserMedia);
-*/
-  // Checks if getUserMedia is available on the client browser
-  window.hasUserMedia = function hasUserMedia() {
-    return navigator.getMedia ? true : false;
-  };
+(function () {
+    /*
+     // GetUserMedia is not yet supported by all browsers
+     // Until then, we need to handle the vendor prefixes
+     navigator.getMedia = ( navigator.getUserMedia ||
+     navigator.webkitGetUserMedia ||
+     navigator.mozGetUserMedia ||
+     navigator.msGetUserMedia);
+     */
+    // Checks if getUserMedia is available on the client browser
+    window.hasUserMedia = function hasUserMedia() {
+        return navigator.getMedia ? true : false;
+    };
 })();
 
 angular.module('webcam', ['userMedia'])
-  .directive('webcam', ['userMediaService', function(userMediaService) {
-    return {
-      template: '<div class="webcam" ng-transclude></div>',
-      restrict: 'E',
-      replace: true,
-      transclude: true,
-      scope:
-      {
-        onError: '&',
-        onStream: '&',
-        onStreaming: '&',
-        placeholder: '=',
-        config: '=channel'
-      },
-      link: function postLink($scope, element) {
-        var videoElem = null,
-            videoStream = null,
-            placeholder = null;
+    .directive('webcam', ['userMediaService', 'UM_Event', '$rootScope', function (userMediaService, UM_Event, $rootScope) {
+        return {
+            template: '<div class="webcam" ng-transclude></div>',
+            restrict: 'E',
+            replace: true,
+            transclude: true,
+            scope: {
+                onError: '&',
+                onStream: '&',
+                onStreaming: '&',
+                placeholder: '=',
+                config: '=channel'
+            },
+            link: function postLink($scope, element) {
+                var videoElem = null,
+                    videoStream = null,
+                    placeholder = null;
 
-        $scope.config = $scope.config || {};
+                $scope.config = $scope.config || {};
 
-        var _removeDOMElement = function _removeDOMElement(DOMel) {
-          if (DOMel) {
-            angular.element(DOMel).remove();
-          }
-        };
+                var _removeDOMElement = function _removeDOMElement(DOMel) {
+                    if (DOMel) {
+                        angular.element(DOMel).remove();
+                    }
+                };
 
-        var onDestroy = function onDestroy() {
-          if (!!videoStream && typeof videoStream.stop === 'function') {
-            videoStream.stop();
-          }
-          if (!!videoElem) {
-            delete videoElem.src;
-          }
-        };
+                var onDestroy = function onDestroy() {
+                    if (!!videoStream && typeof videoStream.stop === 'function') {
+                        videoStream.stop();
+                    }
+                    if (!!videoElem) {
+                        delete videoElem.src;
+                    }
+                };
 
-        // called when camera stream is loaded
-        var onSuccess = function onSuccess(stream) {
-          videoStream = stream;
+                // called when camera stream is loaded
+                var onSuccess = function onSuccess(stream) {
+                    videoStream = stream;
 
-          // Firefox supports a src object
-          if (navigator.mozGetUserMedia) {
-            videoElem.mozSrcObject = stream;
-          } else {
-            var vendorURL = window.URL || window.webkitURL;
-            videoElem.src = vendorURL.createObjectURL(stream);
-          }
+                    // Firefox supports a src object
+                    if (navigator.mozGetUserMedia) {
+                        videoElem.mozSrcObject = stream;
+                    } else {
+                        var vendorURL = window.URL || window.webkitURL;
+                        videoElem.src = vendorURL.createObjectURL(stream);
+                    }
 
-          /* Start playing the video to show the stream from the webcam */
-          videoElem.play();
-          $scope.config.video = videoElem;
+                    /* Start playing the video to show the stream from the webcam */
+                    videoElem.play();
+                    $scope.config.video = videoElem;
 
-          /* Call custom callback */
-          if ($scope.onStream) {
-            $scope.onStream({stream: stream});
-          }
-        };
+                    /* Call custom callback */
+                    if ($scope.onStream) {
+                        $scope.onStream({stream: stream});
+                    }
+                };
 
-        // called when any error happens
-        var onFailure = function onFailure(err) {
-          _removeDOMElement(placeholder);
-          if (console && console.log) {
-            console.log('The following error occured: ', err);
-          }
+                // called when any error happens
+                var onFailure = function onFailure(err) {
+                    _removeDOMElement(placeholder);
+                    if (console && console.log) {
+                        console.log('The following error occured: ', err);
+                    }
 
-          /* Call custom callback */
-          if ($scope.onError) {
-            $scope.onError({err:err});
-          }
+                    /* Call custom callback */
+                    if ($scope.onError) {
+                        $scope.onError({err: err});
+                    }
 
-          return;
-        };
+                    return;
+                };
 
-        var startWebcam = function startWebcam() {
-          videoElem = document.createElement('video');
-          videoElem.setAttribute('class', 'webcam-live');
-          videoElem.setAttribute('autoplay', '');
-        videoElem.setAttribute('muted', '');
-          element.append(videoElem);
+                var startWebcam = function startWebcam() {
+                    videoElem = document.createElement('video');
+                    videoElem.setAttribute('class', 'webcam-live');
+                    videoElem.setAttribute('autoplay', '');
+                    videoElem.setAttribute('muted', '');
+                    element.append(videoElem);
 
-          if ($scope.placeholder) {
-            placeholder = document.createElement('img');
-            placeholder.setAttribute('class', 'webcam-loader');
-            placeholder.src = $scope.placeholder;
-            element.append(placeholder);
-          }
+                    if ($scope.placeholder) {
+                        placeholder = document.createElement('img');
+                        placeholder.setAttribute('class', 'webcam-loader');
+                        placeholder.src = $scope.placeholder;
+                        element.append(placeholder);
+                    }
 
-          // Default variables
-          var isStreaming = false,
-            width = element.width = $scope.config.videoWidth || 320,
-            height = element.height = 0;
+                    // Default variables
+                    var isStreaming = false,
+                        width = element.width = $scope.config.videoWidth || 320,
+                        height = element.height = 0;
 
-          // Check the availability of getUserMedia across supported browsers
-          if (!window.hasUserMedia()) {
-            onFailure({code:-1, msg: 'Browser does not support getUserMedia.'});
-            return;
-          }
+                    // Check the availability of getUserMedia across supported browsers
+                    if (!window.hasUserMedia()) {
+                        onFailure({code: -1, msg: 'Browser does not support getUserMedia.'});
+                        return;
+                    }
 
-          //var mediaConstraint = { video: true, audio: true };
-          //navigator.getMedia(mediaConstraint, onSuccess, onFailure);
-          function onFirstSuccess(stream){
-            console.log('firstSuccess');
-          }
-          function onFirstFailure(err){
-            console.log('firstFailure');
-          }
-          //userMediaService(onFirstSuccess, onFirstFailure);
-          userMediaService(onSuccess, onFailure);
+                    //Edits
+                    userMediaService();
+                    //TODO why are the stream and error args reversed from the broadcast?
+                    $rootScope.$on(UM_Event.GOTSTREAM, function(event, stream, err){
+                        console.log(err);
+                        console.log(stream);
+                        if (err){
+                            onFailure(err);
+                        } else {
+                            onSuccess(stream);
+                        }
+                    });
 
-          /* Start streaming the webcam data when the video element can play
-           * It will do it only once
-           */
-          videoElem.addEventListener('canplay', function() {
-            if (!isStreaming) {
-              var scale = width / videoElem.videoWidth;
-              height = (videoElem.videoHeight * scale) ||
-                        $scope.config.videoHeight;
-              videoElem.setAttribute('width', width);
-              videoElem.setAttribute('height', height);
-              isStreaming = true;
+                    /* Start streaming the webcam data when the video element can play
+                     * It will do it only once
+                     */
+                    videoElem.addEventListener('canplay', function () {
+                        if (!isStreaming) {
+                            var scale = width / videoElem.videoWidth;
+                            height = (videoElem.videoHeight * scale) ||
+                            $scope.config.videoHeight;
+                            videoElem.setAttribute('width', width);
+                            videoElem.setAttribute('height', height);
+                            isStreaming = true;
 
-              $scope.config.video = videoElem;
+                            $scope.config.video = videoElem;
 
-              _removeDOMElement(placeholder);
+                            _removeDOMElement(placeholder);
 
-              /* Call custom callback */
-              if ($scope.onStreaming) {
-                $scope.onStreaming();
-              }
+                            /* Call custom callback */
+                            if ($scope.onStreaming) {
+                                $scope.onStreaming();
+                            }
+                        }
+                    }, false);
+                };
+
+                var stopWebcam = function stopWebcam() {
+                    onDestroy();
+                    videoElem.remove();
+                };
+
+                $scope.$on('$destroy', onDestroy);
+                $scope.$on('START_WEBCAM', startWebcam);
+                $scope.$on('STOP_WEBCAM', stopWebcam);
+
+                startWebcam();
+
             }
-          }, false);
         };
-
-        var stopWebcam = function stopWebcam() {
-          onDestroy();
-          videoElem.remove();
-        };
-
-        $scope.$on('$destroy', onDestroy);
-        $scope.$on('START_WEBCAM', startWebcam);
-        $scope.$on('STOP_WEBCAM', stopWebcam);
-
-        startWebcam();
-
-      }
-    };
-  }]);
+    }]);

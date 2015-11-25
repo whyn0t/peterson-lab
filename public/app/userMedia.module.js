@@ -1,39 +1,35 @@
-angular.module('userMedia', ['$scope'])
+angular.module('userMedia', [])
     .constant('UM_Event', {
         GOTSTREAM: 'gotStream'
     })
-    .factory('userMediaService', function($rootScope){
-        var liveStream = null;
-        var streamErr = null;
+    .factory('userMediaService', ['$rootScope', 'UM_Event', function($rootScope, UM_Event){
+        var _stream = null;
+        var _err = null;
 
         navigator.getMedia = ( navigator.getUserMedia ||
         navigator.webkitGetUserMedia ||
         navigator.mozGetUserMedia ||
         navigator.msGetUserMedia);
         var mediaConstraint = { video: true, audio: true };
+        navigator.getMedia(mediaConstraint, onSuccess, onFailure);
         console.log('userMedia service started');
-        return function(onSuccess, onFailure){
 
-            function onSuccessLocal(stream){
-                console.log('getUserMedia | Got stream')
-                $rootScope.$emit(UM_Event.GOTSTREAM, stream)
-                liveStream = stream;
-                onSuccess(stream);
-            }
-            function onFailureLocal(err){
-              console.log('getUserMedia | Stream failed')
-                streamErr = err;
-                onFailure(err);
-            }
+        function onSuccess(stream){
+            console.log('getUserMedia | Got stream')
+            $rootScope.$emit(UM_Event.GOTSTREAM, stream, _err);
+            _stream = stream;
+        }
+        function onFailure(err){
+            console.log('getUserMedia | Stream failed')
+            _err = err;
+        }
 
-            if (!liveStream && !streamErr) {
-              navigator.getMedia(mediaConstraint, onSuccessLocal, onFailureLocal);
-            }else if (liveStream){
-                onSuccess(liveStream);
-            } else if (streamErr) {
-                onFailure(streamErr);
+        return function(){
+            if(_stream || _err){
+                console.log('Getusermedia requested');
+                //$rootScope.$emit(UM_Event.GOTSTREAM, _err, _stream);
             } else {
-              console.log('userMedia service has failed')
+                console.log('getusermedia requested with no stream')
             }
         }
-    });
+    }]);

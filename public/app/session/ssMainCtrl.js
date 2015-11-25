@@ -3,8 +3,6 @@ angular.module('app').controller('ssMainCtrl', function($scope, $window, $docume
 
     var ctrl = this;
     $scope.user = {};
-    //for snapshot
-    $scope.imageCount = 0;
 
     $scope.validation = {};
     //for validation
@@ -22,6 +20,7 @@ angular.module('app').controller('ssMainCtrl', function($scope, $window, $docume
     //$scope.sessionData = {studyId: $location.search().studyId || 'demo'};
     var authentication = {};
 
+    /*
     //TODO webcam capture junk needs to be put into a directive
     var _video = null,
         patData = null;
@@ -66,6 +65,10 @@ angular.module('app').controller('ssMainCtrl', function($scope, $window, $docume
             $scope.patOpts.h = _video.height;
         });
     };
+
+
+    //for snapshot
+    $scope.imageCount = 0;
 
     //for stimulus phase.Grabs image from webcam feed and uploads it
     $scope.makeSnapshot = function makeSnapshot() {
@@ -125,6 +128,7 @@ angular.module('app').controller('ssMainCtrl', function($scope, $window, $docume
             $scope.imageCount += 1;
         }
     }
+    */
 
     //does what it says. Triggered by phase switch to thank you
     function uploadAudio(){

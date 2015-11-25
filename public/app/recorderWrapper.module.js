@@ -19,8 +19,8 @@ angular.module('audioRecorder', ['userMedia'])
 
 		function saveAudio() {
 		    audioRecorder.exportWAV( doneEncoding );
-		    // could get mono instead by saying
 		    console.log("AudioRecorder: " + audioRecorder.toString());
+            // could get mono instead by saying
 		    //audioRecorder.exportMonoWAV( doneEncoding );
 		}
 
