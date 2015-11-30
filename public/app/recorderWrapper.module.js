@@ -1,5 +1,5 @@
 angular.module('audioRecorder', ['userMedia'])
-	.factory('audioRecorderService', ['userMediaService', 'recorderService', '$window', '$rootScope', function(userMediaService, recorderService, $window, $rootScope){
+	.factory('audioRecorderService', ['userMediaService', 'UM_Event', 'recorderService', '$window', '$rootScope', function(userMediaService, UM_Event, recorderService, $window, $rootScope){
 
 		$window.AudioContext = $window.AudioContext || $window.webkitAudioContext;
 
@@ -16,6 +16,16 @@ angular.module('audioRecorder', ['userMedia'])
 		var recIndex = 0;
 		var recording = false;
         var analyserNode = null;
+
+        $rootScope.$on(UM_Event.GOTSTREAM, function(event, stream, err){
+            console.log(err);
+            console.log(stream);
+            if (err){
+                console.error(err);
+            } else {
+                gotStream(stream);
+            }
+        });
 
 		function saveAudio() {
 		    audioRecorder.exportWAV( doneEncoding );
@@ -167,6 +177,7 @@ angular.module('audioRecorder', ['userMedia'])
 
 		}
 
+
 		function initAudio() {
 			userMediaService(gotStream, function(e) {
 		            alert('Error getting audio');
@@ -174,6 +185,7 @@ angular.module('audioRecorder', ['userMedia'])
 		        });
 
 		}
+
 
         function getAudioData(){
             console.log("got audioData");

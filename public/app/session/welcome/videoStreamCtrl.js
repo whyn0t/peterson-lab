@@ -1,5 +1,5 @@
-angular.module('app').controller('videoStreamCtrl', function($scope) {
-    //TODO webcam capture junk needs to be put into a directive
+angular.module('app').controller('videoStreamCtrl', function($scope, $interval, $http) {
+    //TODO webcam capture junk needs to be put into a directive?
     var _video = null,
         patData = null;
     $scope.patOpts = {x: 0, y: 0, w: 25, h: 25};
@@ -15,11 +15,21 @@ angular.module('app').controller('videoStreamCtrl', function($scope) {
             }
         );
     };
+    var stopSnapshots;
+
+    $scope.$on('stimulusPhase', function(event, data){
+        stopSnapshots = $interval(function () {
+            $scope.makeSnapshot();
+        }, 5000);
+    });
+
+    $scope.$on('debriefPhase', function(event, data){
+        $interval.cancel(stopSnapshots);
+    });
 
     //webcam directive seeks stream form usermedia service
     //onStream, link the stream to the video element's source
     //this should be a directive that receives the stream via a stream-ready event
-    //audiorecorderservice should be separate and also respond to stream-ready event
     $scope.onStream = function (stream) {
         console.log('videoStreamCtrl | ')
         var videoElem = document.querySelector('#webcam-live');
@@ -32,7 +42,7 @@ angular.module('app').controller('videoStreamCtrl', function($scope) {
             console.log(vendorURL.createObjectURL(stream));
             videoElem.src = vendorURL.createObjectURL(stream);
         }
-        audioRecorderService.API.initAudio();
+        //audioRecorderService.API.initAudio();
     }
     //also for webcam, sets up webcam capture by storing video feed as _video?
     $scope.onSuccess = function () {
@@ -97,7 +107,7 @@ angular.module('app').controller('videoStreamCtrl', function($scope) {
                     },
                     headers: {
                         'Content-Type': undefined,
-                        'x-access-token': authentication.token
+                        'x-access-token': $scope.authentication.token
                     }
                 }).success(function () {
                     console.log("Uploaded image");
