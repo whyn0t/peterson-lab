@@ -15,13 +15,16 @@ Welcome
 
 stimulus
     centre video better?
-    delete images stored in gdrive from server temp folder
+    audio takes a long time to confirm upload. Send 200 when upload is complete and then upload to gdrive
 
 feedback
     larger text input
     optional feedback text?
 
 general
+    warn users about needing to complete the session in one go
+    once they have begun, don't let them start again
+    
     modularization of client side
     error management
     browser testing

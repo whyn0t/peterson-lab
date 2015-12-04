@@ -18,8 +18,6 @@ angular.module('audioRecorder', ['userMedia'])
         var analyserNode = null;
 
         $rootScope.$on(UM_Event.GOTSTREAM, function(event, stream, err){
-            console.log(err);
-            console.log(stream);
             if (err){
                 console.error(err);
             } else {
@@ -45,11 +43,10 @@ angular.module('audioRecorder', ['userMedia'])
 		}
 
 		function doneEncoding( blob ) {
-            console.log("blob = ", blob);
 		    //recorderService.setupDownload( blob, "myRecording" + ((recIndex<10)?"0":"") + recIndex + ".wav" );
 		    //recIndex++;
             audioData = blob;
-            console.log("stored audio data in blob");
+            $rootScope.$broadcast('audioDoneEncoding', blob);
 		}
 
 		function toggleRecording() {
@@ -59,7 +56,7 @@ angular.module('audioRecorder', ['userMedia'])
 		        audioRecorder.stop();
 		        recording = false;
 		        audioRecorder.getBuffers( gotBuffers );
-                console.log('stopped recording');
+                console.log('recorderWrapper | stopped recording');
 		    } else {
 		        // start recording
 		        if (!audioRecorder)
@@ -67,7 +64,7 @@ angular.module('audioRecorder', ['userMedia'])
 		        recording = true;
 		        audioRecorder.clear();
 		        audioRecorder.record();
-                console.log('recording');
+                console.log('recorderWrapper | started recording');
 		    }
 		}
 
@@ -167,7 +164,6 @@ angular.module('audioRecorder', ['userMedia'])
 		    inputPoint.connect( analyserNode );
 
 		    audioRecorder = new recorderService( inputPoint );
-		    console.log("AudioRecorder: " + audioRecorder.toString());
 		    var zeroGain = audioContext.createGain();
 		    zeroGain.gain.value = 0;
 		    inputPoint.connect( zeroGain );
@@ -188,7 +184,6 @@ angular.module('audioRecorder', ['userMedia'])
 
 
         function getAudioData(){
-            console.log("got audioData");
             return audioData;
         }
 		

@@ -54,10 +54,9 @@ function fileExists(fileInfo, parentId, successCallback, failCallback){
 function insertFile(fileInfo, callback){
     if (fileInfo.path.length == 0) {
         callback(new Error("insertFile requires a path of length > 0"));
-        return;
     }
-
-    if (fileInfo.path.length == 1){
+    else if (fileInfo.path.length == 1){
+        console.log('gDrive | insertFile | length==1 block');
         //insert file
         authClient.authorize(function(err, tokens) {
             if (err) {
@@ -79,7 +78,7 @@ function insertFile(fileInfo, callback){
                 resource: resource,
                 media: {
                     mimeType: mimeType,
-                    body: fileInfo.body // read streams are awesome!
+                    body: fileInfo.body
                 }
             }, function(err, response){
                 if (err) { callback(err); return; }
@@ -88,15 +87,15 @@ function insertFile(fileInfo, callback){
             });
         });
     } else {
+        console.log('gDrive | insertFile | create folders block');
         //create folders for insert
         var folderInfo = JSON.parse(JSON.stringify(fileInfo));
         folderInfo.path = folderInfo.path.slice(0, -1);
         fileInfo.path = fileInfo.path.slice(-1);
         mkDir(folderInfo, function(err, response){
             if (err) { callback(err); return; }
-            insertFile(fileInfo, function(err, response){
-                if (err) { callback(err); return; }
-            });
+            fileInfo.parentId = folderInfo.parentId;
+            insertFile(fileInfo, callback);
         });
     }
 }

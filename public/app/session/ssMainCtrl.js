@@ -1,4 +1,4 @@
-angular.module('app').controller('ssMainCtrl', function($scope, $window, $document, $interval, $http, $location, audioRecorderService){
+angular.module('app').controller('ssMainCtrl', function($rootScope, $scope, $window, $document, $interval, $http, $location, audioRecorderService){
     'use strict';
 
     var ctrl = this;
@@ -19,48 +19,6 @@ angular.module('app').controller('ssMainCtrl', function($scope, $window, $docume
     }
     //$scope.sessionData = {studyId: $location.search().studyId || 'demo'};
     $scope.authentication = {};
-
-
-
-    //does what it says. Triggered by phase switch to thank you
-    function uploadAudio(){
-        if ($scope.sessionData.studyId != 'demo') {
-            var fd = new FormData();
-            fd.append('file', audioRecorderService.API.getAudioData(), 'audio.wav');
-            var postUrl = '/api/avData?studyId=' + $scope.sessionData.studyId + '&partId=' + $scope.sessionData.partId;
-            $http.post(postUrl, fd,
-                {
-                    transformRequest: function (data) {
-                        return data;
-                    },
-                    headers: {
-                        'Content-Type': undefined,
-                        'x-access-token': $scope.authentication.token
-                    }
-                }).success(function () {
-                    console.log("Uploaded audio");
-                }).error(function () {
-                    console.log("Audio upload failed");
-                });
-        }
-    }
-
-    //communicates mictestpass. Should happen via events
-    $scope.$watch('audioRecorderService.micTestPass', function(){
-        if (audioRecorderService.micTestPass){
-            $scope.micTestPass = true;
-        }
-        console.log('micTest Event Received')
-    });
-
-    //maybe this is the way that I am doing the mictest pass. Which would be the right way. Delete the other one I guess.
-    $scope.$on('micTestPass', function(event, data){
-        $scope.validation.microphone = true;
-        $scope.borders.microphone = {border: '5px solid green'};
-        $scope.$apply();
-    });
-
-
 
     //for validation phase, to change the formatting
     $scope.$watch('validation.speakerTestInput', function(){
@@ -102,6 +60,28 @@ angular.module('app').controller('ssMainCtrl', function($scope, $window, $docume
         $scope.phase = "thankyou";
     }
 
+    $scope.$on('audioDoneEncoding', function(event, data){
+        if ($scope.sessionData.studyId != 'demo') {
+            var fd = new FormData();
+            fd.append('file', data, 'audio.wav');
+            var postUrl = '/api/avData?studyId=' + $scope.sessionData.studyId + '&partId=' + $scope.sessionData.partId;
+            $http.post(postUrl, fd,
+                {
+                    transformRequest: function (data) {
+                        return data;
+                    },
+                    headers: {
+                        'Content-Type': undefined,
+                        'x-access-token': $scope.authentication.token
+                    }
+                }).success(function () {
+                    console.log("recorderWrapper | Uploaded audio");
+                }).error(function () {
+                    console.log("recorderWrapper | Audio upload failed");
+                });
+        }
+    });
+
     //prompted by switch to thankyou phase
     var postSession = function(sessionData){
         if ($scope.sessionData.studyId != 'demo') {
@@ -126,7 +106,6 @@ angular.module('app').controller('ssMainCtrl', function($scope, $window, $docume
                 url: '/api/auth/session',
                 data: $scope.sessionData
             }).then(function (res) {
-                console.log(res.data.token);
                 $scope.authentication = res.data;
                 //$rootScope.videoUrl = res.data.stimulusUrl;
             })
@@ -139,29 +118,19 @@ angular.module('app').controller('ssMainCtrl', function($scope, $window, $docume
 
     angular.element($window).on('keydown', function(e) {
         if (e.keyCode == 32) {
-            //var userIdValid = !ctrl.idForm.input.$error.required;
-            //var speakerTestInput = $scope.validation.speakerTestInput.toLowerCase().trim();
-            //console.log(speakerTestInput);
             if ($scope.phase == "welcome"
                 && !ctrl.idForm.input.$error.required
                 && $scope.validation.speakerTestInput == 'welcome'
                 && $scope.validation.microphone
                 && $scope.validation.webcam){
-
                 $scope.$broadcast('stimulusPhase');
-                //start video capture
-                //audioRecorderService.API.toggleRecording();
-                //$scope.makeSnapshot();
-                //stopImg = $interval(function () {
-                 //   $scope.makeSnapshot();
-                //}, 5000);
-                //start audio capture
+                audioRecorderService.API.toggleRecording();
                 $scope.phase = "stimulus";
             } else if ($scope.phase == "stimulus") {
-                $scope.$broadcast('debriefPhase', $scope.sessionData.studyId, $scope.sessionData.partId, $scope.authentication);
                 $scope.$broadcast('stopPlayer');
-                //audioRecorderService.API.toggleRecording();
-                //$interval.cancel(stopImg);
+                $scope.$broadcast('debriefPhase');
+                //TODO maybe figure out separating the audio component one day
+                audioRecorderService.API.toggleRecording();
                 $scope.phase = "debrief";
             } else if ($scope.phase == "thankyou") {
                 $scope.phase = "welcome";

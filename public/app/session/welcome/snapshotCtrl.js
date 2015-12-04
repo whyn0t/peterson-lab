@@ -1,11 +1,14 @@
 angular.module('app').controller('videoStreamCtrl', function($scope, $interval, $http) {
     //TODO webcam capture junk needs to be put into a directive?
+    $scope.videoChannel = {};
+
     var _video = null,
         patData = null;
     $scope.patOpts = {x: 0, y: 0, w: 25, h: 25};
 
     //from webcam directive for storing data
-    $scope.channel = {};
+
+    var videoStream = null;
 
     $scope.webcamError = false;
     $scope.onError = function (err) {
@@ -18,6 +21,7 @@ angular.module('app').controller('videoStreamCtrl', function($scope, $interval, 
     var stopSnapshots;
 
     $scope.$on('stimulusPhase', function(event, data){
+        console.log("videoStreamCtrl | stimulusPhase event caught");
         stopSnapshots = $interval(function () {
             $scope.makeSnapshot();
         }, 5000);
@@ -31,23 +35,12 @@ angular.module('app').controller('videoStreamCtrl', function($scope, $interval, 
     //onStream, link the stream to the video element's source
     //this should be a directive that receives the stream via a stream-ready event
     $scope.onStream = function (stream) {
-        console.log('videoStreamCtrl | ')
-        var videoElem = document.querySelector('#webcam-live');
-        // Firefox supports a src object
-        if (navigator.mozGetUserMedia) {
-            videoElem.mozSrcObject = stream;
-            console.log(stream);
-        } else {
-            var vendorURL = window.URL || window.webkitURL;
-            console.log(vendorURL.createObjectURL(stream));
-            videoElem.src = vendorURL.createObjectURL(stream);
-        }
-        //audioRecorderService.API.initAudio();
+        $scope.$parent.$broadcast('snapshotCtrlOnStream', stream);
     }
     //also for webcam, sets up webcam capture by storing video feed as _video?
     $scope.onSuccess = function () {
         // The video element contains the captured camera data
-        _video = $scope.channel.video;
+        _video = $scope.videoChannel.video;
         $scope.$apply(function () {
             //sets dimensions for later image capture
             $scope.patOpts.w = _video.width;
@@ -59,9 +52,9 @@ angular.module('app').controller('videoStreamCtrl', function($scope, $interval, 
     //for snapshot
     $scope.imageCount = 0;
 
-    //for stimulus phase.Grabs image from webcam feed and uploads it
+    //for stimulus phase. Grabs image from webcam feed and uploads it
     $scope.makeSnapshot = function makeSnapshot() {
-        console.log("snapshot");
+        console.log("videoStreamCtrl | snapshot captured");
         if (_video) {
             var patCanvas = document.querySelector('#snapshot');
             if (!patCanvas) return;
@@ -76,6 +69,8 @@ angular.module('app').controller('videoStreamCtrl', function($scope, $interval, 
             sendSnapshotToServer(idata.toDataURL());
             $scope.dataUrl = idata.toDataURL();
             idata.toBlob(uploadImage);
+        } else {
+            console.log("_video not available");
         }
     };
 
@@ -110,9 +105,9 @@ angular.module('app').controller('videoStreamCtrl', function($scope, $interval, 
                         'x-access-token': $scope.authentication.token
                     }
                 }).success(function () {
-                    console.log("Uploaded image");
+                    console.log("videoStreamCtrl | snapshot uploaded");
                 }).error(function () {
-                    console.log("Image upload failed");
+                    console.error("videoStreamCtrl | snapshot upload failed");
                 });
             $scope.imageCount += 1;
         }

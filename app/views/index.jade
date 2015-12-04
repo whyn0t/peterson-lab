@@ -4,11 +4,11 @@ block main-content
     section.content
     div(class="container-fluid partId")
         div(ng-controller="ssMainCtrl as session" class="col-xs-10 col-xs-offset-1" ng-cloak)
-            div(ng-controller="videoStreamCtrl")
-                webcam(on-streaming="onSuccess()" on-access-denied="onError(err)" on-stream="onStream(stream)" channel="channel" hidden)
-            div(ng-controller="audioStreamCtrl" ng-switch on="phase")
+            div(ng-controller="videoStreamCtrl as video")
+                webcam(on-streaming="onSuccess()" on-access-denied="onError(err)" on-stream="onStream(stream)" channel="videoChannel" hidden)
+            div(ng-switch on="phase")
                 div(ng-switch-when="permissions")
-                    p Please allow access to your camera and microphone to continue. Refresh the page if there is no permissions prompt.
+                    p Please allow access to your camera and microphone to continue. Refresh the page if there is no permissions prompt.C
                 div(ng-switch-when="welcome")
                     include blocks/welcome/main
                 div(ng-switch-when="stimulus")

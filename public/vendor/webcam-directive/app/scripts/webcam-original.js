@@ -125,8 +125,6 @@ angular.module('webcam', ['userMedia'])
                     userMediaService();
                     //TODO why are the stream and error args reversed from the broadcast?
                     $rootScope.$on(UM_Event.GOTSTREAM, function(event, stream, err){
-                        console.log(err);
-                        console.log(stream);
                         if (err){
                             onFailure(err);
                         } else {
