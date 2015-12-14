@@ -1,13 +1,7 @@
-Code structure improvement
-    Initialize page behaviors using events. On spacebar press, emit an event that indicates the app's current state.
-
 Admin
     Study does not store false active
-    On study delete, delete avData
     activate active
     obfuscate password
-    video upload and assignment to study
-    on delete with data deleted stimuli folder and crashed...
 
 Welcome
     Participant number highlight for completion
@@ -22,16 +16,14 @@ feedback
     optional feedback text?
 
 general
-    warn users about needing to complete the session in one go
-    once they have begun, don't let them start again
-    
-    modularization of client side
-    error management
     browser testing
 
-upload video
-    reorganize gdrive folder structure
+security
+     AWS files are open access. Could result in unwarranted access => charges?
 
+ unexpected behaviour handling
+    study not valid
+    register user as having started to prevent restarting
 
 EXTRAS
 thankyou

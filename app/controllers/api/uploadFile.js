@@ -16,12 +16,11 @@ module.exports.controller = function(app) {
                 console.error(err);
                 res.sendStatus(500).send("Gdrive error. See logs.")
             } else {
-                console.log('uploadFile | uploaded tp gDrive: ', req.file.originalname);
+                console.log('uploadFile | uploaded to gDrive: ', req.file.originalname);
                 res.sendStatus(200);
                 fs.unlink(req.file.path, function (err) {
                     if (err){
                         console.error(err);
-                        res.sendStatus(500).send("FS error. See logs.")
                     } else {
                         console.log('uploadFile | deleted temp file for: ', req.file.originalname);
                     }

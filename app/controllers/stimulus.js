@@ -20,6 +20,11 @@ module.exports.controller = function(app){
                 console.error(err);
                 return;
             } else {
+                //TODO S3 puts a leading space on file name? wtf?
+                //hacky fix
+                for (var i=0; i<data.Contents.length; i++){
+                    data.Contents[i].Key = data.Contents[i].Key.trim();
+                }
                 res.json(data.Contents);
             }
         })

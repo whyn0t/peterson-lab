@@ -19,3 +19,6 @@ block main-content
                     div(class="text-center")
                         h1 Thank you for your participation!
                         h6 (Press any key to restart demo)
+                div(class="parent" ng-switch-when="authFail")
+                    p You have entered an invalid participant number.
+                    button(ng-click="session.phase='welcome'") Go Back

@@ -7,8 +7,6 @@ angular.module('app').controller('stimulusCtrl',
         vm.onPlayerReady = function(API) {
             vm.API = API;
             $scope.videoAPI = API;
-            console.log("player ready");
-            console.log($scope.phase);
         }
 
         $scope.$on('stopPlayer', function(){
@@ -18,9 +16,9 @@ angular.module('app').controller('stimulusCtrl',
 
         vm.config = {
             sources: [
-                {src: $sce.trustAsResourceUrl("/video/stim1.mp4"), type: "video/mp4"},
-                {src: $sce.trustAsResourceUrl("/video/stim1.webm"), type: "video/webm"},
-                {src: $sce.trustAsResourceUrl("/video/stim1.mp4"), type: "video/ogg"}
+                //TODO the S3 path should be in a config file, not hardcoded
+                //get stimulus name from parent scope
+                {src: $sce.trustAsResourceUrl('https://s3-us-west-2.amazonaws.com/peterson-elab/' + $scope.stimulus), type: "video/mp4"}
             ]
         }
 

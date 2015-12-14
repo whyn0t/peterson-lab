@@ -1,4 +1,4 @@
-angular.module('app').controller('ssMainCtrl', function($rootScope, $scope, $window, $document, $interval, $http, $location, audioRecorderService){
+angular.module('app').controller('ssMainCtrl', function($rootScope, $scope, $window, $document, $interval, $http, $location, $sce, audioRecorderService){
     'use strict';
 
     var ctrl = this;
@@ -36,13 +36,6 @@ angular.module('app').controller('ssMainCtrl', function($rootScope, $scope, $win
            $scope.sessionData.partId = $scope.sessionData.partId.replace(/\D/g,'');
        }
     });
-
-    //validation of participant/study pair. Should be conditional on a participant's entry. No dummy runs unless the username is "demo"
-    $scope.$watch('phase', function(){
-        if ($scope.phase == 'stimulus') {
-            validateSession();
-        }
-    })
 
     //captures player stop time. This seems like the right way to do this. Maybe not the right place.
     $scope.$on('playerTime', function(event, data){
@@ -97,7 +90,7 @@ angular.module('app').controller('ssMainCtrl', function($rootScope, $scope, $win
     }
 
     //for welcome phase to validate user session
-    var validateSession = function(){
+    var authenticateSession = function(){
         //hacky
         if ($scope.sessionData.studyId != 'demo') {
             $scope.sessionData.partId = parseInt($scope.sessionData.partId);
@@ -105,9 +98,15 @@ angular.module('app').controller('ssMainCtrl', function($rootScope, $scope, $win
                 method: 'POST',
                 url: '/api/auth/session',
                 data: $scope.sessionData
-            }).then(function (res) {
+            }).then(function(res) {
                 $scope.authentication = res.data;
-                //$rootScope.videoUrl = res.data.stimulusUrl;
+                $scope.stimulus = res.data.stimulus;
+                $scope.$broadcast('stimulusPhase');
+                audioRecorderService.API.toggleRecording();
+                $scope.phase = "stimulus";
+            }, function(res) {
+                //TODO use alert instead
+                $scope.phase="authFail";
             })
         }
     }
@@ -123,9 +122,11 @@ angular.module('app').controller('ssMainCtrl', function($rootScope, $scope, $win
                 && $scope.validation.speakerTestInput == 'welcome'
                 && $scope.validation.microphone
                 && $scope.validation.webcam){
-                $scope.$broadcast('stimulusPhase');
-                audioRecorderService.API.toggleRecording();
-                $scope.phase = "stimulus";
+                authenticateSession();
+                //TODO use alert for failed auth
+                //$scope.$broadcast('stimulusPhase');
+                //audioRecorderService.API.toggleRecording();
+                //$scope.phase = "stimulus";
             } else if ($scope.phase == "stimulus") {
                 $scope.$broadcast('stopPlayer');
                 $scope.$broadcast('debriefPhase');

@@ -1,5 +1,5 @@
 div(class="text-center" ng-controller="stimulusCtrl as stim")
-    videogular(vg-player-ready="stim.onPlayerReady($API)" ng-click="stim.API.play()" vg-auto-play="true")
+    videogular(vg-player-ready="stim.onPlayerReady($API)" vg-auto-play="true")
         vg-media(vg-src="stim.config.sources")
         vg-overlay-play
     canvas(id='snapshot' hidden)
