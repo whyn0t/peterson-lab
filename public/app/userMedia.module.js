@@ -11,8 +11,10 @@ angular.module('userMedia', [])
         navigator.mozGetUserMedia ||
         navigator.msGetUserMedia);
         var mediaConstraint = { video: true, audio: true };
-        navigator.getMedia(mediaConstraint, onSuccess, onFailure);
-        console.log('userMedia service started');
+        console.log('userMediaSvc | started');
+        if (!_stream) {
+            navigator.getMedia(mediaConstraint, onSuccess, onFailure);
+        }
 
         function onSuccess(stream){
             console.log('getUserMedia | Got stream')
@@ -29,6 +31,7 @@ angular.module('userMedia', [])
                 console.log('Getusermedia requested');
                 //$rootScope.$emit(UM_Event.GOTSTREAM, _err, _stream);
             } else {
+                navigator.getMedia(mediaConstraint, onSuccess, onFailure);
                 console.log('getusermedia requested with no stream')
             }
         }

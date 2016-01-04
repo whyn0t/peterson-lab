@@ -17,6 +17,8 @@ angular.module('audioRecorder', ['userMedia'])
 		var recording = false;
         var analyserNode = null;
 
+        userMediaService();
+
         $rootScope.$on(UM_Event.GOTSTREAM, function(event, stream, err){
             if (err){
                 console.error(err);

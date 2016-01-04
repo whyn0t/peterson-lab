@@ -112,30 +112,34 @@ angular.module('app').controller('ssMainCtrl', function($rootScope, $scope, $win
     }
 
     var stopImg;
-    //$scope.phase = "permissions";
-    $scope.phase = "welcome";
+    $scope.phase = "permissions";
+    //$scope.phase = "welcome";
 
     angular.element($window).on('keydown', function(e) {
         if (e.keyCode == 32) {
-            if ($scope.phase == "welcome"
-                && !ctrl.idForm.input.$error.required
-                && $scope.validation.speakerTestInput == 'welcome'
-                && $scope.validation.microphone
-                && $scope.validation.webcam){
-                authenticateSession();
-                //TODO use alert for failed auth
-                //$scope.$broadcast('stimulusPhase');
-                //audioRecorderService.API.toggleRecording();
-                //$scope.phase = "stimulus";
-            } else if ($scope.phase == "stimulus") {
-                $scope.$broadcast('stopPlayer');
-                $scope.$broadcast('debriefPhase');
-                //TODO maybe figure out separating the audio component one day
-                audioRecorderService.API.toggleRecording();
-                $scope.phase = "debrief";
-            } else if ($scope.phase == "thankyou") {
-                $scope.phase = "welcome";
-                location.reload();
+            switch($scope.phase) {
+                case "permissions":
+                    $scope.phase = "welcome";
+                    break;
+                case "welcome":
+                    if (!ctrl.idForm.input.$error.required
+                        && $scope.validation.speakerTestInput == 'welcome'
+                        && $scope.validation.microphone
+                        && $scope.validation.webcam) {
+                        authenticateSession();
+                    }
+                    break;
+                case "stimulus":
+                    $scope.$broadcast('stopPlayer');
+                    $scope.$broadcast('debriefPhase');
+                    //TODO maybe figure out separating the audio component one day
+                    audioRecorderService.API.toggleRecording();
+                    $scope.phase = "debrief";
+                    break;
+                case "thankyou":
+                        $scope.phase = "welcome";
+                        location.reload();
+                    break;
             }
         }
     });

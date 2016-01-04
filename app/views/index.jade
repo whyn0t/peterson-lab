@@ -8,7 +8,7 @@ block main-content
                 webcam(on-streaming="onSuccess()" on-access-denied="onError(err)" on-stream="onStream(stream)" channel="videoChannel" hidden)
             div(ng-switch on="phase")
                 div(ng-switch-when="permissions")
-                    p Please allow access to your camera and microphone to continue. Refresh the page if there is no permissions prompt.C
+                    p Please allow access to your camera and microphone to continue. Refresh the page if there is no permissions prompt.
                 div(ng-switch-when="welcome")
                     include blocks/welcome/main
                 div(ng-switch-when="stimulus")
