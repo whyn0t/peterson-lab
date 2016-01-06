@@ -3,7 +3,8 @@ div(ng-controller='liveStreamCtrl' class="col-xs-4 calibration-height parent" ng
         div(class="text-center")
             p(ng-hide="validation.webcam") Center the camera on your face
             h4(ng-show="validation.webcam") Webcam calibration complete
-            video(id="webcam-live" autoplay muted)
+            h4(ng-if="session.phase=='oops'") Oops!
+            live-stream(ng-if="session.phase=='welcome'")
                 img(src="/images/liveFeedPlaceHolder.gif" title="Please refresh the page and allow microphone and webcam access to continue")
     div(class="row-fluid")
         div(class="text-center")

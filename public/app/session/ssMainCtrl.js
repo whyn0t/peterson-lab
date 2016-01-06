@@ -1,4 +1,4 @@
-angular.module('app').controller('ssMainCtrl', function($rootScope, $scope, $window, $document, $interval, $http, $location, $sce, audioRecorderService){
+angular.module('app').controller('ssMainCtrl', function($rootScope, $scope, $window, $document, $interval, $http, $location, $sce, audioRecorderService, UM_Event){
     'use strict';
 
     var ctrl = this;
@@ -50,7 +50,7 @@ angular.module('app').controller('ssMainCtrl', function($rootScope, $scope, $win
     //function for switching phase using a button
     $scope.switchToThankYou = function(){
         postSession($scope.sessionData);
-        $scope.phase = "thankyou";
+        ctrl.phase = "thankyou";
     }
 
     $scope.$on('audioDoneEncoding', function(event, data){
@@ -103,23 +103,33 @@ angular.module('app').controller('ssMainCtrl', function($rootScope, $scope, $win
                 $scope.stimulus = res.data.stimulus;
                 $scope.$broadcast('stimulusPhase');
                 audioRecorderService.API.toggleRecording();
-                $scope.phase = "stimulus";
+                ctrl.phase = "briefing";
             }, function(res) {
                 //TODO use alert instead
-                $scope.phase="authFail";
+                ctrl.phase="authFail";
             })
         }
     }
 
+    //to detect mediaStreamReady and change to welcome phase
+    $rootScope.$on(UM_Event.GOTSTREAM, function(event, stream, err){
+        if (err){
+            console.error(err);
+        } else {
+            ctrl.phase = 'welcome';
+
+        }
+    });
+
     var stopImg;
-    $scope.phase = "permissions";
-    //$scope.phase = "welcome";
+    ctrl.phase = "permissions";
+    //ctrl.phase = "welcome";
 
     angular.element($window).on('keydown', function(e) {
         if (e.keyCode == 32) {
-            switch($scope.phase) {
+            switch(ctrl.phase) {
                 case "permissions":
-                    $scope.phase = "welcome";
+                    ctrl.phase = "welcome";
                     break;
                 case "welcome":
                     if (!ctrl.idForm.input.$error.required
@@ -129,15 +139,18 @@ angular.module('app').controller('ssMainCtrl', function($rootScope, $scope, $win
                         authenticateSession();
                     }
                     break;
+                case "briefing":
+                    ctrl.phase = "stimulus";
+                    break;
                 case "stimulus":
                     $scope.$broadcast('stopPlayer');
                     $scope.$broadcast('debriefPhase');
                     //TODO maybe figure out separating the audio component one day
                     audioRecorderService.API.toggleRecording();
-                    $scope.phase = "debrief";
+                    ctrl.phase = "debrief";
                     break;
                 case "thankyou":
-                        $scope.phase = "welcome";
+                        ctrl.phase = "welcome";
                         location.reload();
                     break;
             }

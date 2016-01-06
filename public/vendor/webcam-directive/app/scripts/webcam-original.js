@@ -122,15 +122,19 @@ angular.module('webcam', ['userMedia'])
                     }
 
                     //Edits
-                    userMediaService();
-                    //TODO why are the stream and error args reversed from the broadcast?
-                    $rootScope.$on(UM_Event.GOTSTREAM, function(event, stream, err){
-                        if (err){
-                            onFailure(err);
-                        } else {
+                    userMediaService
+                        .then(function(stream){
                             onSuccess(stream);
-                        }
-                    });
+                        });
+                    //TODO need error callback? How does it know that it was an error?
+                    //TODO why are the stream and error args reversed from the broadcast?
+                    //$rootScope.$on(UM_Event.GOTSTREAM, function(event, stream, err){
+                    //    if (err){
+                    //        onFailure(err);
+                    //    } else {
+                    //        onSuccess(stream);
+                    //    }
+                    //});
 
                     /* Start streaming the webcam data when the video element can play
                      * It will do it only once

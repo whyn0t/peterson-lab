@@ -1,6 +1,5 @@
 div(class="row-fluid")
-    p In order to make sure that you are not in a distracting environment, we would like to collect audio and video data during this task. This data will be stored on a secure server, separately from your provided information, and separately from any identifying information. This data will only be accessible by researchers affiliated with this project.
-    p Please enable your browser to access your webcam and microphone and follow the instructions below before proceeding.
+    p Please input your participant number and complete the three calibration tasks below to ensure your webcam, microphone and headphones are properly set up.
 div(class="row-fluid")
     include participant
 div(class="row-fluid")
@@ -8,4 +7,6 @@ div(class="row-fluid")
     include microphone
     include speakers
 div(class="row-fluid")
-    h2(class="text-center" ng-show="!ctrl.idForm.input.$error.required && validation.webcam && validation.microphone && validation.speakerTestInput == 'welcome'") Press space bar to begin...
+    div(class="text-center" ng-show="!ctrl.idForm.input.$error.required && validation.webcam && validation.microphone && validation.speakerTestInput == 'welcome'")
+        h2(font color="red") Once you begin the study, you must complete it in one sitting.
+        h2 Press space bar to begin the study...

@@ -17,15 +17,19 @@ angular.module('audioRecorder', ['userMedia'])
 		var recording = false;
         var analyserNode = null;
 
-        userMediaService();
-
-        $rootScope.$on(UM_Event.GOTSTREAM, function(event, stream, err){
-            if (err){
-                console.error(err);
-            } else {
+        userMediaService
+            .then(function(stream){
                 gotStream(stream);
-            }
-        });
+            });
+        //TODO need error callback? How does it know that it was an error?
+
+        //$rootScope.$on(UM_Event.GOTSTREAM, function(event, stream, err){
+        //    if (err){
+        //        console.error(err);
+        //    } else {
+        //        gotStream(stream);
+        //    }
+        //});
 
 		function saveAudio() {
 		    audioRecorder.exportWAV( doneEncoding );
@@ -85,56 +89,59 @@ angular.module('audioRecorder', ['userMedia'])
 		    rafID = null;
 		}
 
+
 		function updateAnalysers(time) {
-		    if (!analyserContext) {
-		        var canvas = document.getElementById("analyser");
-		        canvasWidth = canvas.width;
-		        canvasHeight = canvas.height;
-		        analyserContext = canvas.getContext('2d');
-		    }
-
-		    // analyzer draw code here
-		    {
-		        var SPACING = 3;
-		        var freqByteData = new Uint8Array(analyserNode.frequencyBinCount);
-
-		        analyserNode.getByteFrequencyData(freqByteData); 
-
-		        analyserContext.clearRect(0, 0, canvasWidth, canvasHeight);
-		        analyserContext.fillStyle = '#F6D565';
-		        analyserContext.lineCap = 'round';
-		        var numBins = analyserNode.frequencyBinCount;
-                var maxDec = analyserNode.maxDecibels;
-
-                var freqSum = 0;
-                for (var i = 0; i < numBins; ++i){
-                    freqSum += freqByteData[i];
-                }
-                var freqAvg = freqSum / numBins;
-                analyserContext.fillStyle = "hsl( " + Math.round((freqAvg*45)/-maxDec) + ", 100%, 50%)";
-                analyserContext.fillRect(0, canvasHeight, canvasWidth, -freqAvg * 2);
-
-                if (freqAvg > 50) {
-                    $rootScope.$broadcast('micTestPass');
+            //TODO service modifying DOM is a big nono. Need to put this in a directive. Hack for now!
+            if (document.getElementById("analyser")) {
+                if (!analyserContext) {
+                    var canvas = document.getElementById("analyser");
+                    canvasWidth = canvas.width;
+                    canvasHeight = canvas.height;
+                    analyserContext = canvas.getContext('2d');
                 }
 
-                /*
-		        // Draw rectangle for each frequency bin.
-		        for (var i = 0; i < numBars; ++i) {
-		            var magnitude = 0;
-		            var offset = Math.floor( i * multiplier );
-		            // gotta sum/average the block, or we miss narrow-bandwidth spikes
-		            for (var j = 0; j< multiplier; j++)
-		                magnitude += freqByteData[offset + j];
-		            magnitude = magnitude / multiplier;
-		            var magnitude2 = freqByteData[i * multiplier];
-		            analyserContext.fillStyle = "hsl( " + Math.round((i*360)/numBars) + ", 100%, 50%)";
-		            analyserContext.fillRect(0, canvasHeight, BAR_WIDTH, -magnitude);
-		        }
-		        */
-		    }
-		    
-		    rafID = $window.requestAnimationFrame( updateAnalysers );
+                // analyzer draw code here
+                {
+                    var SPACING = 3;
+                    var freqByteData = new Uint8Array(analyserNode.frequencyBinCount);
+
+                    analyserNode.getByteFrequencyData(freqByteData);
+
+                    analyserContext.clearRect(0, 0, canvasWidth, canvasHeight);
+                    analyserContext.fillStyle = '#F6D565';
+                    analyserContext.lineCap = 'round';
+                    var numBins = analyserNode.frequencyBinCount;
+                    var maxDec = analyserNode.maxDecibels;
+
+                    var freqSum = 0;
+                    for (var i = 0; i < numBins; ++i) {
+                        freqSum += freqByteData[i];
+                    }
+                    var freqAvg = freqSum / numBins;
+                    analyserContext.fillStyle = "hsl( " + Math.round((freqAvg * 45) / -maxDec) + ", 100%, 50%)";
+                    analyserContext.fillRect(0, canvasHeight, canvasWidth, -freqAvg * 2);
+
+                    if (freqAvg > 50) {
+                        $rootScope.$broadcast('micTestPass');
+                    }
+
+                    /*
+                     // Draw rectangle for each frequency bin.
+                     for (var i = 0; i < numBars; ++i) {
+                     var magnitude = 0;
+                     var offset = Math.floor( i * multiplier );
+                     // gotta sum/average the block, or we miss narrow-bandwidth spikes
+                     for (var j = 0; j< multiplier; j++)
+                     magnitude += freqByteData[offset + j];
+                     magnitude = magnitude / multiplier;
+                     var magnitude2 = freqByteData[i * multiplier];
+                     analyserContext.fillStyle = "hsl( " + Math.round((i*360)/numBars) + ", 100%, 50%)";
+                     analyserContext.fillRect(0, canvasHeight, BAR_WIDTH, -magnitude);
+                     }
+                     */
+                }
+            }
+            rafID = $window.requestAnimationFrame( updateAnalysers );
 		}
 
 		function toggleMono() {
@@ -175,22 +182,11 @@ angular.module('audioRecorder', ['userMedia'])
 
 		}
 
-
-		function initAudio() {
-			userMediaService(gotStream, function(e) {
-		            alert('Error getting audio');
-		            console.log(e);
-		        });
-
-		}
-
-
         function getAudioData(){
             return audioData;
         }
 		
-		return {API: {initAudio: initAudio,
-						toggleMono: toggleMono,
+		return {API: {toggleMono: toggleMono,
 						toggleRecording: toggleRecording,
 						saveAudio: saveAudio,
                         getAudioData: getAudioData
