@@ -1,3 +1,7 @@
+Demo: 
+https://sleepy-mountain-8012.herokuapp.com/admin
+https://sleepy-mountain-8012.herokuapp.com/run/test
+
 # peterson-lab
 Study-runner for showing video a stimulus and taking survey responses. Intended for use on amazon's mechanical turk. 
 
