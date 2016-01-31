@@ -11,7 +11,9 @@ angular.module('app', [
     'recorder',
     'audioRecorder',
     'com.2fdevs.videogular',
-    'com.2fdevs.videogular.plugins.controls'
+    'com.2fdevs.videogular.plugins.controls',
+    'ng.deviceDetector',
+    'ui.bootstrap'
 ]);
 
 //how many arguments can be passed to the config callback?

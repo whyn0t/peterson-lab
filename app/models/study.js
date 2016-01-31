@@ -6,6 +6,7 @@ var studySchema = mongoose.Schema({
     partIdMax: Number,
     stimulusTitle: String,
     stimulusUrl: String,
+    instructions: String,
     active: Boolean,
     dateTime: {type: Date, default: Date.now()}
 });

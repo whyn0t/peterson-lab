@@ -101,6 +101,8 @@ angular.module('app').controller('ssMainCtrl', function($rootScope, $scope, $win
             }).then(function(res) {
                 $scope.authentication = res.data;
                 $scope.stimulus = res.data.stimulus;
+                $scope.instructions = res.data.instructions;
+                ctrl.instructions = res.data.instructions;
                 $scope.$broadcast('stimulusPhase');
                 audioRecorderService.API.toggleRecording();
                 ctrl.phase = "briefing";
@@ -121,16 +123,22 @@ angular.module('app').controller('ssMainCtrl', function($rootScope, $scope, $win
         }
     });
 
+    $rootScope.$on("FFORCHROME", function(event, stream, err){
+        if (err){
+            console.error(err);
+        } else {
+            ctrl.phase = 'permissions';
+
+        }
+    });
+
     var stopImg;
-    ctrl.phase = "permissions";
+    ctrl.phase = "browser-detect";
     //ctrl.phase = "welcome";
 
     angular.element($window).on('keydown', function(e) {
         if (e.keyCode == 32) {
             switch(ctrl.phase) {
-                case "permissions":
-                    ctrl.phase = "welcome";
-                    break;
                 case "welcome":
                     if (!ctrl.idForm.input.$error.required
                         && $scope.validation.speakerTestInput == 'welcome'

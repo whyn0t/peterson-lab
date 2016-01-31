@@ -7,12 +7,14 @@ block main-content
             div(ng-controller="videoStreamCtrl as video")
                 webcam(on-streaming="onSuccess()" on-access-denied="onError(err)" on-stream="onStream(stream)" channel="videoChannel" hidden)
             div(ng-switch on="session.phase")
+                div(ng-switch-when="browser-detect")
+                    include blocks/browser-detection
                 div(ng-switch-when="permissions")
                     permissions
                 div(ng-switch-when="welcome")
                     include blocks/welcome/main
                 div(ng-switch-when="briefing")
-                    h1 Insert study instructions here
+                    h3 {{session.instructions}}
                     h2 Press space bar to start the video...
                 div(ng-switch-when="stimulus")
                     include blocks/stimulus.jade

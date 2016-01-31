@@ -44,23 +44,13 @@ angular.module('webcam', ['userMedia'])
 
                 $scope.config = $scope.config || {};
 
-                var _removeDOMElement = function _removeDOMElement(DOMel) {
-                    if (DOMel) {
-                        angular.element(DOMel).remove();
-                    }
-                };
-
-                var onDestroy = function onDestroy() {
-                    if (!!videoStream && typeof videoStream.stop === 'function') {
-                        videoStream.stop();
-                    }
-                    if (!!videoElem) {
-                        delete videoElem.src;
-                    }
-                };
+                userMediaService
+                    .then(function(stream){
+                        onSuccess(stream);
+                    });
 
                 // called when camera stream is loaded
-                var onSuccess = function onSuccess(stream) {
+                function onSuccess(stream) {
                     videoStream = stream;
 
                     // Firefox supports a src object
@@ -78,6 +68,21 @@ angular.module('webcam', ['userMedia'])
                     /* Call custom callback */
                     if ($scope.onStream) {
                         $scope.onStream({stream: stream});
+                    }
+                };
+
+                var _removeDOMElement = function _removeDOMElement(DOMel) {
+                    if (DOMel) {
+                        angular.element(DOMel).remove();
+                    }
+                };
+
+                var onDestroy = function onDestroy() {
+                    if (!!videoStream && typeof videoStream.stop === 'function') {
+                        videoStream.stop();
+                    }
+                    if (!!videoElem) {
+                        delete videoElem.src;
                     }
                 };
 
@@ -120,21 +125,6 @@ angular.module('webcam', ['userMedia'])
                         onFailure({code: -1, msg: 'Browser does not support getUserMedia.'});
                         return;
                     }
-
-                    //Edits
-                    userMediaService
-                        .then(function(stream){
-                            onSuccess(stream);
-                        });
-                    //TODO need error callback? How does it know that it was an error?
-                    //TODO why are the stream and error args reversed from the broadcast?
-                    //$rootScope.$on(UM_Event.GOTSTREAM, function(event, stream, err){
-                    //    if (err){
-                    //        onFailure(err);
-                    //    } else {
-                    //        onSuccess(stream);
-                    //    }
-                    //});
 
                     /* Start streaming the webcam data when the video element can play
                      * It will do it only once

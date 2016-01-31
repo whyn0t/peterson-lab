@@ -12,6 +12,14 @@ block main-content
                     input(type='text' name='input' ng-model='authentication.password' required)
                 button(ng-click='submitCredentials()') submit
         div(ng-show='authentication.access_token')
+            div
+                script(type="text/ng-template" id="instructionsDialog.html")
+                    div(class="modal-body")
+                        h3 Input study instructions here:
+                        textarea(type='text' ng-model='response.instructions')
+                    div(class="dialog-footer")
+                        button(ng-click="submitInstructions()") Submit
+                        button(ng-click="cancel()") Cancel
             h2 Manage Studies
             table(class='table table-bordered')
                 thead
@@ -21,6 +29,7 @@ block main-content
                         th PartId Min
                         th PartId Max
                         th Stimulus
+                        th Instructions
                 tbody
                     tr(ng-repeat="study in studies")
                         td
@@ -29,6 +38,8 @@ block main-content
                         td {{ study.partIdMin }}
                         td {{ study.partIdMax }}
                         td {{ study.stimulusTitle }}
+                        td
+                            button(ng-click='openDialog(study.instructions)') View Instructions
                         td
                             button(ng-click='deleteStudy(study)') Delete
                     tr
@@ -43,6 +54,8 @@ block main-content
                         td
                             select(ng-model='newStudy.stimulusTitle')
                                 option(ng-repeat="stimulus in stimuli") {{ stimulus.Key }}
+                        td
+                            button(ng-click='openDialog(newStudy.instructions)') Edit Instructions
                         td
                             button(ng-click='postNewStudy()') Add
             h2 Share AV Data

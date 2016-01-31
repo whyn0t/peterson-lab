@@ -61,7 +61,8 @@ module.exports.controller = function(app) {
                             token: token,
                             exp: expires,
                             user: studyId + partId,
-                            stimulus: studyResult.stimulusTitle
+                            stimulus: studyResult.stimulusTitle,
+                            instructions: studyResult.instructions
                         });
                     }
                 });

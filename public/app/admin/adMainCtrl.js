@@ -1,4 +1,4 @@
-angular.module('app').controller('mvAdminCtrl', function($scope, $http) {
+angular.module('app').controller('mvAdminCtrl', function($scope, $http, $uibModal) {
     $scope.authentication = {attempts: 0};
     $scope.newStudy = {};
     $scope.studies = {};
@@ -6,6 +6,7 @@ angular.module('app').controller('mvAdminCtrl', function($scope, $http) {
     $scope.newShare = {};
     $scope.shares = {};
     $scope.stimuli = {};
+    var modalInstance = null;
 
     $scope.submitCredentials = function(){
         $http.post('/api/auth', {
@@ -27,6 +28,24 @@ angular.module('app').controller('mvAdminCtrl', function($scope, $http) {
             }
         })
     }
+
+    $scope.openDialog = function(instructions){
+        modalInstance = $uibModal.open({
+            templateUrl: 'instructionsDialog.html',
+            controller: 'instructionsCtrl',
+            resolve: {
+                instructions: function () {
+                    return instructions;
+                }
+            }
+        });
+
+        modalInstance.result.then(function (instructions) {
+            $scope.newStudy.instructions = instructions;
+        });
+    }
+
+
 
     function populateStudyTable(){
         $http({

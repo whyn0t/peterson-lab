@@ -17,7 +17,9 @@
     "angular-sanitize": "~1.4.2",
     "webcam-directive": "~3.0.0",
     "videogular-controls": "~1.2.4",
-    "angular-bootstrap": "~0.13.3"
+    "angular-bootstrap": "~0.13.3",
+    "ng-device-detector": "~2.0.3",
+    "re-tree": "~0.0.2"
   },
   "resolutions": {
     "angular-sanitize": "~1.4.2",
