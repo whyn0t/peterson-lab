@@ -6,9 +6,10 @@ angular.module('app').controller('ssMainCtrl', function($rootScope, $scope, $win
 
     $scope.validation = {};
     //for validation
-    $scope.borders = {webcam: { border: '5px solid red' },
-                        microphone: { border: '5px solid red' },
-                        speakers: { border: '5px solid red' }};
+    //
+    //$scope.style = {webcam: '',
+    //                    microphone: { border: '5px solid red' },
+    //                    speakers: { border: '5px solid red' }};
 
     //HACK to get studyId from url when or format /run/:studyId
     var urlPath = $location.absUrl().split('/');

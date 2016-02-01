@@ -14,7 +14,8 @@ footer
     border-top 1px solid #d7e0e2
     */
 .partId {
-  margin-top: 50px;
+  margin-top: 30px;
+  margin-bottom: 20px;
 }
 .parent {
   display: flex;
@@ -28,6 +29,18 @@ footer
 }
 .calibration-height {
   height: 250px;
+}
+.calibrator {
+  border-color: #f00;
+}
+.calibrator .panel-heading {
+  background-color: rgba(202,51,79,0.42);
+}
+.calibrator.calibration-success {
+  border-color: #008000;
+}
+.calibrator.calibration-success .panel-heading {
+  background-color: rgba(0,128,0,0.22);
 }
 .centred {
   position: fixed;
@@ -48,4 +61,10 @@ footer
 }
 .audioTest {
   float: left;
+}
+.info-message {
+  margin-bottom: 30px;
+}
+label input {
+  margin-left: 5px;
 }
