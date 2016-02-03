@@ -37,7 +37,6 @@ angular.module('app').controller('audioStreamCtrl', function($scope, audioRecord
 
     $scope.$on('micTestPass', function(event, data){
         $scope.validation.microphone = true;
-        $scope.borders.microphone = {border: '5px solid green'};
         $scope.$apply();
     });
 });

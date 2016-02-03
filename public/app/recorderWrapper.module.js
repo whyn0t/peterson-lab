@@ -119,7 +119,7 @@ angular.module('audioRecorder', ['userMedia'])
                     }
                     var freqAvg = freqSum / numBins;
                     analyserContext.fillStyle = "hsl( " + Math.round((freqAvg * 45) / -maxDec) + ", 100%, 50%)";
-                    analyserContext.fillRect(0, canvasHeight, canvasWidth, -freqAvg * 2);
+                    analyserContext.fillRect(0, 0, freqAvg * 2 * canvasWidth / 100, canvasHeight);
 
                     if (freqAvg > 50) {
                         $rootScope.$broadcast('micTestPass');
@@ -141,6 +141,12 @@ angular.module('audioRecorder', ['userMedia'])
                      */
                 }
             }
+
+			/*
+			* This is terrible, this function is running throughout every page, constantly, even if there is nothing to animate
+			 * It also causes the height and the width to be wrong.
+			*/
+
             rafID = $window.requestAnimationFrame( updateAnalysers );
 		}
 
