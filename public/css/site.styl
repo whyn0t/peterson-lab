@@ -40,8 +40,17 @@ footer
 .calibrator.calibration-success
   border-color green
 
+.calibration-height.calibration-success
+  height auto;
+
+.calibration-success .panel-body
+  display none
+
 .calibrator.calibration-success .panel-heading
   background-color rgba(0, 128, 0, 0.22)
+
+.calibrator.speaker-calibrator input
+  width: 80%
 
 .centred
   position fixed
@@ -50,9 +59,10 @@ footer
   transform translate(-50%, -50%)
 
 #analyser
-  height 100px
-  width 20px
+  width: 80%
+  height 20px
   border 2px solid black
+  margin-top 30px
 
 #webcam-live
   height 150px
