@@ -2,53 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="75922d38-c3aa-45dc-bb3e-4832b78ffca2" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/browser-bar-buttons-pointer.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/models/appData.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/services/googleDriveOld.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/models/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/app/session/sessionAuthSvc.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/app/session/youTubeEmbed/youTubeCst.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/app/session/youTubeEmbed/youTubeCtrl.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/app/session/youTubeEmbed/youTubeDir.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/app/session/youTubeEmbed/youTubeSvc.js" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/controllers/api/downloadCsv.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/app/youTubeEmbed/youTubeApp.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/app/youTubeEmbed/youTubeCtrl.js" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AWSconfig.json" afterPath="$PROJECT_DIR$/AWSconfig.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/app/admin/adMainCtrl.js" afterPath="$PROJECT_DIR$/public/app/admin/adMainCtrl.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/admin.jade" afterPath="$PROJECT_DIR$/app/views/admin.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/app/app.js" afterPath="$PROJECT_DIR$/public/app/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/app/session/welcome/audioStreamCtrl.js" afterPath="$PROJECT_DIR$/public/app/session/welcome/audioStreamCtrl.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/api/auth.js" afterPath="$PROJECT_DIR$/app/controllers/api/auth.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/blocks/browser-detection.jade" afterPath="$PROJECT_DIR$/app/views/blocks/browser-detection.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/app/session/browserDetection/browserDetectionCtrl.js" afterPath="$PROJECT_DIR$/public/app/session/browserDetection/browserDetectionCtrl.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/blocks/debrief.jade" afterPath="$PROJECT_DIR$/app/views/blocks/debrief.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/services/googleDrive.js" afterPath="$PROJECT_DIR$/app/services/googleDrive.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/index.jade" afterPath="$PROJECT_DIR$/app/views/index.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/blocks/welcome/main.jade" afterPath="$PROJECT_DIR$/app/views/blocks/welcome/main.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/blocks/welcome/microphone.jade" afterPath="$PROJECT_DIR$/app/views/blocks/welcome/microphone.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/blocks/welcome/participant.jade" afterPath="$PROJECT_DIR$/app/views/blocks/welcome/participant.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/app/session/permissions/permissionsDir.html" afterPath="$PROJECT_DIR$/public/app/session/permissions/permissionsDir.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/app/session/permissions/permissionsDir.js" afterPath="$PROJECT_DIR$/public/app/session/permissions/permissionsDir.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/app/recorderWrapper.module.js" afterPath="$PROJECT_DIR$/public/app/recorderWrapper.module.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/includes/scripts.jade" afterPath="$PROJECT_DIR$/app/views/includes/scripts.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server.js" afterPath="$PROJECT_DIR$/server.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/api/session.js" afterPath="$PROJECT_DIR$/app/controllers/api/session.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/session.js" afterPath="$PROJECT_DIR$/app/models/session.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/share.js" afterPath="$PROJECT_DIR$/app/models/share.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/shares.js" afterPath="$PROJECT_DIR$/app/controllers/shares.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/site.css" afterPath="$PROJECT_DIR$/public/css/site.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/site.styl" afterPath="$PROJECT_DIR$/public/css/site.styl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/app/session/welcome/snapshotCtrl.js" afterPath="$PROJECT_DIR$/public/app/session/welcome/snapshotCtrl.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/app/session/ssMainCtrl.js" afterPath="$PROJECT_DIR$/public/app/session/ssMainCtrl.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/blocks/stimulus.jade" afterPath="$PROJECT_DIR$/app/views/blocks/stimulus.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/stimulus.js" afterPath="$PROJECT_DIR$/app/controllers/stimulus.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/studies.js" afterPath="$PROJECT_DIR$/app/controllers/studies.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/study.js" afterPath="$PROJECT_DIR$/app/models/study.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/api/uploadFile.js" afterPath="$PROJECT_DIR$/app/controllers/api/uploadFile.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/blocks/welcome/webcam.jade" afterPath="$PROJECT_DIR$/app/views/blocks/welcome/webcam.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="petersonLab.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -102,6 +56,16 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="auth.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/controllers/api/auth.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.7851373" vertical-offset="198" max-vertical-offset="2268">
+              <caret line="38" column="27" selection-start-line="38" selection-start-column="27" selection-end-line="38" selection-end-column="27" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="AWSconfig.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AWSconfig.json">
           <provider selected="true" editor-type-id="text-editor">
@@ -112,20 +76,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="url.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/node_modules/stylus/lib/functions/url.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1449" max-vertical-offset="2196">
-              <caret line="92" column="11" selection-start-line="92" selection-start-column="11" selection-end-line="92" selection-end-column="11" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="googleDriveOld.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="googleDriveOld.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/services/googleDriveOld.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.33279744" vertical-offset="3591" max-vertical-offset="6282">
+            <state vertical-scroll-proportion="0.0" vertical-offset="3591" max-vertical-offset="6282">
               <caret line="211" column="11" selection-start-line="211" selection-start-column="11" selection-end-line="211" selection-end-column="11" />
               <folding />
             </state>
@@ -199,7 +153,6 @@
         <option value="$PROJECT_DIR$/public/app/session/youTubeEmbed/youTubeSvc.js" />
         <option value="$PROJECT_DIR$/app/views/blocks/welcome/webcam.jade" />
         <option value="$PROJECT_DIR$/app/views/blocks/stimulus.jade" />
-        <option value="$PROJECT_DIR$/app/services/googleDriveOld.js" />
         <option value="$PROJECT_DIR$/app/services/googleDrive.js" />
         <option value="$PROJECT_DIR$/app/models/AppData.js" />
         <option value="$PROJECT_DIR$/public/css/site.css" />
@@ -224,13 +177,14 @@
         <option value="$PROJECT_DIR$/public/app/session/welcome/snapshotCtrl.js" />
         <option value="$PROJECT_DIR$/app/views/index.jade" />
         <option value="$PROJECT_DIR$/app/models/session.js" />
-        <option value="$PROJECT_DIR$/app/controllers/api/auth.js" />
         <option value="$PROJECT_DIR$/app/views/admin.jade" />
         <option value="$PROJECT_DIR$/app/models/study.js" />
         <option value="$PROJECT_DIR$/app/views/blocks/debrief.jade" />
         <option value="$PROJECT_DIR$/public/app/app.js" />
         <option value="$PROJECT_DIR$/public/app/session/ssMainCtrl.js" />
         <option value="$PROJECT_DIR$/AWSconfig.json" />
+        <option value="$PROJECT_DIR$/app/services/googleDriveOld.js" />
+        <option value="$PROJECT_DIR$/app/controllers/api/auth.js" />
       </list>
     </option>
   </component>
@@ -568,6 +522,28 @@
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controllers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="api" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="petersonLab" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="petersonLab" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
@@ -665,16 +641,16 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="55" y="24" width="1865" height="1056" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21854664" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32746115" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32746115" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33056995" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33056995" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32953367" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -1090,8 +1066,8 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2142">
           <caret line="21" column="53" selection-start-line="21" selection-start-column="53" selection-end-line="21" selection-end-column="53" />
           <folding>
-            <marker date="1456104616768" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1456104616768" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1456197045957" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1456197045957" expanded="true" signature="-1:-1" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -1128,20 +1104,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/api/auth.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.714286" vertical-offset="1332" max-vertical-offset="2268">
-          <caret line="86" column="63" selection-start-line="86" selection-start-column="63" selection-end-line="86" selection-end-column="63" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/models/study.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="342">
           <caret line="7" column="21" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
           <folding>
-            <marker date="1456112827636" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1456197045949" expanded="true" signature="-1:-1" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -1220,8 +1188,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/services/googleDriveOld.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33279744" vertical-offset="3591" max-vertical-offset="6282">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3591" max-vertical-offset="6282">
           <caret line="211" column="11" selection-start-line="211" selection-start-column="11" selection-end-line="211" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/api/auth.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7851373" vertical-offset="198" max-vertical-offset="2268">
+          <caret line="38" column="27" selection-start-line="38" selection-start-column="27" selection-end-line="38" selection-end-column="27" />
           <folding />
         </state>
       </provider>

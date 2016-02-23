@@ -34,9 +34,9 @@ module.exports.controller = function(app) {
     });
 
     //provides a key (participantId) to the qualtrics survey for later authentication
-    app.post('/api/auth/generateKey', function(req, res) {
-        var studyKey = req.body.studyKey;
-        var sid = req.body.sid;
+    app.get('/api/auth/generateKey', function(req, res) {
+        var studyKey = req.query.studyKey;
+        var sid = req.query.sid;
         Study.findOne({sid: sid, key: studyKey}).exec(function (err, result) {
             if (err) {
                 console.error(err);
