@@ -1,64 +1,47 @@
-angular.module('app').controller('ssMainCtrl', function($rootScope, $scope, $window, $document, $interval, $http, $location, $sce, audioRecorderService, UM_Event){
+angular.module('app').controller('ssMainCtrl', function($rootScope, $scope, $window, $document, $interval, $http, $location, $sce, audioRecorderService, UM_Event, sessionAuth){
     'use strict';
 
+    //VARIABLES
     var ctrl = this;
     $scope.user = {};
-
     $scope.validation = {};
-    //for validation
-    //
-    //$scope.style = {webcam: '',
-    //                    microphone: { border: '5px solid red' },
-    //                    speakers: { border: '5px solid red' }};
+    $scope.sessionData = {};
+    $scope.audioUploaded = false;
+    //sessionAuth.then(function (res) {
+    //    $scope.sessionData = res.data;
+    //    ctrl.instructions = $scope.sessionData.instructions;
+    //}, function (res) {
+    //    //TODO sessionAuth failed
+    //});
 
-    //HACK to get studyId from url when or format /run/:studyId
-    var urlPath = $location.absUrl().split('/');
-    if (urlPath[urlPath.length - 2] == 'run'){
-        $scope.sessionData = {studyId: urlPath[urlPath.length - 1]}
-    } else {
-        $scope.sessionData = {studyId: 'demo'};
-    }
-    //$scope.sessionData = {studyId: $location.search().studyId || 'demo'};
-    $scope.authentication = {};
-
+    //CALIBRATION VALIDATION
     //for validation phase, to change the formatting
     $scope.$watch('validation.speakerTestInput', function(){
         if ($scope.validation.speakerTestInput) {
             $scope.validation.speakerTestInput = $scope.validation.speakerTestInput.toLowerCase().trim();
-            if ($scope.validation.speakerTestInput == 'welcome'){
-                $scope.borders.speakers = { border: '5px solid green' };
-            }
+            //if ($scope.validation.speakerTestInput == 'welcome'){
+            //    $scope.borders.speakers = { border: '5px solid green' };
+            //}
         }
-    });
-
-    //hack to prevent numbers from being entered in the participant ID field
-    $scope.$watch('sessionData.partId', function(){
-       if($scope.sessionData.partId) {
-           $scope.sessionData.partId = $scope.sessionData.partId.replace(/\D/g,'');
-       }
-    });
-
-    //captures player stop time. This seems like the right way to do this. Maybe not the right place.
-    $scope.$on('playerTime', function(event, data){
-        $scope.sessionData.stopTime = data;
     });
 
     //play validation sound (welcome)
     $scope.playTestSound = function(){
         document.getElementById('audioTest').play();
-    }
+    };
 
-    //function for switching phase using a button
-    $scope.switchToThankYou = function(){
-        postSession($scope.sessionData);
-        ctrl.phase = "thankyou";
-    }
+    //HANDLE A/V DATA
+    //captures player stop time. This seems like the right way to do this. Maybe not the right place.
+    $scope.$on('playerTime', function(event, data){
+        var time = Math.floor( data * 1000 ); //convert to milliseconds and remove decimals
+        $scope.sessionData.stopTime = time;
+    });
 
     $scope.$on('audioDoneEncoding', function(event, data){
-        if ($scope.sessionData.studyId != 'demo') {
+        if ($scope.sessionData.sid != 'demo') {
             var fd = new FormData();
             fd.append('file', data, 'audio.wav');
-            var postUrl = '/api/avData?studyId=' + $scope.sessionData.studyId + '&partId=' + $scope.sessionData.partId;
+            var postUrl = '/api/avData?sid=' + $scope.sessionData.sid + '&pid=' + $scope.sessionData.pid;
             $http.post(postUrl, fd,
                 {
                     transformRequest: function (data) {
@@ -66,53 +49,39 @@ angular.module('app').controller('ssMainCtrl', function($rootScope, $scope, $win
                     },
                     headers: {
                         'Content-Type': undefined,
-                        'x-access-token': $scope.authentication.token
+                        'x-access-token': $scope.sessionData.token
                     }
                 }).success(function () {
                     console.log("recorderWrapper | Uploaded audio");
+                    $scope.audioUploaded = true;
                 }).error(function () {
                     console.log("recorderWrapper | Audio upload failed");
                 });
         }
     });
 
-    //prompted by switch to thankyou phase
-    var postSession = function(sessionData){
-        if ($scope.sessionData.studyId != 'demo') {
-            $http({
-                method: 'POST',
-                url: '/api/sessionData',
-                data: sessionData,
-                headers: {
-                    'x-access-token': $scope.authentication.token
-                }
-            })
-        }
-    }
+    //PHASE CONTROL
+    //TODO put phase control in a service?
 
-    //for welcome phase to validate user session
-    var authenticateSession = function(){
-        //hacky
-        if ($scope.sessionData.studyId != 'demo') {
-            $scope.sessionData.partId = parseInt($scope.sessionData.partId);
-            $http({
-                method: 'POST',
-                url: '/api/auth/session',
-                data: $scope.sessionData
-            }).then(function(res) {
-                $scope.authentication = res.data;
-                $scope.stimulus = res.data.stimulus;
-                $scope.instructions = res.data.instructions;
-                ctrl.instructions = res.data.instructions;
-                $scope.$broadcast('stimulusPhase');
-                audioRecorderService.API.toggleRecording();
-                ctrl.phase = "briefing";
-            }, function(res) {
-                //TODO use alert instead
-                ctrl.phase="authFail";
-            })
+    //ensure the audio has been uploaded before redirecting to the post-survey
+    $scope.$watch('audioUploaded', function(){
+        if ( $scope.audioUploaded && ctrl.phase == 'debrief' ){
+            $location.path($scope.sessionData.redirect).search({
+                sid: $scope.sessionData.sid,
+                pid: $scope.sessionData.pid,
+                stopTime: $scope.sessionData.stopTime
+            });
         }
-    }
+    });
+    $scope.$on('debriefPhase', function(){
+        if ( $scope.audioUploaded ){
+            $location.path($scope.sessionData.redirect).search({
+                sid: $scope.sessionData.sid,
+                pid: $scope.sessionData.pid,
+                stopTime: $scope.sessionData.stopTime
+        });
+        }
+    });
 
     //to detect mediaStreamReady and change to welcome phase
     $rootScope.$on(UM_Event.GOTSTREAM, function(event, stream, err){
@@ -124,31 +93,38 @@ angular.module('app').controller('ssMainCtrl', function($rootScope, $scope, $win
         }
     });
 
-    $rootScope.$on("FFORCHROME", function(event, stream, err){
+    $rootScope.$on("FFORCHROME", function(event, stream, err){ //TODO is there a need for all of these parameters?
         if (err){
             console.error(err);
         } else {
-            ctrl.phase = 'permissions';
+            //authenticate the session
+            sessionAuth.then(function (res) {
+                $scope.sessionData = res.data;
+                ctrl.instructions = $scope.sessionData.instructions;
+                ctrl.phase = 'permissions';
+            }, function (res) {
+                ctrl.phase = 'invalid-url';
+            });
 
         }
     });
 
     var stopImg;
     ctrl.phase = "browser-detect";
-    //ctrl.phase = "welcome";
 
     angular.element($window).on('keydown', function(e) {
         if (e.keyCode == 32) {
             switch(ctrl.phase) {
                 case "welcome":
-                    if (!ctrl.idForm.input.$error.required
-                        && $scope.validation.speakerTestInput == 'welcome'
-                        && $scope.validation.microphone
-                        && $scope.validation.webcam) {
-                        authenticateSession();
+                    if ($scope.validation.speakerTestInput == 'welcome'
+                    && $scope.validation.microphone
+                    && $scope.validation.webcam) {
+                        ctrl.phase = "briefing";
                     }
                     break;
                 case "briefing":
+                    $scope.$broadcast('stimulusPhase');
+                    audioRecorderService.API.toggleRecording();
                     ctrl.phase = "stimulus";
                     break;
                 case "stimulus":
@@ -158,10 +134,11 @@ angular.module('app').controller('ssMainCtrl', function($rootScope, $scope, $win
                     audioRecorderService.API.toggleRecording();
                     ctrl.phase = "debrief";
                     break;
-                case "thankyou":
-                        ctrl.phase = "welcome";
-                        location.reload();
-                    break;
+                ////deprecated
+                //case "thankyou":
+                //        ctrl.phase = "welcome";
+                //        location.reload();
+                //    break;
             }
         }
     });

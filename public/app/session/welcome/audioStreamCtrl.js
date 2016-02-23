@@ -13,10 +13,10 @@ angular.module('app').controller('audioStreamCtrl', function($scope, audioRecord
 
     //does what it says. Triggered by phase switch to thank you
     function uploadAudio(){
-        if ($scope.sessionData.studyId != 'demo') {
+        if ($scope.sessionData.sid != 'demo') {
             var fd = new FormData();
             fd.append('file', audioRecorderService.API.getAudioData(), 'audio.wav');
-            var postUrl = '/api/avData?studyId=' + $scope.sessionData.studyId + '&partId=' + $scope.sessionData.partId;
+            var postUrl = '/api/avData?sid=' + $scope.sessionData.sid + '&pid=' + $scope.sessionData.pid;
             $http.post(postUrl, fd,
                 {
                     transformRequest: function (data) {

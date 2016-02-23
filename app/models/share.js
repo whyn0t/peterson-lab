@@ -6,6 +6,4 @@ var shareSchema = mongoose.Schema({
     permission: String
 });
 
-var Share = mongoose.model('Share', shareSchema);
-
-module.exports = Share;
+module.exports = mongoose.model('Share', shareSchema);

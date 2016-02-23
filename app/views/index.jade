@@ -2,13 +2,15 @@ extends ./includes/layout
 
 block main-content
     section.content
-    div(class="container-fluid partId")
+    div(class="container-fluid pid")
         div(ng-controller="ssMainCtrl as session" class="col-xs-10 col-xs-offset-1" ng-cloak)
             div(ng-controller="videoStreamCtrl as video")
                 webcam(on-streaming="onSuccess()" on-access-denied="onError(err)" on-stream="onStream(stream)" channel="videoChannel" hidden)
             div(ng-switch on="session.phase")
                 div(ng-switch-when="browser-detect")
                     include blocks/browser-detection
+                div(ng-switch-when="invalid-url")
+                    h3 Sorry, the link that you used is no longer valid
                 div(ng-switch-when="permissions")
                     permissions
                 div(ng-switch-when="welcome")

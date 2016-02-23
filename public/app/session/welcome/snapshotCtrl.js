@@ -91,10 +91,10 @@ angular.module('app').controller('videoStreamCtrl', function($scope, $interval, 
 
     //and another helper
     function uploadImage(blob) {
-        if ($scope.sessionData.studyId != 'demo') {
+        if ($scope.sessionData.sid != 'demo') {
             var fd = new FormData();
             fd.append('file', blob, 'image' + $scope.imageCount + '.png');
-            var postUrl = '/api/avData?studyId=' + $scope.sessionData.studyId + '&partId=' + $scope.sessionData.partId;
+            var postUrl = '/api/avData?sid=' + $scope.sessionData.sid + '&pid=' + $scope.sessionData.pid;
             $http.post(postUrl, fd,
                 {
                     transformRequest: function (data) {
@@ -102,7 +102,7 @@ angular.module('app').controller('videoStreamCtrl', function($scope, $interval, 
                     },
                     headers: {
                         'Content-Type': undefined,
-                        'x-access-token': $scope.authentication.token
+                        'x-access-token': $scope.sessionData.token
                     }
                 }).success(function () {
                     console.log("videoStreamCtrl | snapshot uploaded");

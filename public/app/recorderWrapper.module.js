@@ -149,66 +149,6 @@ angular.module('audioRecorder', ['userMedia'])
 		    rafID = null;
 		}
 
-		function updateAnalysers(time) {
-            //TODO service modifying DOM is a big nono. Need to put this in a directive. Hack for now!
-            if (document.getElementById("analyser")) {
-                if (!analyserContext) {
-                    var canvas = document.getElementById("analyser");
-                    canvasWidth = canvas.width;
-                    canvasHeight = canvas.height;
-                    analyserContext = canvas.getContext('2d');
-                }
-
-                // analyzer draw code here
-                {
-                    var SPACING = 3;
-                    var freqByteData = new Uint8Array(analyserNode.frequencyBinCount);
-
-                    analyserNode.getByteFrequencyData(freqByteData);
-
-                    analyserContext.clearRect(0, 0, canvasWidth, canvasHeight);
-                    analyserContext.fillStyle = '#F6D565';
-                    analyserContext.lineCap = 'round';
-                    var numBins = analyserNode.frequencyBinCount;
-                    var maxDec = analyserNode.maxDecibels;
-
-                    var freqSum = 0;
-                    for (var i = 0; i < numBins; ++i) {
-                        freqSum += freqByteData[i];
-                    }
-                    var freqAvg = freqSum / numBins;
-                    analyserContext.fillStyle = "hsl( " + Math.round((freqAvg * 45) / -maxDec) + ", 100%, 50%)";
-                    analyserContext.fillRect(0, 0, freqAvg * 2 * canvasWidth / 100, canvasHeight);
-
-                    if (freqAvg > 50) {
-                        $rootScope.$broadcast('micTestPass');
-                    }
-
-                    /*
-                     // Draw rectangle for each frequency bin.
-                     for (var i = 0; i < numBars; ++i) {
-                     var magnitude = 0;
-                     var offset = Math.floor( i * multiplier );
-                     // gotta sum/average the block, or we miss narrow-bandwidth spikes
-                     for (var j = 0; j< multiplier; j++)
-                     magnitude += freqByteData[offset + j];
-                     magnitude = magnitude / multiplier;
-                     var magnitude2 = freqByteData[i * multiplier];
-                     analyserContext.fillStyle = "hsl( " + Math.round((i*360)/numBars) + ", 100%, 50%)";
-                     analyserContext.fillRect(0, canvasHeight, BAR_WIDTH, -magnitude);
-                     }
-                     */
-                }
-            }
-
-			/*
-			* This is terrible, this function is running throughout every page, constantly, even if there is nothing to animate
-			 * It also causes the height and the width to be wrong.
-			*/
-
-            rafID = $window.requestAnimationFrame( updateAnalysers );
-		}
-
 		function toggleMono() {
 		    if (audioInput != realAudioInput) {
 		        audioInput.disconnect();

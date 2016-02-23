@@ -1,13 +1,11 @@
 var mongoose = require('mongoose');
 
 var studySchema = mongoose.Schema({
-    studyId: String,
-    partIdMin: Number,
-    partIdMax: Number,
-    stimulusTitle: String,
-    stimulusUrl: String,
+    sid: String,
+    key: String,
+    youTubeId: String,
     instructions: String,
-    active: Boolean,
+    redirect: String,
     dateTime: {type: Date, default: Date.now()}
 });
 

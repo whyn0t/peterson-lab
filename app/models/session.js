@@ -1,11 +1,11 @@
 var mongoose = require('mongoose');
 
 var sessionSchema = mongoose.Schema({
-    studyId: String,
-    partId: Number,
-    stopTime: Number,
-    response: String,
-    dateTime: {type: Date, default: Date.now()}
+    sid: String,
+    pid: Number,
+    startTime: {type: Date, default: Date.now()},
+    endTime: Date,
+    started: Boolean
 });
 
 var Session = mongoose.model('Session', sessionSchema);

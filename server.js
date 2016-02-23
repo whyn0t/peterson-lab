@@ -8,8 +8,6 @@ var express = require('express'),
     mongoose = require('mongoose'),
     multer = require('multer'),
     moment = require('moment'),
-    json2csv = require('json2csv'),
-    archiver = require('archiver'),
     async = require('async'),
     request = require('request'),
     path = require('path'),
@@ -53,6 +51,13 @@ db.once('open', function callback(){
     console.log('petersonLab db opened');
 });
 
+//TODO initialize the models in a cleaner fashion
+var appData = require('./app/models/appData');
+var session = require('./app/models/session');
+var share = require('./app/models/share');
+var study = require('./app/models/study');
+
+
 //dynamically add routes from controllers folder
 (function requireRoutes(routePath){
     fs.readdirSync(routePath).forEach(function (file) {
@@ -78,36 +83,48 @@ app.get('/admin', function(req, res){
     });
 });
 
-app.get('/run/:studyId', function(req, res){
+app.get('/run/:sid', function(req, res){
     res.render('index', {
     })
 })
 
 //else, serve index.html
-app.get('*', function(req, res){
+app.get('/', function(req, res){
 	res.render('index', {
     });
 });
 
 //initialize gDrive folder structure
-console.log("Initializing folder structure...");
-drive.mkDir({path: ["eLab", "Stimuli"]}, function(err) {
-    if (err) {
-        console.error(err);
-    } else {
-        drive.mkDir({path: ["eLab", "avData"]}, function (err) {
-            if (err) {
+drive.init(function() {
+    console.log("Initializing folder structure...");
+    drive.queueRequest(function(callback) {
+        drive.mkdir(["eLab", "Stimuli"], null, function(err){
+            if(err) {
                 console.error(err);
-            } else {
-                drive.mkDir({path: ["eLab", "sessionData"]}, function (err) {
-                    if (err) {
-                        console.error(err);
-                    }
-                });
+                return;
             }
-        });
-    }
-});
+            callback();
+        })
+    });
+    drive.queueRequest(function(callback) {
+        drive.mkdir(["eLab", "avData"], null, function(err){
+            if(err) {
+                console.error(err);
+                return;
+            }
+            callback();
+        })
+    });
+    drive.queueRequest(function(callback) {
+        drive.mkdir(["eLab", "sessionData"], null, function(err){
+            if(err) {
+                console.error(err);
+                return;
+            }
+            callback();
+        })
+    });
+})
 
 const port = process.env.PORT || 3030;
 app.listen(port);

@@ -1,8 +1,15 @@
-//TODO better way to do path?
-var Study = require('../../models/study'),
-    Session = require('../../models/session'),
+;//TODO better way to do path?
+var mongoose = require('mongoose'),
+    Study = mongoose.model('Study'),
+    Session = mongoose.model('Session'),
+    //Study = require('../../models/study'),
+    //Session = require('../../models/session'),
+    AppData = require('../../models/appData'),
     jwt = require('jwt-simple'),
-    moment = require('moment');
+    moment = require('moment'),
+    flakeIdGen = require('flake-idgen'),
+    intformat = require('biguint-format'),
+    generator = new flakeIdGen;
 
 module.exports.controller = function(app) {
 
@@ -26,47 +33,88 @@ module.exports.controller = function(app) {
         }
     });
 
+    //provides a key (participantId) to the qualtrics survey for later authentication
+    app.post('/api/auth/generateKey', function(req, res) {
+        var studyKey = req.body.studyKey;
+        var sid = req.body.sid;
+        Study.findOne({sid: sid, key: studyKey}).exec(function (err, result) {
+            if (err) {
+                console.error(err);
+                res.end(418);
+                return;
+            } else if (result == null) { //the study does not exist
+                res.end(418);
+                return;
+            }
+            var pid = intformat(generator.next(), 'dec');
+            var session = new Session({
+                sid: sid,
+                pid: pid,
+                started: false
+            });
+            session.save(function (err) {
+                if (err) {
+                    console.error(err);
+                    res.send(500);
+                    return;
+                }
+                res.send('pid=' + pid);
+            });
+        });
+    });
+
+    //authenticates the participantId/sid and generates a JWTtoken
     app.post('/api/auth/session', function (req, res) {
-        var studyId = req.body.studyId;
-        var partId = req.body.partId;
-        Study.findOne({studyId: studyId}).exec(function (err, studyResult) {
+        var sid = req.body.sid;
+        var pid = req.body.pid;
+        Study.findOne({sid: sid}).exec(function (err, studyResult) {
             if (err) {
                 console.error(err);
                 //todo better status
                 res.end(418);
-            } else {
-                //check if session exists
-                //TODO register session in db if one does not exist to prevent restarting
-                Session.findOne({studyId: studyId, partId: partId}).exec(function(err, sessionResult){
-                    if (err) {
-                        console.error(err);
-                        res.end(400);
-                    } else if(sessionResult){
-                        //participant has already been run on this study
-                        console.log('auth | failure: participant already run for this study');
-                        res.end('Participant already run for this study', 400);
-                    } else if (studyResult.partIdMin > partId || partId > studyResult.partIdMax) {
-                        //participant id outside of study's valid id range
-                        console.log('auth | failure: partId out of range');
-                        res.end(400);
-                    } else {
-                        //authenticate user
-                        console.log('auth | authentication for ', studyId, ', ', partId, 'successful.');
-                        var expires = moment().add('hours', 1).valueOf();
-                        var token = jwt.encode({
-                            iss: studyId + partId,
-                            exp: expires
-                        }, app.get('jwtTokenSecret'));
-                        res.json({
-                            token: token,
-                            exp: expires,
-                            user: studyId + partId,
-                            stimulus: studyResult.stimulusTitle,
-                            instructions: studyResult.instructions
-                        });
-                    }
+                return;
+            } else if ( pid == 'demo' ) {
+                res.json({
+                    token: 'demo',
+                    pid: pid,
+                    sid: sid,
+                    youTubeId: studyResult.youTubeId,
+                    instructions: studyResult.instructions
                 });
+                return;
             }
+            //check if session exists and it has not been started
+            Session.findOne({sid: sid, pid: pid, started: false}).exec(function(err, sessionResult){
+                if (err) {
+                    console.error(err);
+                    res.end(400);
+                } else if(sessionResult) { //there is a session registered with the given pid/sid
+                    //authenticate user
+                    console.log('auth | authentication for ', sid, ', ', pid, 'successful.');
+                    var expires = moment().add('hours', 1).valueOf();
+                    var token = jwt.encode({
+                        iss: sid + pid,
+                        exp: expires
+                    }, app.get('jwtTokenSecret'));
+                    res.json({
+                        token: token,
+                        exp: expires,
+                        pid: pid,
+                        sid: sid,
+                        youTubeId: studyResult.youTubeId,
+                        instructions: studyResult.instructions
+                    });
+                    //mark the session as started
+                    Session.findOneAndUpdate({ sid: sid, pid: pid }, { started: true }, null, function (result) {
+                        if (err) {
+                            //TODO what to do on error?
+                            console.error();
+                        }
+                    });
+                } else { //no session matches the requests parameters
+                    res.sendStatus(400);
+                }
+            });
         });
     });
 

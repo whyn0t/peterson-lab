@@ -4,7 +4,7 @@ div(ng-controller="audioStreamCtrl" class="col-xs-6 col-lg-offset-2 col-lg-4 par
             span(ng-hide="validation.microphone") Increase your microphone volume and tap the microphone until the meter fills up
             span(ng-show="validation.microphone") Microphone calibration complete
         div(class="panel-body")
-            canvas(id='analyser')
+            mic-levels()
 
 //div(ng-controller="audioStreamCtrl" class="col-xs-6 col-lg-4 row-fluid calibration-height parent" ng-style='borders.microphone')
     div(class="text-center")

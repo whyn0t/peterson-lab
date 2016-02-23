@@ -31,8 +31,10 @@ angular.module('app')
             'need to collect audio and video data during this task. This data will be stored on a secure server, ' +
             'separately from your provided information, and separately from any identifying information. This data ' +
             'will only be accessible by researchers affiliated with this project.</h3> ' +
-            '<h4 ng-show="permissions.state == \'denied\'" class="alert alert-danger">' +
-            'You need to enable access to your computer\'s webcam and microphone to continue.</h4> ' +
+            '<div ng-show="permissions.state == \'denied\'" class="alert alert-danger">' +
+            '<h4>Access to your webcam and microphone is currently blocked.</h4>' +
+            '<h4>Please click this button <img src="/images/browser-bar-buttons-pointer.png"/> on the right side of your browser bar and select the "Always allow.." option.</h4>'+
+            '</div>'+
             '<h4 ng-show="permissions.state == \'notFound\'" class="alert alert-warning">You need a webcam and ' +
             'microphone attached to your computer to continue.</h4> ' +
             '<h4 ng-show="permissions.state == \'granted\'" class="alert alert-success">' +

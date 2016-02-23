@@ -24,38 +24,32 @@ block main-content
             table(class='table table-bordered')
                 thead
                     tr
-                        th Active
                         th Study ID
-                        th PartId Min
-                        th PartId Max
-                        th Stimulus
+                        th Study Key
+                        th YouTube ID
                         th Instructions
+                        th Post-Survey URL
                 tbody
                     tr(ng-repeat="study in studies")
-                        td
-                            input(type='checkbox' name='active' ng-model='study.active')
-                        td {{ study.studyId }}
-                        td {{ study.partIdMin }}
-                        td {{ study.partIdMax }}
-                        td {{ study.stimulusTitle }}
+                        td {{ study.sid }}
+                        td {{ study.key }}
+                        td {{ study.youTubeId }}
                         td
                             button(ng-click='openDialog(study.instructions)') View Instructions
+                        td {{ study.redirect }}
                         td
                             button(ng-click='deleteStudy(study)') Delete
                     tr
                         td
-                            input(type='checkbox' name='active' ng-model='newStudy.active')
+                            input(type='text' name='sid' ng-model='newStudy.sid')
                         td
-                            input(type='text' name='studyId' ng-model='newStudy.studyId')
+                            i Generated on "Add"...
                         td
-                            input(type='number' name='partIdMin' ng-model='newStudy.partIdMin')
-                        td
-                            input(type='number' name='partIdMax' ng-model='newStudy.partIdMax')
-                        td
-                            select(ng-model='newStudy.stimulusTitle')
-                                option(ng-repeat="stimulus in stimuli") {{ stimulus.Key }}
+                            input(type='text' name='youTubeId' ng-model='newStudy.youTubeId')
                         td
                             button(ng-click='openDialog(newStudy.instructions)') Edit Instructions
+                        td
+                            input(type='text' name='redirect' ng-model='newStudy.redirect')
                         td
                             button(ng-click='postNewStudy()') Add
             h2 Share AV Data
@@ -85,5 +79,3 @@ block main-content
                                 option owner
                         td
                             button(ng-click='shareAvData()') Add
-            h2 Backup Session Data to CSV file on the Google Drive
-                button(ng-click='csvBackup()') Do it!

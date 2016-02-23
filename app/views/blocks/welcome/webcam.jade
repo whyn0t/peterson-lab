@@ -7,7 +7,7 @@ div(ng-controller='liveStreamCtrl' class="col-xs-12 col-md-6 col-md-offset-3 par
       div(class="panel-body")
         h4(ng-if="session.phase=='oops'") Oops!
         live-stream(ng-if="session.phase=='welcome'")
-            img(src="/images/liveFeedPlaceHolder.gif" title="Please refresh the page and allow microphone and webcam access to continue")
+            img(src="/images/liveFeedPlaceholder.gif" title="Please refresh the page and allow microphone and webcam access to continue")
         div(class="row-fluid")
             div(class="text-center")
                 button(ng-click="validation.webcam = true" ng-hide="validation.webcam") Done

@@ -138,16 +138,6 @@ angular.module('app').controller('mvAdminCtrl', function($scope, $http, $uibModa
             });
     }
 
-    $scope.csvBackup = function(){
-        $http({
-            method: 'GET',
-            url: '/api/getCsv',
-            headers: {
-                'x-access-token': $scope.authentication.access_token
-            }
-        });
-    }
-
     function getStimuli(){
         $http({
             method: 'GET',
@@ -159,7 +149,6 @@ angular.module('app').controller('mvAdminCtrl', function($scope, $http, $uibModa
         })
         .then(function(res){
             $scope.stimuli = res.data;
-            console.log(res.data);
         }, function(res){
             //the get failed
         });

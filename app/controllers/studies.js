@@ -1,7 +1,11 @@
 var jwtauth = require('../services/jwtauth'),
     drive = require('../services/googleDrive'),
-    Study = require('../models/study'),
-    Session = require('../models/session');
+    mongoose = require('mongoose'),
+    Study = mongoose.model('Study'),
+    Session = mongoose.model('Session'),
+    flakeIdGen = require('flake-idgen'),
+    intformat = require('biguint-format'),
+    generator = new flakeIdGen;
 
 module.exports.controller = function(app){
     var auth = jwtauth.set(app);
@@ -18,15 +22,12 @@ module.exports.controller = function(app){
     });
 
     app.post('/api/removeStudy', [auth], function(req, res){
-        console.log("Starting delete");
-        drive.deleteFile(req.body.studyId, null, function(err) {
-            if (err){
-                console.error("Gdrive : ", err);
-                res.status(500).send("Gdrive error. See logs.");
-                return;
+        Study.findByIdAndRemove(req.body._id, function (err, result) {
+            if (err) {
+                console.error("Mongoose : ", err);
+                res.status(500).send("Mongoose error. See logs.");
             } else {
-                console.log("Gdrive delete successful");
-                Study.findByIdAndRemove(req.body._id, function (err, result) {
+                Session.find({sid: req.body.sid}).remove(function (err) {
                     if (err) {
                         console.error("Mongoose : ", err);
                         res.status(500).send("Mongoose error. See logs.");
@@ -34,17 +35,27 @@ module.exports.controller = function(app){
                         res.sendStatus(200);
                     }
                 });
-                Session.find({studyId: req.body.studyId}).remove(function (err) {
-                    if (err) {
-                        console.error("Mongoose : ", err);
-                        res.status(500).send("Mongoose error. See logs.");
-                    }
-                });
             }
+        });
+        var fileInfo = {
+            path: ["eLab", "avData"],
+            title: req.body.sid
+        };
+        drive.queueRequest(function(callback){
+            drive.deleteFile(fileInfo, function(err) {
+                if (err){
+                    console.error("Gdrive | ", err);
+                    return;
+                } else {
+                    callback();
+                }
+            });
+
         });
     });
 
     app.post('/api/newStudy', [auth], function(req, res){
+        req.body.key = intformat(generator.next(), 'dec');  //generate study key
         var study = new Study(req.body);
         console.log(req.body);
         study.save(function (err) {

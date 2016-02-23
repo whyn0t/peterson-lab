@@ -1,6 +1,4 @@
 var jwtauth = require('../services/jwtauth'),
-    Share = require('../models/share'),
-    drive = require('../services/googleDrive'),
     AWS = require('aws-sdk');
 
 module.exports.controller = function(app){

@@ -9,21 +9,17 @@ module.exports.controller = function(app) {
         console.log('got session data post');
         console.log(req.body);
         var session = new Session({
-            studyId: req.body.studyId,
-            partId: req.body.partId,
-            stopTime: req.body.stopTime,
-            response: req.body.response
+            sid: req.body.sid,
+            pid: req.body.pid
         });
-        if (session.studyId != 'demo') {
-            session.save(function (err) {
-                if (err) {
-                    console.log(err);
-                    //TODO need better failure status
-                    res.sendStatus(418);
-                } else {
-                    res.sendStatus(200);
-                }
-            });
-        }
+        session.save(function (err) {
+            if (err) {
+                console.log(err);
+                //TODO need better failure status
+                res.sendStatus(418);
+            } else {
+                res.sendStatus(200);
+            }
+        });
     });
 }
