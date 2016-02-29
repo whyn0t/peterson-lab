@@ -103,7 +103,8 @@ module.exports.controller = function(app) {
                         pid: pid,
                         sid: sid,
                         youTubeId: studyResult.youTubeId,
-                        instructions: studyResult.instructions
+                        instructions: studyResult.instructions,
+                        redirect: studyResult.redirect
                     });
                     //mark the session as started
                     Session.findOneAndUpdate({ sid: sid, pid: pid }, { started: true }, null, function (result) {

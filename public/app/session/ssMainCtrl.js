@@ -77,11 +77,12 @@ angular.module('app').controller('ssMainCtrl', function($rootScope, $scope, $win
 
     $scope.$on('debriefPhase', function(){
         if ( $scope.audioUploaded ){
-            window.location.path($scope.sessionData.redirect).search({
+          /*  window.location.path($scope.sessionData.redirect).search({
                 sid: $scope.sessionData.sid,
                 pid: $scope.sessionData.pid,
                 stopTime: $scope.sessionData.stopTime
-        });
+        });*/
+            $window.location = $scope.sessionData.redirect + "?sid=" + $scope.sessionData.sid + "&pid=" + $scope.sessionData.pid + "&stopTime=" + $scope.sessionData.stopTime;
         }
     });
 
