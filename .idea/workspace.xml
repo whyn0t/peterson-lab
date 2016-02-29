@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="75922d38-c3aa-45dc-bb3e-4832b78ffca2" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/blocks/debrief.jade" afterPath="$PROJECT_DIR$/app/views/blocks/debrief.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/blocks/welcome/webcam.jade" afterPath="$PROJECT_DIR$/app/views/blocks/welcome/webcam.jade" />
     </list>
     <ignored path="petersonLab.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -60,8 +59,8 @@
       <file leaf-file-name="debrief.jade" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/blocks/debrief.jade">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.09045226" vertical-offset="0" max-vertical-offset="597">
-              <caret line="3" column="46" selection-start-line="3" selection-start-column="46" selection-end-line="3" selection-end-column="46" />
+            <state vertical-scroll-proportion="0.12060302" vertical-offset="0" max-vertical-offset="597">
+              <caret line="4" column="36" selection-start-line="4" selection-start-column="36" selection-end-line="4" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -1227,8 +1226,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/blocks/debrief.jade">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.09045226" vertical-offset="0" max-vertical-offset="597">
-          <caret line="3" column="46" selection-start-line="3" selection-start-column="46" selection-end-line="3" selection-end-column="46" />
+        <state vertical-scroll-proportion="0.12060302" vertical-offset="0" max-vertical-offset="597">
+          <caret line="4" column="36" selection-start-line="4" selection-start-column="36" selection-end-line="4" selection-end-column="36" />
           <folding />
         </state>
       </provider>
