@@ -79,7 +79,8 @@ module.exports.controller = function(app) {
                     pid: pid,
                     sid: sid,
                     youTubeId: studyResult.youTubeId,
-                    instructions: studyResult.instructions
+                    instructions: studyResult.instructions,
+                    redirect: studyResult.redirect
                 });
                 return;
             }

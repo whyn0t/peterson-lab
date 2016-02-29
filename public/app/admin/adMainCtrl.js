@@ -17,7 +17,6 @@ angular.module('app').controller('mvAdminCtrl', function($scope, $http, $uibModa
             $scope.authentication.expires = res.data.exp;
             populateStudyTable();
             populateShareTable();
-            getStimuli();
         }, function(res){
             if (res.status == 401){
                 $scope.authentication.attempts += 1;
@@ -136,21 +135,5 @@ angular.module('app').controller('mvAdminCtrl', function($scope, $http, $uibModa
             }, function(res){
                 //the get failed
             });
-    }
-
-    function getStimuli(){
-        $http({
-            method: 'GET',
-            url: 'api/getStimuli',
-            headers: {
-                'x-access-token': $scope.authentication.access_token,
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(function(res){
-            $scope.stimuli = res.data;
-        }, function(res){
-            //the get failed
-        });
     }
 });

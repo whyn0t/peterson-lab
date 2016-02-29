@@ -1,10 +1,10 @@
-div(class="row-fluid alert alert-info")
-    p Please complete the three calibration tasks below to ensure your webcam, microphone and headphones are properly set up.
+div(class="row-fluid")
+    p(class="text-center alert alert-info col-md-6 col-md-offset-3") Please complete the three calibration tasks below to ensure your webcam, microphone and headphones are properly set up.
 div(class="row-fluid")
     include webcam
     include microphone
     include speakers
 div(class="row-fluid")
-    div(class="text-center" ng-show="validation.webcam && validation.microphone && validation.speakerTestInput == 'welcome'")
-        h2(font color="red") Once you begin the study, you must complete it in one sitting.
+    div(class="col-md-6 col-md-offset-3 text-center" ng-show="validation.webcam && validation.microphone && validation.speakerTestInput == 'welcome'")
+        h2 Once you begin the study, you must complete it in one sitting.
         h2 Press space bar to begin the study...

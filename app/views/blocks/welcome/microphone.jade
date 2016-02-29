@@ -1,9 +1,9 @@
-div(ng-controller="audioStreamCtrl" class="col-xs-6 col-lg-offset-2 col-lg-4 parent" ng-style='borders.microphone')
+div(ng-controller="audioStreamCtrl" class="col-md-4 parent" ng-style='borders.microphone')
     div(class="panel panel-default calibrator calibration-height text-center" ng-class='{"calibration-success":validation.microphone==true}')
         div(class="panel-heading")
             span(ng-hide="validation.microphone") Increase your microphone volume and tap the microphone until the meter fills up
             span(ng-show="validation.microphone") Microphone calibration complete
-        div(class="panel-body")
+        div(class="panel-body calibration-height")
             mic-levels()
 
 //div(ng-controller="audioStreamCtrl" class="col-xs-6 col-lg-4 row-fluid calibration-height parent" ng-style='borders.microphone')

@@ -54,7 +54,7 @@ angular.module('app')
 
         return {
             restrict: 'E',
-            template: "<div><canvas id='analyser'><canvas/></div>",
+            template: "<div class='calibration-height'><canvas id='analyser' /></div>",
             link: link
         }
     }]);
