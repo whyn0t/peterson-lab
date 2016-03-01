@@ -8,7 +8,7 @@ html
         link(rel="stylesheet", href="/css/bootstrap.css")
         link(rel="stylesheet", href="/vendor/toastr/toastr.css")
         link(rel="stylesheet", href="/css/site.css")
-    body(ng-app='app' ng-keypress="onSpace($event)")
+    body(ng-app='app' ng-keypress="onSpace($event)" ng-cloak)
         //h1 Layout
         block main-content
         include scripts
