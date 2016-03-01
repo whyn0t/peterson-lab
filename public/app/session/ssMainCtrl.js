@@ -91,7 +91,14 @@ angular.module('app').controller('ssMainCtrl', function($rootScope, $scope, $win
         if (err){
             console.error(err);
         } else {
-            ctrl.phase = 'welcome';
+            //authenticate the session
+            sessionAuth.then(function (res) {
+                $scope.sessionData = res.data;
+                ctrl.instructions = $scope.sessionData.instructions;
+                ctrl.phase = 'welcome';
+            }, function (res) {
+                ctrl.phase = 'invalid-url';
+            });
 
         }
     });
@@ -100,15 +107,7 @@ angular.module('app').controller('ssMainCtrl', function($rootScope, $scope, $win
         if (err){
             console.error(err);
         } else {
-            //authenticate the session
-            sessionAuth.then(function (res) {
-                $scope.sessionData = res.data;
-                ctrl.instructions = $scope.sessionData.instructions;
-                ctrl.phase = 'permissions';
-            }, function (res) {
-                ctrl.phase = 'invalid-url';
-            });
-
+            ctrl.phase = 'permissions';
         }
     });
 

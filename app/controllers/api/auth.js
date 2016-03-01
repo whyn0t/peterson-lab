@@ -85,7 +85,7 @@ module.exports.controller = function(app) {
                 return;
             }
             //check if session exists and it has not been started
-            Session.findOne({sid: sid, pid: pid, started: false}).exec(function(err, sessionResult){
+            Session.findOne({sid: sid, pid: pid}).exec(function(err, sessionResult){
                 if (err) {
                     console.error(err);
                     res.end(400);
