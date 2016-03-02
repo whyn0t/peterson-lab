@@ -109,6 +109,12 @@ angular.module('app').directive('youtube', function($window, YT_event, youTubeAp
                 scope.$emit('playerTime', player.getCurrentTime());
             });
 
+            scope.$on(YT_event.STATUS_CHANGE, function (event, message) {
+                if(message == 'ENDED'){
+                    scope.$emit('playerTime', player.getCurrentTime());
+                }
+            });
+
         }
     };
 });

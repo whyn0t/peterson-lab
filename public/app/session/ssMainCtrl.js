@@ -32,9 +32,10 @@ angular.module('app').controller('ssMainCtrl', function($rootScope, $scope, $win
 
     //HANDLE A/V DATA
     //captures player stop time. This seems like the right way to do this. Maybe not the right place.
-    $scope.$on('playerTime', function(event, data){
+    var playerTimeListener = $scope.$on('playerTime', function(event, data){
         var time = Math.floor( data * 1000 ); //convert to milliseconds and remove decimals
         $scope.sessionData.stopTime = time;
+        playerTimeListener();
     });
 
     $scope.$on('audioDoneEncoding', function(event, data){

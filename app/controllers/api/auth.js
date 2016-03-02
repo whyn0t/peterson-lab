@@ -37,6 +37,11 @@ module.exports.controller = function(app) {
     app.get('/api/auth/generateKey', function(req, res) {
         var studyKey = req.query.studyKey;
         var sid = req.query.sid;
+        if (!sid || !studyKey){
+            //TODO server crashes when calling res.end(418); Could this be because GET requires a string be sent?
+            res.send("Error: sid or studyKey parameter is missing from the url query parameters.");
+            return;
+        }
         Study.findOne({sid: sid, key: studyKey}).exec(function (err, result) {
             if (err) {
                 console.error(err);
