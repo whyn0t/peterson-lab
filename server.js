@@ -43,7 +43,7 @@ app.use(express.static(__dirname + "/public"));
 if (env === 'development') {
     mongoose.connect('mongodb://localhost/petersonLab');
 } else {
-    mongoose.connect('mongodb://nigelsmk:simplepassword@ds041154.mongolab.com:41154/heroku_p0n7ngq3');
+    mongoose.connect('mongodb://admin:petersonelab1!@ds041154.mongolab.com:41154/heroku_p0n7ngq3');
 }
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error...'));

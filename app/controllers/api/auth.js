@@ -16,7 +16,7 @@ module.exports.controller = function(app) {
     //TODO change to /api/auth/admin
     app.post('/api/auth', function (req, res) {
         console.log(req.body);
-        if (req.body.username == 'admin' && req.body.password == 'petersonlab1!') {
+        if (req.body.username == 'admin' && req.body.password == 'petersonelab1!') {
             var expires = moment().add('hours', 16).valueOf();
             var token = jwt.encode({
                 iss: req.body.username,
