@@ -45,10 +45,12 @@ module.exports.controller = function(app) {
         Study.findOne({sid: sid, key: studyKey}).exec(function (err, result) {
             if (err) {
                 console.error(err);
-                res.end(418);
+                res.send("Error: internal database error");
+                //res.end(418);
                 return;
             } else if (result == null) { //the study does not exist
-                res.end(418);
+                res.send("Error: invalid sid");
+                //res.end(418);
                 return;
             }
             var pid = intformat(generator.next(), 'dec');
@@ -60,7 +62,8 @@ module.exports.controller = function(app) {
             session.save(function (err) {
                 if (err) {
                     console.error(err);
-                    res.send(500);
+                    res.send("Error: internal database error");
+                    //res.send(500);
                     return;
                 }
                 res.send('pid=' + pid);
