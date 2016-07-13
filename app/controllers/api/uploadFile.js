@@ -7,9 +7,9 @@ module.exports.controller = function(app) {
     var auth = jwtauth.set(app);
 
     app.post('/api/avData', [auth], function (req, res) {
-        //TODO if we get to this point is the file fully uploaded?
+        //TODO if we get to this point is the file fully uploaded? Seems to be so
         res.sendStatus(200);
-        gdrive.queueRequest(function(callback){
+         gdrive.queueRequest(function(callback){
             gdrive.insert({
                 path: ['eLab', 'avData', req.query.sid, req.query.pid],
                 title: req.file.originalname,

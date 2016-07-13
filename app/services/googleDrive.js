@@ -27,6 +27,13 @@ module.exports = {
 //initialization
 var q = queue();
 q.concurrency = 1;
+q.timeout = 360000; //3 minutes timeout
+
+q.on('timeout', function(next, job){
+    console.error('gdrive | upload timed out');
+    next();
+});
+
 //TODO track shared files
 var dirTree = {
     id: 'root',
