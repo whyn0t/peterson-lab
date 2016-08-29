@@ -9,7 +9,7 @@ block main-content
                 label Username:
                     input(type='text' name='input' ng-model='authentication.username' required)
                 label Password:
-                    input(type='text' name='input' ng-model='authentication.password' required)
+                    input(type='password' name='input' ng-model='authentication.password' required)
                 button(ng-click='submitCredentials()') submit
         div(ng-show='authentication.access_token')
             div
