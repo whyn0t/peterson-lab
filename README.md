@@ -18,7 +18,7 @@ Written with the MEAN stack. Employs Amazon S3 cloud for video hosting and Googl
 
 ##Admin Page
 - The "active" checkbox on the study management pane needs to be able to prevent the running of studies that are inactive
-- The admin password box should be obfuscated
+- ~~The admin password box should be obfuscated~~
 - controls need to be put on the inputs to prevent things like duplicate studies and duplicate shares
 - when an item in a row's table is clicked it should set that field into edit mode. Change the new/delete button to a save button.
 
