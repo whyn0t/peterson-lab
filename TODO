@@ -1,7 +1,7 @@
 Admin
     Study does not store false active
     activate active
-    obfuscate password
+    <strike>obfuscate password</strike>
 
 Welcome
     Participant number highlight for completion
